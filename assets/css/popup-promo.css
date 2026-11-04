@@ -1,0 +1,42 @@
+/* ===== popup de promocao Safirion ===== */
+.pp{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;
+ padding:20px;background:rgba(6,11,24,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+ opacity:0;transition:opacity .28s ease}
+.pp[data-aberto]{display:flex}
+.pp[data-visivel]{opacity:1}
+.pp__cx{position:relative;width:100%;max-width:940px;max-height:calc(100vh - 40px);overflow:auto;
+ display:grid;grid-template-columns:1fr;background:var(--pp-bg,#0b1324);color:var(--pp-tx,#fff);
+ border:1px solid var(--pp-bd,rgba(255,255,255,.12));border-radius:22px;
+ box-shadow:0 30px 90px rgba(0,0,0,.55);transform:translateY(14px) scale(.985);
+ transition:transform .32s cubic-bezier(.2,.8,.2,1)}
+.pp[data-visivel] .pp__cx{transform:none}
+@media(min-width:800px){.pp__cx{grid-template-columns:.85fr 1fr}}
+.pp__fig{position:relative;display:none;background:#060b18}
+@media(min-width:800px){.pp__fig{display:block}}
+.pp__fig img{width:100%;height:100%;object-fit:cover;object-position:50% 34%;display:block}
+.pp__selo{position:absolute;top:18px;left:18px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+ font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#fff;
+ background:rgba(35,137,230,.92);padding:7px 13px;border-radius:999px}
+.pp__cont{padding:clamp(26px,4vw,42px);display:flex;flex-direction:column;gap:15px;justify-content:center}
+.pp__cont::before{content:"";width:34px;height:4px;border-radius:999px;background:#2389e6;margin-bottom:3px}
+.pp__cont h2{margin:0;font-size:clamp(22px,3vw,31px);font-weight:600;line-height:1.14;letter-spacing:-.02em}
+.pp__cont p{margin:0;font-size:15.5px;line-height:1.62;color:var(--pp-tx2,#a1b8c3)}
+.pp__cont .pp__nota{margin:4px 0 0;padding:14px 17px;border-left:3px solid #2389e6;border-radius:0 10px 10px 0;
+ background:var(--pp-sup,rgba(35,137,230,.10));font-size:14.5px;line-height:1.55;color:#fff;font-weight:700}
+.pp__btn{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:8px;padding:16px 24px;
+ border-radius:999px;background:#2389e6;color:#fff;font-size:15.5px;font-weight:700;text-decoration:none;
+ box-shadow:0 0 30px rgba(35,137,230,.34);transition:filter .2s ease,transform .2s ease}
+.pp__btn:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.pp__mini{margin:0;font-size:12.5px;line-height:1.5;color:var(--pp-tx3,#6f818f)}
+.pp__x{position:absolute;top:14px;right:14px;width:38px;height:38px;display:flex;align-items:center;
+ justify-content:center;border:0;cursor:pointer;border-radius:10px;font-size:19px;line-height:1;
+ background:var(--pp-xbg,rgba(255,255,255,.10));color:var(--pp-tx,#fff);transition:background .2s ease}
+.pp__x:hover{background:var(--pp-xbg2,rgba(255,255,255,.20))}
+.pp__x:focus-visible,.pp__btn:focus-visible{outline:2px solid #4ba3f0;outline-offset:3px}
+body.pp-travado{overflow:hidden}
+@media(prefers-reduced-motion:reduce){.pp,.pp__cx,.pp__btn{transition:none}}
+
+/* v2: destaque do codigo promocional dentro do texto */
+.pp__cont p strong{color:#7cc0ff;font-weight:700;letter-spacing:.04em;
+  background:rgba(35,137,230,.14);border:1px solid rgba(35,137,230,.3);
+  border-radius:6px;padding:1px 7px;white-space:nowrap}

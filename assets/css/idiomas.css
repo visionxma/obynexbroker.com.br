@@ -1,0 +1,120 @@
+/* ==========================================================================
+   Safirion — versões em outros idiomas
+   Seletor de idioma (todas as páginas), ajustes por escrita e árabe (RTL).
+   Carregado depois do styles.css; gerado à mão, usado pelo .i18n/montar.js.
+   ========================================================================== */
+
+/* ---------- Seletor no header ---------- */
+.lng{position:relative;flex:0 0 auto}
+.lng summary{
+  list-style:none;display:flex;align-items:center;gap:8px;
+  height:40px;padding:0 13px;cursor:pointer;
+  border:1px solid var(--line);border-radius:var(--r-pill);
+  color:var(--ink);font-size:12.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  transition:border-color .25s var(--ease),background-color .25s var(--ease);
+  -webkit-user-select:none;user-select:none;
+}
+.lng summary::-webkit-details-marker{display:none}
+.lng summary:hover,.lng[open] summary{border-color:rgba(75,163,240,.5);background:rgba(35,137,230,.12)}
+.lng img,.ft__lng img{flex:0 0 auto;width:20px;height:15px;border-radius:3px;object-fit:cover}
+.lng__lista{
+  position:absolute;inset-inline-end:0;top:calc(100% + 10px);z-index:5;
+  display:grid;grid-template-columns:1fr 1fr;gap:2px;
+  width:max-content;max-width:calc(100vw - 24px);max-height:min(70vh,520px);overflow:auto;
+  margin:0;padding:8px;list-style:none;
+  background:rgba(6,13,23,.97);border:1px solid var(--line);border-radius:var(--r-md);
+  box-shadow:var(--shadow);
+}
+.lng__lista a{
+  display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:var(--r-xs);
+  color:var(--muted);font-size:14px;letter-spacing:0;white-space:nowrap;
+  transition:color .25s var(--ease),background-color .25s var(--ease);
+}
+.lng__lista a:hover,.lng__lista a[aria-current]{color:#fff;background:rgba(160,176,197,.1)}
+
+/* ---------- Lista de idiomas no rodapé ---------- */
+.ft__lng{
+  display:flex;flex-wrap:wrap;gap:8px;
+  border-top:1px solid var(--line-soft);padding-block:22px;
+}
+.ft__lng a{
+  display:inline-flex;align-items:center;gap:8px;padding:7px 12px;
+  border:1px solid var(--line-soft);border-radius:var(--r-pill);
+  color:var(--muted);font-size:13px;letter-spacing:0;
+  transition:color .25s var(--ease),border-color .25s var(--ease);
+}
+.ft__lng a:hover,.ft__lng a[aria-current]{color:#fff;border-color:rgba(75,163,240,.5)}
+
+/* o menu do topo não quebra em duas linhas; some antes, porque há idioma de rótulo longo */
+.hdr__nav a{white-space:nowrap}
+.hdr .btn{white-space:nowrap}
+@media (max-width:1280px){
+  .hdr__nav a{padding-inline:10px}
+}
+@media (max-width:1180px){
+  .hdr__nav{display:none}
+  .hdr__side{margin-inline-start:auto}
+}
+@media (max-width:600px){
+  .lng summary{height:36px;padding:0 9px}
+  .lng summary span{display:none}
+  .hdr__in{gap:8px}
+  .hdr__side{gap:6px}
+  .hdr .btn{padding-inline:11px;font-size:12px}
+  /* o logo cede espaço aos botões quando o rótulo do idioma é mais comprido */
+}
+/* celular estreito: nos idiomas de rótulo longo o LOGIN do topo sai (segue no rodapé)
+   para caberem o logo, o idioma e o botão de criar conta */
+@media (max-width:480px){
+  .lng summary{padding:0 7px}
+  .hdr__side{gap:4px}
+  .hdr .btn{padding-inline:9px}
+  html:not(:lang(pt)) .hdr__side .btn--ghost{display:none}
+  html:not(:lang(pt)) .hdr .btn{padding-inline:13px}
+}
+/* no celular a lista de idiomas ocupa a largura do header, em vez de pender do botão */
+@media (max-width:600px){
+  .hdr__in{position:relative}
+  .lng{position:static}
+  .lng__lista{left:0;right:0;top:calc(100% + 8px);width:auto;max-width:none}
+}
+/* botão grande de rótulo comprido quebra em duas linhas em vez de alargar a página */
+@media (max-width:600px){
+  .btn--lg{white-space:normal;text-align:center;max-width:100%}
+}
+
+/* ---------- Escritas sem maiúsculas nem espaçamento entre letras ---------- */
+html:lang(ar) *,html:lang(bn) *,html:lang(hi) *,html:lang(th) *{letter-spacing:0 !important}
+html:lang(ar) .h-display,html:lang(bn) .h-display,html:lang(hi) .h-display,html:lang(th) .h-display{letter-spacing:-.04em !important}
+html:lang(ar) .h2,html:lang(bn) .h2,html:lang(hi) .h2,html:lang(th) .h2,
+html:lang(ar) .faq__title,html:lang(bn) .faq__title,html:lang(hi) .faq__title,html:lang(th) .faq__title,
+html:lang(ar) .hero__claim,html:lang(bn) .hero__claim,html:lang(hi) .hero__claim,html:lang(th) .hero__claim,
+html:lang(ar) .lit__txt,html:lang(bn) .lit__txt,html:lang(hi) .lit__txt,html:lang(th) .lit__txt{line-height:1.4}
+html:lang(zh) .lit__txt,html:lang(th) .lit__txt{max-width:20em}
+/* a Mazzard não tem todas as letras do vietnamita: evita misturar duas fontes na mesma palavra */
+html:lang(vi) body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+html:lang(vi) .h-display{font-family:"Mazzard",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+
+/* ---------- Árabe: direita para a esquerda ---------- */
+/* fora da tela pela direita: à esquerda, em RTL, vira rolagem horizontal de 10 mil px */
+[dir="rtl"] .skip-link{left:auto;right:-9999px}
+[dir="rtl"] .skip-link:focus{left:auto;right:0}
+[dir="rtl"] .hdr__in{padding:0 22px 0 12px}
+/* o título é a marca, letra a letra em caixas: sem isto as caixas se enfileiram ao contrário (NOIRIFAS) */
+[dir="rtl"] .h-display{direction:ltr;text-align:right}
+[dir="rtl"] .btn--lg.btn--primary{padding-right:32px;padding-left:18px}
+[dir="rtl"] .btn__ic svg,[dir="rtl"] .ticker__arrow{scale:-1 1}
+[dir="rtl"] .faq__ic{margin-left:0;margin-right:auto}
+[dir="rtl"] .steps li::after{left:auto;right:18px}
+[dir="rtl"] .pp__selo{left:auto;right:18px}
+[dir="rtl"] .pp__x{right:auto;left:14px}
+[dir="rtl"] .pp__cont .pp__nota{border-left:0;border-right:3px solid #2389e6;border-radius:10px 0 0 10px}
+/* blocos com foto sangrada e a esteira mantêm a geometria; só o texto vira */
+[dir="rtl"] .split,[dir="rtl"] .marquee__track{direction:ltr}
+[dir="rtl"] .split>*,[dir="rtl"] .marquee__item{direction:rtl}
+@media (max-width:1180px){
+  [dir="rtl"] .hdr__side{margin-left:0;margin-right:auto}
+}
+@media (max-width:600px){
+  [dir="rtl"] .hdr__in{padding:0 16px 0 10px}
+}
