@@ -1,108 +1,43 @@
-/* Ponte de tokens: safirion.com.br e safiron.net.
-   Os dois vêm do MESMO clone WordPress e falam --brand/--bg/--ink. Aqui só se
-   traduz para as pontes --pg-* que a folha de blocos lê. O valor depois da
-   vírgula é o medido no site em 29/10/2026, para a página não depender de o
-   chassi ter carregado a folha antiga.
-
-   --pg-marca-700 (#0d63b0) é o tom de botão: dá 6,12:1 com branco. O --brand
-   puro (#2389e6) daria 3,63:1 e reprovaria na regra de 11/10/2026. */
-
 .pg-corpo {
-  --pg-bg:         var(--bg, #04090f);
-  --pg-s1:         var(--s1, #09121b);
-  --pg-s2:         var(--s2, #111d2f);
-  --pg-s3:         var(--s3, #142533);
-  --pg-linha:      rgba(255, 255, 255, .08);
-
-  --pg-ink:        var(--ink, #e0f1ff);
-  --pg-ink-forte:  var(--ink-strong, #ffffff);
-  --pg-muted:      var(--muted, #a0b4c8);
-
-  --pg-marca:      var(--brand, #2389e6);
-  --pg-marca-700:  var(--brand-700, #0d63b0);
-  --pg-marca-600:  var(--brand-600, #1a72c8);
-  --pg-marca-400:  var(--brand-400, #4ba3f0);
-  --pg-marca-300:  var(--brand-300, #82c5ff);
-
-  --pg-ok:         var(--green, #3ed59d);
-  --pg-nao:        #f0776b;
-  --pg-atencao:    #f2c14e;
-
-  --pg-luz:        rgba(35, 137, 230, .16);
-  --pg-fonte:      "Mazzard", "Mazzard M", system-ui, -apple-system, "Segoe UI", sans-serif;
-  /* altura do cabeçalho FIXO de verdade, medida no fundo dele em 31/10/2026:
-     faixa de cotações (38) + barra (70) = 108 com a página rolada, 114 no topo,
-     de 360 a 1920. O 64 de antes deixava o índice e a lateral presos 28px
-     debaixo do cabeçalho e a trilha da hero coberta no celular. O clube
-     (safirionbr.com) define --nav-h:72px no próprio chassi e não usa este. */
-  --pg-nav-h:      var(--nav-h, 108px);
-  --pg-shell:      72rem;
-  /* páginas-ramo: cabeçalho hdr/ft com ~1.200px úteis e ~50px de calha
-     (logo a 123px em 1440, 55px em 1280 e 1024, 37px em 390; 31/10/2026).
-     O safirionbr.com (chassi clube) troca por `casca` na configuração. */
+  --pg-bg: var(--bg, #04090f);
+  --pg-s1: var(--s1, #09121b);
+  --pg-s2: var(--s2, #111d2f);
+  --pg-s3: var(--s3, #142533);
+  --pg-linha: rgba(255, 255, 255, .08);
+  --pg-ink: var(--ink, #e0f1ff);
+  --pg-ink-forte: var(--ink-strong, #ffffff);
+  --pg-muted: var(--muted, #a0b4c8);
+  --pg-marca: var(--brand, #2389e6);
+  --pg-marca-700: var(--brand-700, #0d63b0);
+  --pg-marca-600: var(--brand-600, #1a72c8);
+  --pg-marca-400: var(--brand-400, #4ba3f0);
+  --pg-marca-300: var(--brand-300, #82c5ff);
+  --pg-ok: var(--green, #3ed59d);
+  --pg-nao: #f0776b;
+  --pg-atencao: #f2c14e;
+  --pg-luz: rgba(35, 137, 230, .16);
+  --pg-fonte:
+    "Mazzard",
+    "Mazzard M",
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    sans-serif;
+  --pg-nav-h: var(--nav-h, 108px);
+  --pg-shell: 72rem;
   --pg-shell-ramo: 1200px;
   --pg-calha-ramo: clamp(1.25rem, .5rem + 3.6vw, 3.125rem);
-  --pg-raio:       10px;
+  --pg-raio: 10px;
 }
-
-/* ============================================================================
-   Blocos de conteúdo das 57 páginas de SEO da rede Safirion.
-   UMA folha para os três domínios. Autossuficiente de propósito.
-
-   Por que autossuficiente: os três sites NÃO compartilham chassi nem folha.
-   `safirion.com.br` e `safiron.net` vêm do mesmo clone WordPress e falam
-   `--brand`/`--bg`/`--ink`; `safirion.pe` é clone de OUTRA referência e fala
-   `--azul`/`--fundo`/`--texto`, sem ticker e sem FAQ. Então nenhuma regra aqui
-   lê variável de domínio: tudo passa pelas pontes `--pg-*`, mapeadas num
-   arquivo de ~12 linhas por domínio (tokens-brand.css, tokens-pe.css).
-   Trocar de domínio = trocar o arquivo de ponte, nunca mexer aqui.
-
-   Composição por largura decidida ANTES de escrever (doutrina, seção 1 +
-   skill responsivo-de-cara, passo 1):
-     números / ficha ....... 2 col no celular  → 4 a partir de 48rem
-     cartões / não-é ....... 2 col no celular  → 3 a partir de 48rem
-     passos ................ faixa de 3 já no celular
-     tabela ................ cartão por linha até 47,99rem, tabela depois
-     FAQ ................... 1 col no celular  → 2 a partir de 48rem
-     par de CTAs ........... lado a lado, dividindo a linha em 360px
-     fontes ................ 2 col no celular  → 4
-   Nada empilha por omissão e nada rola para o lado.
-   ========================================================================== */
-
-/* ---- 1. corpo e grão ------------------------------------------------------
-   O grão é do corpo, nunca da caixa de uma seção: grão preso numa seção é
-   recortado na borda e vira degrau na fronteira (doutrina, seções 2 e 12).
-   SVG embutido, não arquivo externo, para não custar requisição no celular. */
-
 .pg-corpo {
   background: var(--pg-bg);
   color: var(--pg-ink);
   font-family: var(--pg-fonte);
   -webkit-font-smoothing: antialiased;
 }
-
-/* Endereço de internet citado no corpo do texto é UMA palavra, e palavra que
-   não quebra passa da direita mesmo com a coluna trancada em `minmax(0, 1fr)`.
-   A regra por bloco (`.pg-fonte`, `.pg-tabela td`, fichas) cobria só onde o
-   estouro já tinha aparecido; a varredura das 252 páginas em 360px achou mais
-   dois no `axelbroker.net` (31/10/2026): o endereço da lista de alertas da CVM
-   num parágrafo levou a página a 228px de rolagem lateral, e o das deliberações
-   num passo, a 15px (55px em 320). `overflow-wrap` é herdado, então a regra vai
-   na RAIZ do nosso conteúdo e vale para todo bloco, inclusive o que ainda não
-   existe; ela só age onde não há espaço para quebrar, e frase comum sai igual
-   (medido no vivo: a altura das páginas sem endereço longo não mudou um pixel). */
-main#conteudo { overflow-wrap: anywhere; }
-
-/* O grão fica ATRÁS do conteúdo por z-index NEGATIVO, sem tocar nos filhos do
-   corpo. A primeira versão desta folha usava `.pg-corpo > * { position:
-   relative; z-index: 1 }` para subir o conteúdo acima do grão — e essa regra
-   larga atropelava o `position: fixed` da gaveta de menu do chassi: a gaveta
-   voltava ao fluxo e o painel de 300px, que mora fora da tela, abria 300px de
-   rolagem lateral em TODAS as larguras (medido em 29/10/2026 nas páginas do
-   safirion.pe: scrollWidth 690 contra 390 na home do mesmo chassi). Alcance do
-   seletor ANTES da regra — e aqui o alcance era o site inteiro. Nada de
-   `overflow-x: hidden`, que é curativo. */
-
+main#conteudo {
+  overflow-wrap: anywhere;
+}
 .pg-corpo::before {
   content: "";
   position: fixed;
@@ -112,36 +47,17 @@ main#conteudo { overflow-wrap: anywhere; }
   opacity: .05;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23g)'/%3E%3C/svg%3E");
 }
-
-/* ---- 2. seção, largura e leitura ---------------------------------------- */
-
-/* Espaço JUSTO entre seções (pedido do Victor, 31/10/2026, repetido do Márcio:
-   "nunca deixe espaçamento exagerado mesmo que venha das referências"). As
-   referências do nicho usam 96–140px entre blocos; aqui duas seções vizinhas
-   somam no máximo ~88px no computador e 56px no celular. Quem cobra é o
-   `portao-ramos.mjs`: vão vertical vazio acima de 120px (computador) ou 72px
-   (celular) reprova a página. */
 .pg-sec {
   position: relative;
   padding-block: clamp(1.75rem, 1.45rem + 1.4vw, 2.75rem);
 }
-/* âncora do índice e dos fatos não pode parar debaixo do cabeçalho fixo */
-main#conteudo [id] { scroll-margin-top: calc(var(--pg-nav-h) + 1rem); }
-/* três colunas (índice, artigo, chamada) pedem uma largura de composição maior
-   que a das páginas antigas; o parágrafo continua preso aos 66ch de leitura.
-   Largura e calha vêm do arquivo de tokens de cada família de chassi, em px,
-   para o texto alinhar com o logo do cabeçalho do domínio (medido em
-   31/10/2026: o chassi Framer usa rem fluido, 20px em 1440, e 80rem virava
-   1.600px, com o conteúdo a 20px da borda e o logo a 40px). */
+main#conteudo [id] {
+  scroll-margin-top: calc(var(--pg-nav-h) + 1rem);
+}
 main#conteudo {
   --pg-shell: var(--pg-shell-ramo, 80rem);
   --pg-calha: var(--pg-calha-ramo, 1rem);
 }
-
-/* Encontro de seções: camada de ALTURA ZERO entre as duas, com a luz
-   atravessando a fronteira. Altura zero não entra na rolagem — `clip-path`
-   recorta a tinta e NÃO tira da rolagem (regra de 28/10/2026), e brilho preso
-   na caixa de uma seção vira degrau na borda (doutrina, seção 2). */
 .pg-sec::before {
   content: "";
   position: absolute;
@@ -152,18 +68,25 @@ main#conteudo {
   transform: translateX(-50%);
   z-index: -1;
   pointer-events: none;
-  background-image: radial-gradient(72% 48% at 50% 0%, var(--pg-luz), transparent 70%);
+  background-image:
+    radial-gradient(
+      72% 48% at 50% 0%,
+      var(--pg-luz),
+      transparent 70%);
 }
-.pg-sec:first-of-type::before { background-image: none; }
-
-/* A largura de COMPOSIÇÃO e a de LEITURA são duas, de propósito: grade e
-   mídia seguem --pg-shell; parágrafo nunca passa de 66ch. */
-.pg-wrap { width: min(100% - 2 * var(--pg-calha, 1rem), var(--pg-shell, 72rem)); margin-inline: auto; }
-.pg-leitura { max-width: 66ch; }
-
+.pg-sec:first-of-type::before {
+  background-image: none;
+}
+.pg-wrap {
+  width: min(100% - 2 * var(--pg-calha, 1rem), var(--pg-shell, 72rem));
+  margin-inline: auto;
+}
+.pg-leitura {
+  max-width: 66ch;
+}
 .pg-sec__eyebrow {
   display: inline-block;
-  font-size: .8125rem;      /* 13px: piso de letra */
+  font-size: .8125rem;
   font-weight: 700;
   letter-spacing: .06em;
   text-transform: uppercase;
@@ -178,90 +101,90 @@ main#conteudo {
   margin: 0 0 .5rem;
   text-wrap: balance;
 }
-.pg-sec__h2 em { font-style: normal; color: var(--pg-marca-400); }
+.pg-sec__h2 em {
+  font-style: normal;
+  color: var(--pg-marca-400);
+}
 .pg-sec__sub {
   font-size: clamp(1rem, .97rem + .2vw, 1.0625rem);
   color: var(--pg-muted);
   max-width: 60ch;
   margin: 0 0 1rem;
 }
-/* Grade de UMA coluna sem `grid-template-columns` nasce com a coluna em `auto`,
-   e coluna `auto` cresce até o min-content do item — o `min-width: 0` do item
-   NÃO alcança a coluna, e por isso o conserto anterior não surtiu efeito. Foi
-   o que esticou a tabela da página de saque do `axelbroker.net`: a coluna
-   fechou 611,328px dentro de um corpo de 328 e a página levou 267px de rolagem
-   lateral (medido em 31/10/2026). `minmax(0, 1fr)` tranca a coluna na largura
-   disponível; com ela, nenhum descendente passa da direita. Toda grade de uma
-   coluna deste arquivo declara a coluna por isso. */
-.pg-sec__corpo { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(1rem, .85rem + .6vw, 1.5rem); }
-
-/* ---- 3. hero: cobre a tela inteira, com o PRODUTO à direita -------------
-   Regra de 08/10/2026, "o erro que eu abomino": hero com min-height:100svh,
-   fundo de ponta a ponta, conteúdo centrado.
-
-   Reforma de 31/10/2026 ("os ramos estão fracos", o Victor): a hero era só
-   texto. Agora segue as referências do nicho (avalonbroker.com e
-   pocketoption.com.mx põem a plataforma na primeira tela; exnova.com põe os
-   números logo abaixo do título): texto à esquerda, print REAL da plataforma à
-   direita, e os fatos da própria página numa faixa de três.
-
-   No celular a composição é a mesma, em sequência, e o print sobe para logo
-   depois dos botões: em 390×844 a primeira tela mostra título, botão E produto.
-   Só peças sem foco mudam de lugar (o print e o parágrafo de apoio), então a
-   ordem de tabulação continua a do HTML. */
-
+.pg-sec__corpo {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(1rem, .85rem + .6vw, 1.5rem);
+}
 .pg-hero {
   position: relative;
-  /* --zoom vem do script de monitor grande (parciais/escala-monitor.html):
-     com a página em zoom, 100svh ficaria maior que a tela */
   min-height: calc(100svh / var(--zoom, 1));
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   align-content: center;
-  /* o pé é curto de propósito: a sobra da tela já se divide em cima e
-     embaixo do conteúdo centrado, e o índice vem logo depois ("nunca deixe
-     espaçamento exagerado", o Victor, 31/10/2026) */
   padding-block: calc(var(--pg-nav-h) + 1.25rem) clamp(1.25rem, 1rem + .8vw, 1.5rem);
-  /* a luz é FUNDO da própria hero, atrás do print, e some antes de chegar ao
-     topo e ao pé da seção — nunca caixa recortada (regra de 28/10/2026) */
-  background-image: radial-gradient(55% 45% at 75% 45%, var(--pg-luz), transparent 72%);
+  background-image:
+    radial-gradient(
+      55% 45% at 75% 45%,
+      var(--pg-luz),
+      transparent 72%);
 }
-.pg-hero__grade { display: grid; grid-template-columns: minmax(0, 1fr); }
-.pg-hero__col { display: contents; }
-.pg-migalha  { order: 1; }
-.pg-hero__chip { order: 2; }
-.pg-hero__h1 { order: 3; }
-.pg-hero__claim { order: 4; }
-.pg-hero__col > .pg-ctas { order: 5; }
-.pg-produto  { order: 6; }
-.pg-fatos    { order: 7; }
-.pg-hero__texto { order: 8; }
-.pg-indep    { order: 9; }
-
-/* A sobra da altura da tela se divide IGUAL entre todos os vãos da hero, em
-   vez de ir inteira para cima e para baixo do conteúdo centrado. Centrado,
-   o vão de baixo somava 119 a 181px antes do índice; dividido, fica entre
-   46 e 104 de 1280x800 a 2560x1440 ("nunca deixe espaçamento exagerado",
-   o Victor, 31/10/2026). Em duas colunas são três vãos (acima, entre a linha
-   de cima e a declaração, abaixo); em pé, um entre cada peça. */
+.pg-hero__grade {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+.pg-hero__col {
+  display: contents;
+}
+.pg-migalha {
+  order: 1;
+}
+.pg-hero__chip {
+  order: 2;
+}
+.pg-hero__h1 {
+  order: 3;
+}
+.pg-hero__claim {
+  order: 4;
+}
+.pg-hero__col > .pg-ctas {
+  order: 5;
+}
+.pg-produto {
+  order: 6;
+}
+.pg-fatos {
+  order: 7;
+}
+.pg-hero__texto {
+  order: 8;
+}
+.pg-indep {
+  order: 9;
+}
 @media (min-width: 60rem) {
-  .pg-hero { align-content: stretch; }
-  .pg-hero__grade { align-content: space-evenly; }
+  .pg-hero {
+    align-content: stretch;
+  }
+  .pg-hero__grade {
+    align-content: space-evenly;
+  }
 }
-/* Duas colunas só em tela deitada. Em pé (1024x1366, monitor girado) a
-   composição é a do tablet, com o print na largura toda: em duas colunas
-   sobravam 317px de vão em cima e 336px embaixo, medidos em 31/10/2026. */
 @media (min-width: 60rem) and (min-aspect-ratio: 6/5) {
   .pg-hero__grade {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr);
     gap: 1.5rem 3rem;
     align-items: center;
   }
-  .pg-hero__col { display: block; min-width: 0; }
-  .pg-indep { grid-column: 1 / -1; }
+  .pg-hero__col {
+    display: block;
+    min-width: 0;
+  }
+  .pg-indep {
+    grid-column: 1 / -1;
+  }
 }
-
-/* migalha: UMA linha; o título longo vira reticências, nunca segunda linha */
 .pg-migalha ol {
   display: flex;
   min-width: 0;
@@ -272,11 +195,20 @@ main#conteudo {
   line-height: 1.4;
   color: var(--pg-muted);
 }
-.pg-migalha li { white-space: nowrap; }
-.pg-migalha li[aria-current] { min-width: 0; overflow: hidden; text-overflow: ellipsis; color: var(--pg-ink); }
-.pg-migalha li + li::before { content: "/"; margin-inline: .5rem; opacity: .55; }
-/* alvo de toque de 44px pelo enchimento, com margem negativa do mesmo tamanho:
-   a linha continua com 20px de altura visível */
+.pg-migalha li {
+  white-space: nowrap;
+}
+.pg-migalha li[aria-current] {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--pg-ink);
+}
+.pg-migalha li + li::before {
+  content: "/";
+  margin-inline: .5rem;
+  opacity: .55;
+}
 .pg-migalha a {
   display: inline-block;
   padding: .75rem .375rem;
@@ -284,8 +216,11 @@ main#conteudo {
   color: var(--pg-marca-300);
   text-decoration: none;
 }
-@media (hover: hover) and (pointer: fine) { .pg-migalha a:hover { text-decoration: underline; } }
-
+@media (hover: hover) and (pointer: fine) {
+  .pg-migalha a:hover {
+    text-decoration: underline;
+  }
+}
 .pg-hero__chip {
   display: inline-flex;
   align-items: center;
@@ -309,7 +244,10 @@ main#conteudo {
   margin: 0 0 .625rem;
   text-wrap: balance;
 }
-.pg-hero__h1 em { font-style: normal; color: var(--pg-marca-400); }
+.pg-hero__h1 em {
+  font-style: normal;
+  color: var(--pg-marca-400);
+}
 .pg-hero__claim {
   font-size: clamp(1.0625rem, 1rem + .35vw, 1.3125rem);
   font-weight: 600;
@@ -318,7 +256,9 @@ main#conteudo {
   margin: 0 0 1rem;
   max-width: 48ch;
 }
-.pg-hero__claim .az { color: var(--pg-marca-400); }
+.pg-hero__claim .az {
+  color: var(--pg-marca-400);
+}
 .pg-hero__texto {
   font-size: clamp(1rem, .97rem + .2vw, 1.0625rem);
   line-height: 1.62;
@@ -326,14 +266,17 @@ main#conteudo {
   max-width: 60ch;
   margin: 0 0 1rem;
 }
-.pg-hero__col > .pg-ctas { margin-bottom: 1rem; }
-@media (min-width: 60rem) and (min-aspect-ratio: 6/5) {
-  .pg-hero__texto { margin-bottom: 1.25rem; }
-  .pg-hero__col > .pg-ctas { margin-bottom: 0; }
+.pg-hero__col > .pg-ctas {
+  margin-bottom: 1rem;
 }
-
-/* fatos da própria página (ficha e números do JSON, ou as contas da página):
-   faixa de TRÊS já no celular, cada um levando à seção que o prova */
+@media (min-width: 60rem) and (min-aspect-ratio: 6/5) {
+  .pg-hero__texto {
+    margin-bottom: 1.25rem;
+  }
+  .pg-hero__col > .pg-ctas {
+    margin-bottom: 0;
+  }
+}
 .pg-fatos {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -342,9 +285,15 @@ main#conteudo {
   margin: 0 0 1rem;
   padding: 0;
 }
-.pg-fatos[data-n="2"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.pg-fatos[data-n="1"] { grid-template-columns: minmax(0, 18rem); }
-.pg-fatos > li { min-width: 0; }
+.pg-fatos[data-n="2"] {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.pg-fatos[data-n="1"] {
+  grid-template-columns: minmax(0, 18rem);
+}
+.pg-fatos > li {
+  min-width: 0;
+}
 .pg-fato {
   display: flex;
   flex-direction: column;
@@ -355,7 +304,10 @@ main#conteudo {
   border-left: 2px solid color-mix(in srgb, var(--pg-marca) 60%, transparent);
   color: inherit;
   text-decoration: none;
-  transition: transform .18s cubic-bezier(.22, 1, .36, 1), border-color .18s, background-color .18s;
+  transition:
+    transform .18s cubic-bezier(.22, 1, .36, 1),
+    border-color .18s,
+    background-color .18s;
 }
 .pg-fato__valor {
   font-size: clamp(.9375rem, .85rem + .55vw, 1.375rem);
@@ -365,8 +317,14 @@ main#conteudo {
   overflow-wrap: normal;
   font-variant-numeric: tabular-nums;
 }
-.pg-fato__rotulo { font-size: .8125rem; line-height: 1.35; color: var(--pg-muted); }
-.pg-fato:active { transform: scale(.98); }
+.pg-fato__rotulo {
+  font-size: .8125rem;
+  line-height: 1.35;
+  color: var(--pg-muted);
+}
+.pg-fato:active {
+  transform: scale(.98);
+}
 @media (min-width: 48rem) {
   .pg-fato {
     padding: .75rem .875rem;
@@ -374,16 +332,26 @@ main#conteudo {
     border-radius: var(--pg-raio, 10px);
     background: var(--pg-s1);
   }
-  .pg-fato__rotulo { font-size: .875rem; }
+  .pg-fato__rotulo {
+    font-size: .875rem;
+  }
 }
-@media (min-width: 60rem) and (min-aspect-ratio: 6/5) { .pg-fatos { margin: 1.25rem 0 0; } }
+@media (min-width: 60rem) and (min-aspect-ratio: 6/5) {
+  .pg-fatos {
+    margin: 1.25rem 0 0;
+  }
+}
 @media (hover: hover) and (pointer: fine) {
-  .pg-fato:hover { transform: translateY(-2px); border-color: var(--pg-marca-700); }
+  .pg-fato:hover {
+    transform: translateY(-2px);
+    border-color: var(--pg-marca-700);
+  }
 }
-
-/* o produto: print REAL de trade.safirion.com, com a barra do navegador que já
-   vem na captura — nada de moldura de aparelho (não foi pedida) */
-.pg-produto { position: relative; margin: 0 0 1rem; min-width: 0; }
+.pg-produto {
+  position: relative;
+  margin: 0 0 1rem;
+  min-width: 0;
+}
 .pg-produto__tela img {
   display: block;
   width: 100%;
@@ -391,9 +359,7 @@ main#conteudo {
   border-radius: 12px;
   border: 1px solid color-mix(in srgb, var(--pg-marca) 32%, var(--pg-linha));
   background: var(--pg-s1);
-  box-shadow:
-    0 28px 60px -30px rgba(0, 0, 0, .8),
-    0 40px 90px -50px color-mix(in srgb, var(--pg-marca) 70%, transparent);
+  box-shadow: 0 28px 60px -30px rgba(0, 0, 0, .8), 0 40px 90px -50px color-mix(in srgb, var(--pg-marca) 70%, transparent);
 }
 .pg-produto__selo {
   display: flex;
@@ -428,20 +394,23 @@ main#conteudo {
   }
 }
 @media (min-width: 60rem) and (min-aspect-ratio: 6/5) {
-  .pg-produto { margin: 0; }
-  /* peça da direita em perspectiva OLHA para o leitor: gira para a esquerda
-     (doutrina, seção 4), e endireita quando o mouse chega */
+  .pg-produto {
+    margin: 0;
+  }
   .pg-produto {
     transform: perspective(1800px) rotateY(-5deg) rotateX(1.5deg);
     transition: transform .5s cubic-bezier(.22, 1, .36, 1);
   }
 }
 @media (min-width: 60rem) and (min-aspect-ratio: 6/5) and (hover: hover) and (pointer: fine) {
-  .pg-produto:hover { transform: perspective(1800px) rotateY(0deg) rotateX(0deg); }
+  .pg-produto:hover {
+    transform: perspective(1800px) rotateY(0deg) rotateX(0deg);
+  }
 }
 @media (prefers-reduced-motion: no-preference) {
-  /* só transform: opacidade zero atrasaria a maior pintura da página */
-  .pg-produto__tela { animation: pg-produto-entra .7s cubic-bezier(.22, 1, .36, 1) both; }
+  .pg-produto__tela {
+    animation: pg-produto-entra .7s cubic-bezier(.22, 1, .36, 1) both;
+  }
   .pg-produto__ponto::after {
     content: "";
     position: absolute;
@@ -451,17 +420,29 @@ main#conteudo {
     animation: pg-pulso 2.4s ease-out infinite;
   }
 }
-@keyframes pg-produto-entra { from { transform: translateY(14px) scale(.985); } to { transform: none; } }
-@keyframes pg-pulso { 0% { transform: scale(1); opacity: .6; } 80%, 100% { transform: scale(2.6); opacity: 0; } }
-
-/* Declaração de afiliado À VISTA na primeira tela. Não é rodapé: página de
-   afiliado que não se declara passa por oficial, e o publisher do JSON-LD
-   nunca é a corretora (memória `pagina-de-afiliado-nunca-se-declara-a-corretora`). */
+@keyframes pg-produto-entra {
+  from {
+    transform: translateY(14px) scale(.985);
+  }
+  to {
+    transform: none;
+  }
+}
+@keyframes pg-pulso {
+  0% {
+    transform: scale(1);
+    opacity: .6;
+  }
+  80%, 100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
 .pg-indep {
   display: flex;
   gap: .625rem;
   align-items: flex-start;
-  font-size: 1rem;          /* corpo ≥ 16px: é texto que a pessoa LÊ, não rótulo */
+  font-size: 1rem;
   line-height: 1.55;
   color: var(--pg-muted);
   background: var(--pg-s1);
@@ -471,34 +452,48 @@ main#conteudo {
   padding: .625rem .9375rem;
   margin: 0;
 }
-.pg-indep strong { color: var(--pg-ink); }
-.pg-indep a { color: var(--pg-marca-300); text-decoration: underline; text-underline-offset: 2px; }
-
-/* ---- 4. par de CTAs: lado a lado em 360px ------------------------------ */
-
-.pg-ctas { display: flex; flex-wrap: wrap; gap: .625rem; }
-.pg-ctas > * { flex: 1 1 9rem; min-width: 0; }
-@media (min-width: 48rem) { .pg-ctas > * { flex: 0 0 auto; } }
-
+.pg-indep strong {
+  color: var(--pg-ink);
+}
+.pg-indep a {
+  color: var(--pg-marca-300);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.pg-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .625rem;
+}
+.pg-ctas > * {
+  flex: 1 1 9rem;
+  min-width: 0;
+}
+@media (min-width: 48rem) {
+  .pg-ctas > * {
+    flex: 0 0 auto;
+  }
+}
 .pg-botao {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: .5rem;
-  min-height: 2.875rem;      /* 46px: alvo de toque */
+  min-height: 2.875rem;
   padding: .75rem 1.375rem;
   border-radius: var(--pg-raio, 10px);
-  font-size: 1rem;           /* rótulo de botão é texto de leitura: ≥ 16px */
+  font-size: 1rem;
   font-weight: 700;
   text-align: center;
   text-decoration: none;
   border: 1px solid transparent;
   cursor: pointer;
-  transition: transform .18s cubic-bezier(.22, 1, .36, 1), box-shadow .18s, background-color .18s, border-color .18s;
+  transition:
+    transform .18s cubic-bezier(.22, 1, .36, 1),
+    box-shadow .18s,
+    background-color .18s,
+    border-color .18s;
 }
-/* Bloco de cor viva leva texto BRANCO, e a cor escurece até o branco dar
-   4,5:1 (regra de 11/10/2026). `--pg-marca-700` é o tom medido para isso:
-   #0d63b0 dá 6,12:1 com branco; o `--pg-marca` puro daria só 3,63:1. */
 .pg-botao--cheio {
   background: var(--pg-marca-700);
   color: #fff;
@@ -509,14 +504,19 @@ main#conteudo {
   color: var(--pg-ink-forte);
   border-color: var(--pg-linha);
 }
-.pg-botao:active { transform: scale(.98); }
-@media (hover: hover) and (pointer: fine) {
-  .pg-botao--cheio:hover { transform: translateY(-2px); box-shadow: 0 16px 32px -14px color-mix(in srgb, var(--pg-marca) 80%, transparent); }
-  .pg-botao--vazio:hover { transform: translateY(-2px); border-color: var(--pg-marca-700); }
+.pg-botao:active {
+  transform: scale(.98);
 }
-
-/* ---- 5. bloco `texto` --------------------------------------------------- */
-
+@media (hover: hover) and (pointer: fine) {
+  .pg-botao--cheio:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 32px -14px color-mix(in srgb, var(--pg-marca) 80%, transparent);
+  }
+  .pg-botao--vazio:hover {
+    transform: translateY(-2px);
+    border-color: var(--pg-marca-700);
+  }
+}
 .pg-texto > p {
   font-size: clamp(1rem, .97rem + .2vw, 1.0625rem);
   line-height: 1.72;
@@ -524,15 +524,22 @@ main#conteudo {
   max-width: 66ch;
   margin: 0 0 1rem;
 }
-.pg-texto > p:last-child { margin-bottom: 0; }
-.pg-texto strong { color: var(--pg-ink-forte); font-weight: 700; }
-.pg-texto em { font-style: normal; color: var(--pg-marca-400); }
-.pg-texto a { color: var(--pg-marca-300); text-decoration: underline; text-underline-offset: 2px; }
-
-/* ---- 6. bloco `citavel` -------------------------------------------------
-   40 a 60 palavras que respondem o título inteiro sem depender do resto da
-   página. É o trecho que o ChatGPT, o Perplexity e o AI Overview copiam. */
-
+.pg-texto > p:last-child {
+  margin-bottom: 0;
+}
+.pg-texto strong {
+  color: var(--pg-ink-forte);
+  font-weight: 700;
+}
+.pg-texto em {
+  font-style: normal;
+  color: var(--pg-marca-400);
+}
+.pg-texto a {
+  color: var(--pg-marca-300);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
 .pg-citavel {
   position: relative;
   background: var(--pg-s1);
@@ -545,7 +552,9 @@ main#conteudo {
 .pg-citavel::before {
   content: "";
   position: absolute;
-  left: 0; top: .875rem; bottom: .875rem;
+  left: 0;
+  top: .875rem;
+  bottom: .875rem;
   width: 3px;
   border-radius: 0 3px 3px 0;
   background: var(--pg-marca-700);
@@ -557,10 +566,9 @@ main#conteudo {
   color: var(--pg-ink-forte);
   margin: 0;
 }
-.pg-citavel strong { color: #fff; }
-
-/* ---- 7. blocos `numeros` e `ficha`: 2 colunas → 4 ---------------------- */
-
+.pg-citavel strong {
+  color: #fff;
+}
 .pg-numeros,
 .pg-ficha {
   display: grid;
@@ -572,9 +580,11 @@ main#conteudo {
 }
 @media (min-width: 48rem) {
   .pg-numeros,
-  .pg-ficha { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .875rem; }
+  .pg-ficha {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: .875rem;
+  }
 }
-
 .pg-numeros > li,
 .pg-ficha > li {
   background: var(--pg-s1);
@@ -588,42 +598,40 @@ main#conteudo {
   align-content: start;
   gap: .1875rem;
 }
-/* Filho de grade nasce com `min-width: auto`: ele NÃO encolhe abaixo da maior
-   palavra, e endereço de internet é uma palavra só. Na raiz do `axelbroker.net`
-   o título `axelbroker.com/welcome` fechou 177px dentro de um cartão de 149 e
-   `trade.axelbroker.online` esticou a ficha, somando 19px de rolagem lateral na
-   página (medido em 31/10/2026). O `min-width: 0` do `li` não alcança os filhos
-   dele; a quebra só age onde não há espaço, então frase comum sai igual. */
 .pg-numeros > li > *,
 .pg-ficha > li > *,
 .pg-cartoes > li > *,
-.pg-naoe > li > * { min-width: 0; overflow-wrap: anywhere; }
-
-/* Cartão de NÚMERO lê centralizado; fato escrito lê da esquerda
-   (regra de 11/10/2026). */
-.pg-numeros > li { text-align: center; justify-items: center; }
-
+.pg-naoe > li > * {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.pg-numeros > li {
+  text-align: center;
+  justify-items: center;
+}
 .pg-dado__rotulo {
   order: -1;
-  font-size: .875rem;        /* 14px */
+  font-size: .875rem;
   font-weight: 600;
   color: var(--pg-muted);
   line-height: 1.3;
 }
 .pg-dado__valor {
-  font-size: clamp(1.25rem, 1.05rem + .8vw, 1.875rem);   /* 20 → 30px */
+  font-size: clamp(1.25rem, 1.05rem + .8vw, 1.875rem);
   font-weight: 800;
-  line-height: 1.1;
+  line-height: 1.22;
   color: var(--pg-ink-forte);
   font-variant-numeric: tabular-nums;
   letter-spacing: -.01em;
 }
-.pg-dado__apoio { font-size: .8125rem; line-height: 1.4; color: var(--pg-muted); }
-/* Em `ficha` o valor é fato escrito: 20px e lendo da esquerda. */
-.pg-ficha .pg-dado__valor { font-size: 1.25rem; }
-
-/* ---- 8. blocos `cartoes` e `nao-e`: 2 colunas → 3 --------------------- */
-
+.pg-dado__apoio {
+  font-size: .8125rem;
+  line-height: 1.4;
+  color: var(--pg-muted);
+}
+.pg-ficha .pg-dado__valor {
+  font-size: 1.25rem;
+}
 .pg-cartoes,
 .pg-naoe {
   display: grid;
@@ -635,9 +643,11 @@ main#conteudo {
 }
 @media (min-width: 48rem) {
   .pg-cartoes,
-  .pg-naoe { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .875rem; }
+  .pg-naoe {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: .875rem;
+  }
 }
-
 .pg-cartoes > li,
 .pg-naoe > li {
   background: var(--pg-s1);
@@ -651,10 +661,6 @@ main#conteudo {
   align-content: start;
   gap: .375rem;
 }
-/* Corpo ≥ 16px em TODA largura, inclusive em 360px dentro da grade de 2
-   colunas: a letra miúda em cartão foi o que o Victor chamou de "problemas que
-   eu nem era para estar lhe falando" (11/10/2026). A coluna de 2 em 360px dá
-   ~160px de texto, que a 16px rende ~18 caracteres por linha — cabe. */
 .pg-cartao__titulo {
   display: flex;
   align-items: flex-start;
@@ -662,38 +668,37 @@ main#conteudo {
   font-size: 1rem;
   font-weight: 700;
   line-height: 1.35;
+  text-wrap: balance;
   color: var(--pg-ink-forte);
 }
-.pg-cartao__texto { font-size: 1rem; line-height: 1.6; color: var(--pg-muted); }
-
+.pg-cartao__texto {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--pg-muted);
+}
 .pg-icone {
   flex: 0 0 1.125rem;
   width: 1.125rem;
   height: 1.125rem;
   margin-top: .0625rem;
 }
-.pg-icone--check { color: var(--pg-ok); }
-.pg-icone--x { color: var(--pg-nao); }
-.pg-icone--alerta { color: var(--pg-atencao); }
-.pg-icone--info { color: var(--pg-marca-400); }
-
-.pg-naoe > li { border-left: 3px solid var(--pg-nao); }
-
-/* ---- 9. bloco `passos` -------------------------------------------------
-   A composição sai da MEDIDA do texto, não do hábito: o parágrafo de apoio
-   dos 99 passos destas páginas tem mediana de 156 caracteres e p90 de 204
-   (medido em 29/10/2026 nos JSONs). Texto acima de 160 caracteres não cabe em
-   2 colunas no celular, muito menos em 3: a 16px, uma coluna de 1/3 em 360px
-   deixa ~80px de texto, isto é ~9 caracteres por linha. Então em 360px o
-   passo é uma faixa com o NÚMERO AO LADO do texto (a linha "recurso com
-   parágrafo" da skill responsivo-de-cara), e a faixa de 3 colunas entra a
-   partir de 48rem, onde cada coluna tem ~230px. Não é pilha por omissão: o
-   número e o conteúdo ficam lado a lado, e a decisão tem número atrás. */
-
+.pg-icone--check {
+  color: var(--pg-ok);
+}
+.pg-icone--x {
+  color: var(--pg-nao);
+}
+.pg-icone--alerta {
+  color: var(--pg-atencao);
+}
+.pg-icone--info {
+  color: var(--pg-marca-400);
+}
+.pg-naoe > li {
+  border-left: 3px solid var(--pg-nao);
+}
 .pg-passos {
   display: grid;
-  /* `1fr` é `minmax(auto, 1fr)`: o mínimo é min-content e a coluna cresce com o
-     conteúdo. Só `minmax(0, 1fr)` tranca na largura disponível (31/10/2026). */
   grid-template-columns: minmax(0, 1fr);
   gap: .5rem;
   counter-reset: pg-passo;
@@ -702,9 +707,11 @@ main#conteudo {
   padding: 0;
 }
 @media (min-width: 48rem) {
-  .pg-passos { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .875rem; }
+  .pg-passos {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: .875rem;
+  }
 }
-
 .pg-passos > li {
   counter-increment: pg-passo;
   background: var(--pg-s1);
@@ -730,34 +737,47 @@ main#conteudo {
   color: var(--pg-marca-400);
   font-variant-numeric: tabular-nums;
 }
-.pg-passo__titulo { font-size: 1rem; font-weight: 700; line-height: 1.35; color: var(--pg-ink-forte); }
-.pg-passo__texto { font-size: 1rem; line-height: 1.6; color: var(--pg-muted); }
-@media (min-width: 48rem) {
-  .pg-passos > li { grid-template-columns: minmax(0, 1fr); row-gap: .3125rem; }
-  .pg-passos > li::before { grid-row: auto; font-size: 1.25rem; }
+.pg-passo__titulo {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--pg-ink-forte);
+  text-wrap: balance;
 }
-
-/* ---- 10. bloco `tabela`: cartão por linha no celular ------------------
-   Rolagem lateral é vetada desde 15/09/2026, inclusive dentro de componente.
-   Até 47,99rem cada <tr> vira cartão e o nome da coluna entra em cada valor
-   por `td::before { content: attr(data-rotulo) }`. */
-
-.pg-tabela-box { max-width: 100%; }
-.pg-tabela { width: 100%; border-collapse: collapse; }
-
+.pg-passo__texto {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--pg-muted);
+}
+@media (min-width: 48rem) {
+  .pg-passos > li {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: .3125rem;
+  }
+  .pg-passos > li::before {
+    grid-row: auto;
+    font-size: 1.25rem;
+  }
+}
+.pg-tabela-box {
+  max-width: 100%;
+}
+.pg-tabela {
+  width: 100%;
+  border-collapse: collapse;
+}
 @media (max-width: 47.99rem) {
-  /* A `<table>` continua em layout de TABELA mesmo com os `<tr>` virando grade:
-     o algoritmo mede as colunas pelo conteúdo e não encolhe até a largura do
-     pai. Na página de saque do `axelbroker.net` a tabela fechou 611px dentro de
-     um corpo de 328 e levava 267px de rolagem lateral para a página inteira
-     (medido em 31/10/2026). No celular ela deixa de ser tabela: cada linha é um
-     cartão no fluxo normal, e só aí o `minmax(0, 1fr)` de baixo vale. */
   .pg-tabela,
-  .pg-tabela tbody { display: block; width: 100%; }
+  .pg-tabela tbody {
+    display: block;
+    width: 100%;
+  }
   .pg-tabela thead {
     position: absolute;
     clip-path: inset(50%);
-    width: 1px; height: 1px; overflow: hidden;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
   }
   .pg-tabela tr {
     display: grid;
@@ -768,24 +788,32 @@ main#conteudo {
     padding: .8125rem .875rem;
     margin-bottom: .5rem;
   }
-  /* Quantos valores ficam LADO A LADO dentro do cartão é decidido pelo
-     conteúdo da tabela, no gerador (`colunasNoCelular`), e chega aqui em
-     `data-cel-cols`. "Linha de 3 valores = 3 colunas" vale enquanto a
-     coluna couber a maior palavra: em 360px três colunas dão 96px, o que
-     serve a "0,5%" e não serve a "Superintendencia". Valor de frase fica
-     em uma coluna por valor, com o nome da coluna em cima — nunca em
-     quadro rolável (rolagem lateral é vetada desde 15/09/2026).
-     Só divisor da quantidade de colunas entra, para não sobrar órfã. */
-  .pg-tabela tr { grid-template-columns: minmax(0, 1fr); }
-  .pg-tabela[data-cel-cols="2"] tr { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .pg-tabela[data-cel-cols="3"] tr { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .pg-tabela[data-cel-cols="4"] tr { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .pg-tabela[data-cel-cols="5"] tr { grid-template-columns: repeat(5, minmax(0, 1fr)); }
-  /* endereço de internet e código de registro são UMA palavra: sem isto a
-     célula não encolhe abaixo deles (`overflow-wrap: anywhere` só age quando
-     não há onde quebrar, então frase comum sai igual). */
-  .pg-tabela td { display: grid; grid-template-columns: minmax(0, 1fr); gap: .125rem; min-width: 0; padding: 0; border: 0; font-size: 1rem; line-height: 1.5; overflow-wrap: anywhere; }
-  /* o rótulo da coluna é ETIQUETA, não corpo: piso de 13px (11/10/2026) */
+  .pg-tabela tr {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .pg-tabela[data-cel-cols="2"] tr {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .pg-tabela[data-cel-cols="3"] tr {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .pg-tabela[data-cel-cols="4"] tr {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .pg-tabela[data-cel-cols="5"] tr {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+  .pg-tabela td {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: .125rem;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    font-size: 1rem;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+  }
   .pg-tabela td::before {
     content: attr(data-rotulo);
     font-size: .8125rem;
@@ -794,9 +822,11 @@ main#conteudo {
     text-transform: uppercase;
     color: var(--pg-muted);
   }
-  .pg-tabela td:first-child { font-weight: 700; color: var(--pg-ink-forte); }
+  .pg-tabela td:first-child {
+    font-weight: 700;
+    color: var(--pg-ink-forte);
+  }
 }
-
 @media (min-width: 48rem) {
   .pg-tabela {
     background: var(--pg-s1);
@@ -821,13 +851,17 @@ main#conteudo {
     color: var(--pg-muted);
     border-bottom-color: color-mix(in srgb, var(--pg-marca) 32%, transparent);
   }
-  .pg-tabela tbody tr:last-child td { border-bottom: 0; }
-  .pg-tabela tbody td:first-child { font-weight: 700; color: var(--pg-ink-forte); }
-  .pg-tabela td { color: var(--pg-ink); }
+  .pg-tabela tbody tr:last-child td {
+    border-bottom: 0;
+  }
+  .pg-tabela tbody td:first-child {
+    font-weight: 700;
+    color: var(--pg-ink-forte);
+  }
+  .pg-tabela td {
+    color: var(--pg-ink);
+  }
 }
-
-/* ---- 11. blocos `aviso` e `lista` ------------------------------------- */
-
 .pg-aviso {
   display: flex;
   gap: .75rem;
@@ -838,12 +872,30 @@ main#conteudo {
   border-radius: var(--pg-raio, 10px);
   padding: clamp(.875rem, .75rem + .5vw, 1.125rem);
 }
-.pg-aviso p { font-size: 1rem; line-height: 1.62; color: var(--pg-ink); margin: 0; max-width: 66ch; }
-.pg-aviso strong { color: var(--pg-ink-forte); }
-
-.pg-lista { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: .5rem; max-width: 66ch; }
-/* rótulos curtos (≤40 letras, quantidade par): 2 colunas desde 320px */
-.pg-lista--curta { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 1rem; max-width: 40rem; }
+.pg-aviso p {
+  font-size: 1rem;
+  line-height: 1.62;
+  color: var(--pg-ink);
+  margin: 0;
+  max-width: 66ch;
+}
+.pg-aviso strong {
+  color: var(--pg-ink-forte);
+}
+.pg-lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: .5rem;
+  max-width: 66ch;
+}
+.pg-lista--curta {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 1rem;
+  max-width: 40rem;
+}
 .pg-lista > li {
   position: relative;
   padding-left: 1.5rem;
@@ -861,14 +913,6 @@ main#conteudo {
   border-radius: 50%;
   background: var(--pg-marca-400);
 }
-
-/* ---- 12. fonte de cada número ---------------------------------------- */
-
-/* A linha de fonte cita endereço de internet em TEXTO PURO (o PDF da política de
-   saque do Safirion tem 95 caracteres sem espaço): é uma palavra só, e sem
-   quebra ela transbordou 283px na página de saque do `axelbroker.net`
-   (31/10/2026). `anywhere` só age onde não há onde quebrar, então frase comum
-   sai igual. */
 .pg-fonte {
   display: block;
   min-width: 0;
@@ -878,16 +922,23 @@ main#conteudo {
   color: var(--pg-muted);
   margin-top: .75rem;
 }
-.pg-fonte a { color: var(--pg-marca-300); text-decoration: underline; text-underline-offset: 2px; }
-
-/* ---- 13. FAQ: 1 coluna → 2, com UM controle centralizado -------------
-   Doutrina, seção 9: 5 perguntas à vista em 1 coluna, 6 em 2 colunas, um só
-   botão "Ver mais perguntas (+N)", centralizado, com N vindo de contagem.
-   Abrir uma fecha a outra: `<details name>` + reserva em JS. */
-
-.pg-faq__lista { display: grid; grid-template-columns: minmax(0, 1fr); gap: .5rem; align-items: start; }
-@media (min-width: 48rem) { .pg-faq__lista { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; } }
-
+.pg-fonte a {
+  color: var(--pg-marca-300);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.pg-faq__lista {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: .5rem;
+  align-items: start;
+}
+@media (min-width: 48rem) {
+  .pg-faq__lista {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .75rem;
+  }
+}
 .pg-faq__item {
   background: var(--pg-s1);
   border: 1px solid var(--pg-linha);
@@ -895,9 +946,12 @@ main#conteudo {
   overflow: clip;
   min-width: 0;
 }
-.pg-faq__item[open] { border-color: color-mix(in srgb, var(--pg-marca) 38%, transparent); }
-.pg-faq__item[hidden] { display: none; }
-
+.pg-faq__item[open] {
+  border-color: color-mix(in srgb, var(--pg-marca) 38%, transparent);
+}
+.pg-faq__item[hidden] {
+  display: none;
+}
 .pg-faq__q {
   display: flex;
   align-items: flex-start;
@@ -913,58 +967,64 @@ main#conteudo {
   list-style: none;
   transition: color .18s;
 }
-.pg-faq__q::-webkit-details-marker { display: none; }
-/* cruz que gira 45° ao abrir — desenhada em background, sem elemento extra */
+.pg-faq__q::-webkit-details-marker {
+  display: none;
+}
 .pg-faq__q::after {
   content: "";
   flex: 0 0 1rem;
   width: 1rem;
   height: 1rem;
   margin-top: .1875rem;
-  background:
-    linear-gradient(var(--pg-marca-400), var(--pg-marca-400)) center / 100% 2px no-repeat,
-    linear-gradient(var(--pg-marca-400), var(--pg-marca-400)) center / 2px 100% no-repeat;
+  background: linear-gradient(var(--pg-marca-400), var(--pg-marca-400)) center / 100% 2px no-repeat, linear-gradient(var(--pg-marca-400), var(--pg-marca-400)) center / 2px 100% no-repeat;
   transition: transform .26s cubic-bezier(.22, 1, .36, 1);
 }
-.pg-faq__item[open] .pg-faq__q::after { transform: rotate(45deg); }
-@media (hover: hover) and (pointer: fine) { .pg-faq__q:hover { color: var(--pg-marca-300); } }
-
-.pg-faq__a { padding: 0 1rem 1rem; }
-.pg-faq__a p { font-size: 1rem; line-height: 1.68; color: var(--pg-muted); margin: 0 0 .625rem; max-width: 66ch; }
-.pg-faq__a p:last-child { margin-bottom: 0; }
-.pg-faq__a strong { color: var(--pg-ink); }
-.pg-faq__a a { color: var(--pg-marca-300); text-decoration: underline; text-underline-offset: 2px; }
-
-.pg-mais { display: flex; justify-content: center; margin-top: 1.25rem; }
-
-/* ---- 13b. dobra de bloco longo no celular -----------------------------
-   Nenhuma seção passa de 2,5 telas no celular (skill `responsivo-de-cara`), e
-   em página de texto longo a régua é a altura POR SEÇÃO: medido em 29/10/2026,
-   "As alíquotas do ganho de capital" dava 2,86 telas em 360px e "O que Nevis
-   põe em lista" 2,68 — nos dois casos quem estoura é UM bloco de muitos itens
-   (ficha de 8, tabela de 9 linhas), não o texto corrido.
-
-   A dobra é o MESMO controle do FAQ (um botão centralizado, com o N por
-   CONTAGEM, doutrina seção 9), generalizado para lista, tabela, cartões,
-   ficha, números e passos. Só abaixo de 600px, onde a altura é o problema: do
-   tablet para cima tudo aparece, e a composição lado a lado dos blocos NÃO
-   muda — dobra é altura, não coluna.
-
-   O conteúdo nunca depende de JS: sem `.pg-js` nada fica escondido, e o
-   `hidden` só vale DENTRO da media query, então a tela que gira para paisagem
-   mostra tudo antes de o script reagir ao `resize`. */
-
-@media (max-width: 37.49rem) {
-  .pg-js .pg-dobra > [hidden] { display: none; }
+.pg-faq__item[open] .pg-faq__q::after {
+  transform: rotate(45deg);
 }
-.pg-mais--bloco { margin-top: .625rem; }
-.pg-mais--bloco .pg-botao { font-size: .9375rem; padding-block: .6875rem; }
-
-/* ---- 14. CTA de fecho: o convite AO LADO do produto ---------------------
-   Como a Avalon e a IQ Option fecham a página: quem chegou até aqui decide
-   olhando a plataforma, não um parágrafo solto no meio da tela. Caixa com a
-   luz como FUNDO dela mesma; texto e print lado a lado a partir do tablet. */
-
+@media (hover: hover) and (pointer: fine) {
+  .pg-faq__q:hover {
+    color: var(--pg-marca-300);
+  }
+}
+.pg-faq__a {
+  padding: 0 1rem 1rem;
+}
+.pg-faq__a p {
+  font-size: 1rem;
+  line-height: 1.68;
+  color: var(--pg-muted);
+  margin: 0 0 .625rem;
+  max-width: 66ch;
+}
+.pg-faq__a p:last-child {
+  margin-bottom: 0;
+}
+.pg-faq__a strong {
+  color: var(--pg-ink);
+}
+.pg-faq__a a {
+  color: var(--pg-marca-300);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.pg-mais {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.25rem;
+}
+@media (max-width: 37.49rem) {
+  .pg-js .pg-dobra > [hidden] {
+    display: none;
+  }
+}
+.pg-mais--bloco {
+  margin-top: .625rem;
+}
+.pg-mais--bloco .pg-botao {
+  font-size: .9375rem;
+  padding-block: .6875rem;
+}
 .pg-cta__caixa {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -974,12 +1034,21 @@ main#conteudo {
   border: 1px solid var(--pg-linha);
   border-radius: calc(var(--pg-raio, 10px) + 4px);
   background-color: var(--pg-s1);
-  background-image: radial-gradient(70% 90% at 85% 50%, var(--pg-luz), transparent 70%);
+  background-image:
+    radial-gradient(
+      70% 90% at 85% 50%,
+      var(--pg-luz),
+      transparent 70%);
 }
 @media (min-width: 48rem) {
-  .pg-cta__caixa { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 2.5rem; }
+  .pg-cta__caixa {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    gap: 2.5rem;
+  }
 }
-.pg-cta__col { min-width: 0; }
+.pg-cta__col {
+  min-width: 0;
+}
 .pg-cta__h2 {
   font-size: clamp(1.5rem, 1.2rem + 1.3vw, 2.25rem);
   line-height: 1.16;
@@ -988,7 +1057,16 @@ main#conteudo {
   margin: 0 0 .75rem;
   text-wrap: balance;
 }
-.pg-cta__h2 em { font-style: normal; color: var(--pg-marca-400); }
+.pg-cta__h2 em {
+  font-style: normal;
+  color: var(--pg-marca-400);
+}
+@media (max-width: 29.99rem) {
+  .pg-sec__h2,
+  .pg-cta__h2 {
+    line-height: 1.22;
+  }
+}
 .pg-cta p {
   font-size: clamp(1rem, .97rem + .25vw, 1.0625rem);
   line-height: 1.65;
@@ -996,8 +1074,13 @@ main#conteudo {
   margin: 0 0 .75rem;
   max-width: 60ch;
 }
-.pg-cta .pg-ctas { margin-top: 1rem; }
-.pg-cta__tela { margin: 0; min-width: 0; }
+.pg-cta .pg-ctas {
+  margin-top: 1rem;
+}
+.pg-cta__tela {
+  margin: 0;
+  min-width: 0;
+}
 .pg-cta__tela img {
   display: block;
   width: 100%;
@@ -1006,12 +1089,23 @@ main#conteudo {
   border: 1px solid color-mix(in srgb, var(--pg-marca) 28%, var(--pg-linha));
   box-shadow: 0 24px 50px -28px rgba(0, 0, 0, .8);
 }
-
-/* ---- 15. fontes da página: 2 colunas → 4 ------------------------------ */
-
-.pg-fontes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .5rem; list-style: none; margin: 0; padding: 0; }
-@media (min-width: 48rem) { .pg-fontes { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .75rem; } }
-.pg-fontes > li { min-width: 0; }
+.pg-fontes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+@media (min-width: 48rem) {
+  .pg-fontes {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: .75rem;
+  }
+}
+.pg-fontes > li {
+  min-width: 0;
+}
 .pg-fontes a {
   display: block;
   height: 100%;
@@ -1027,31 +1121,30 @@ main#conteudo {
   transition: border-color .18s, transform .18s;
 }
 @media (hover: hover) and (pointer: fine) {
-  .pg-fontes a:hover { border-color: var(--pg-marca-700); transform: translateY(-2px); }
+  .pg-fontes a:hover {
+    border-color: var(--pg-marca-700);
+    transform: translateY(-2px);
+  }
 }
-
-/* ---- 15b. o corpo em três colunas: índice, artigo e chamada -------------
-   O modelo é a página-ramo da iqoption.mx: índice numerado preso à esquerda,
-   o artigo no meio e a chamada da plataforma presa à direita, as duas peças
-   laterais acompanhando a leitura por `position: sticky` (doutrina, seção 7:
-   nunca posicionar por script).
-
-     celular e tablet ..... índice numa caixa que abre (fechada pelo script),
-                            artigo; a chamada lateral não existe — a hero e o
-                            fecho já levam o mesmo botão
-     64rem ................ índice em cima do artigo, chamada fixa à direita
-     80rem ................ as três colunas */
-
 .pg-layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   grid-template-areas: "indice" "artigo";
   padding-top: .5rem;
 }
-.pg-indice  { grid-area: indice; min-width: 0; }
-.pg-artigo  { grid-area: artigo; min-width: 0; }
-.pg-lateral { grid-area: lateral; display: none; min-width: 0; }
-
+.pg-indice {
+  grid-area: indice;
+  min-width: 0;
+}
+.pg-artigo {
+  grid-area: artigo;
+  min-width: 0;
+}
+.pg-lateral {
+  grid-area: lateral;
+  display: none;
+  min-width: 0;
+}
 @media (min-width: 64rem) {
   .pg-layout {
     grid-template-columns: minmax(0, 1fr) 17rem;
@@ -1081,13 +1174,6 @@ main#conteudo {
     scrollbar-width: thin;
   }
 }
-
-/* ---- 15c. índice ---------------------------------------------------------
-   O tópico da vez acende pela ROLAGEM (o `conteudo.js` marca
-   `aria-current="true"` no link da seção que contém o meio da tela), nunca só
-   pelo clique. O item apagado continua legível: tinta `--pg-muted`, não cinza
-   sobre cinza. */
-
 .pg-indice__caixa {
   background: var(--pg-s1);
   border: 1px solid var(--pg-linha);
@@ -1107,7 +1193,9 @@ main#conteudo {
   cursor: pointer;
   list-style: none;
 }
-.pg-indice__tit::-webkit-details-marker { display: none; }
+.pg-indice__tit::-webkit-details-marker {
+  display: none;
+}
 .pg-indice__n {
   display: inline-grid;
   place-items: center;
@@ -1120,7 +1208,6 @@ main#conteudo {
   color: var(--pg-ink);
   background: var(--pg-s2);
 }
-/* seta que gira ao abrir, desenhada com duas bordas */
 .pg-indice__tit::after {
   content: "";
   margin-left: auto;
@@ -1131,8 +1218,9 @@ main#conteudo {
   transform: translateY(-2px) rotate(45deg);
   transition: transform .26s cubic-bezier(.22, 1, .36, 1);
 }
-.pg-indice__caixa[open] > .pg-indice__tit::after { transform: translateY(1px) rotate(-135deg); }
-
+.pg-indice__caixa[open] > .pg-indice__tit::after {
+  transform: translateY(1px) rotate(-135deg);
+}
 .pg-indice__lista {
   list-style: none;
   margin: 0;
@@ -1160,34 +1248,56 @@ main#conteudo {
   font-variant-numeric: tabular-nums;
   color: var(--pg-marca-300);
 }
-.pg-indice__txt { min-width: 0; overflow-wrap: normal; }
-.pg-indice__lista a[aria-current="true"] {
+.pg-indice__txt {
+  min-width: 0;
+  overflow-wrap: normal;
+}
+.pg-indice__lista a[aria-current=true] {
   color: var(--pg-ink-forte);
   background: color-mix(in srgb, var(--pg-marca) 14%, transparent);
   box-shadow: inset 2px 0 0 var(--pg-marca-400);
 }
 @media (hover: hover) and (pointer: fine) {
-  .pg-indice__lista a:hover { color: var(--pg-ink-forte); background: var(--pg-s2); }
+  .pg-indice__lista a:hover {
+    color: var(--pg-ink-forte);
+    background: var(--pg-s2);
+  }
 }
-
-/* da tablet larga para cima a caixa abre em DUAS colunas: o índice cabe numa
-   faixa curta em cima do artigo em vez de uma lista comprida */
 @media (min-width: 48rem) and (max-width: 79.99rem) {
-  .pg-indice__lista { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: .5rem; }
+  .pg-indice__lista {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: .5rem;
+  }
 }
-
-/* na coluna da esquerda o índice deixa de ser caixa: título fixo e um fio */
 @media (min-width: 80rem) {
-  .pg-indice__caixa { background: none; border: 0; border-radius: 0; }
-  .pg-indice__tit { padding: .25rem 0 .5rem; min-height: 0; cursor: default; pointer-events: none; }
-  .pg-indice__tit::after { content: none; }
-  .pg-indice__lista { padding: 0; border-left: 1px solid var(--pg-linha); }
-  .pg-indice__lista a { border-radius: 0 8px 8px 0; padding: .5rem .625rem; min-height: 2.75rem; font-size: .875rem; }
-  .pg-indice__lista a[aria-current="true"] { box-shadow: inset 2px 0 0 var(--pg-marca-400); }
+  .pg-indice__caixa {
+    background: none;
+    border: 0;
+    border-radius: 0;
+  }
+  .pg-indice__tit {
+    padding: .25rem 0 .5rem;
+    min-height: 0;
+    cursor: default;
+    pointer-events: none;
+  }
+  .pg-indice__tit::after {
+    content: none;
+  }
+  .pg-indice__lista {
+    padding: 0;
+    border-left: 1px solid var(--pg-linha);
+  }
+  .pg-indice__lista a {
+    border-radius: 0 8px 8px 0;
+    padding: .5rem .625rem;
+    min-height: 2.75rem;
+    font-size: .875rem;
+  }
+  .pg-indice__lista a[aria-current=true] {
+    box-shadow: inset 2px 0 0 var(--pg-marca-400);
+  }
 }
-
-/* ---- 15d. artigo -------------------------------------------------------- */
-
 .pg-artigo__meta {
   margin: 0;
   padding: .875rem 0;
@@ -1196,25 +1306,32 @@ main#conteudo {
   line-height: 1.5;
   color: var(--pg-muted);
 }
-.pg-artigo__meta time { color: var(--pg-ink); }
-
-/* seção do artigo: o fio de cima separa, o enchimento é curto */
+.pg-artigo__meta time {
+  color: var(--pg-ink);
+}
 .pg-sec--art {
   padding-block: clamp(1.5rem, 1.2rem + 1.1vw, 2.25rem);
   border-top: 1px solid var(--pg-linha);
 }
-.pg-sec--art::before { content: none; }
-.pg-artigo__meta + .pg-sec--art,
-.pg-artigo > .pg-sec--art:first-child { border-top: 0; padding-top: 1.25rem; }
-.pg-sec--art:last-child { padding-bottom: .5rem; }
-.pg-sec--art .pg-sec__h2 { font-size: clamp(1.375rem, 1.15rem + 1vw, 2rem); }
-
-@media (max-width: 63.99rem) {
-  .pg-indice + .pg-artigo { margin-top: .75rem; }
+.pg-sec--art::before {
+  content: none;
 }
-
-/* ---- 15e. chamada lateral ----------------------------------------------- */
-
+.pg-artigo__meta + .pg-sec--art,
+.pg-artigo > .pg-sec--art:first-child {
+  border-top: 0;
+  padding-top: 1.25rem;
+}
+.pg-sec--art:last-child {
+  padding-bottom: .5rem;
+}
+.pg-sec--art .pg-sec__h2 {
+  font-size: clamp(1.375rem, 1.15rem + 1vw, 2rem);
+}
+@media (max-width: 63.99rem) {
+  .pg-indice + .pg-artigo {
+    margin-top: .75rem;
+  }
+}
 .pg-lateral__caixa {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -1223,7 +1340,11 @@ main#conteudo {
   border: 1px solid var(--pg-linha);
   border-radius: calc(var(--pg-raio, 10px) + 2px);
   background-color: var(--pg-s1);
-  background-image: linear-gradient(180deg, color-mix(in srgb, var(--pg-marca) 16%, transparent), transparent 55%);
+  background-image:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--pg-marca) 16%, transparent),
+      transparent 55%);
 }
 .pg-lateral__tela img {
   display: block;
@@ -1235,19 +1356,31 @@ main#conteudo {
   border-radius: 8px;
   border: 1px solid var(--pg-linha);
 }
-.pg-lateral__tit { margin: 0; font-size: 1.0625rem; font-weight: 800; line-height: 1.3; color: var(--pg-ink-forte); }
-/* a frase do cartão é corpo (16px); o aviso de risco é letra miúda, e letra
-   miúda sem maiúsculas tem piso de 14 (doutrina, "o que era 12–13 vira 14";
-   eram 14 e 13, medidos em 31/10/2026) */
-.pg-lateral__txt { margin: 0; font-size: 1rem; line-height: 1.5; color: var(--pg-muted); }
-.pg-lateral__txt strong { color: var(--pg-ink); }
-.pg-lateral__botao { width: 100%; }
-.pg-lateral__risco { margin: 0; font-size: .875rem; line-height: 1.45; color: var(--pg-muted); }
-
-/* ---- 15f. guias relacionadas: 2 colunas → 3 ------------------------------
-   Toda guia recebe link de outras seis (as seguintes, dando a volta): nenhuma
-   página fica sem saída, e o robô de busca chega a todas por dentro do site. */
-
+.pg-lateral__tit {
+  margin: 0;
+  font-size: 1.0625rem;
+  font-weight: 800;
+  line-height: 1.3;
+  color: var(--pg-ink-forte);
+}
+.pg-lateral__txt {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--pg-muted);
+}
+.pg-lateral__txt strong {
+  color: var(--pg-ink);
+}
+.pg-lateral__botao {
+  width: 100%;
+}
+.pg-lateral__risco {
+  margin: 0;
+  font-size: .875rem;
+  line-height: 1.45;
+  color: var(--pg-muted);
+}
 .pg-rel__lista {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1256,8 +1389,15 @@ main#conteudo {
   margin: 0;
   padding: 0;
 }
-@media (min-width: 48rem) { .pg-rel__lista { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .875rem; } }
-.pg-rel__lista > li { min-width: 0; }
+@media (min-width: 48rem) {
+  .pg-rel__lista {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: .875rem;
+  }
+}
+.pg-rel__lista > li {
+  min-width: 0;
+}
 .pg-rel__item {
   display: flex;
   flex-direction: column;
@@ -1278,8 +1418,19 @@ main#conteudo {
   object-fit: cover;
   background: var(--pg-s2);
 }
-.pg-rel__corpo { display: flex; flex-direction: column; gap: .375rem; flex: 1; padding: .75rem .8125rem .8125rem; }
-.pg-rel__chip { display: none; font-size: .8125rem; font-weight: 600; color: var(--pg-marca-300); }
+.pg-rel__corpo {
+  display: flex;
+  flex-direction: column;
+  gap: .375rem;
+  flex: 1;
+  padding: .75rem .8125rem .8125rem;
+}
+.pg-rel__chip {
+  display: none;
+  font-size: .8125rem;
+  font-weight: 600;
+  color: var(--pg-marca-300);
+}
 .pg-rel__tit {
   font-size: 1rem;
   font-weight: 700;
@@ -1291,55 +1442,66 @@ main#conteudo {
   -webkit-line-clamp: 3;
   overflow: hidden;
 }
-.pg-rel__ir { margin-top: auto; font-size: .875rem; font-weight: 600; color: var(--pg-marca-300); }
-.pg-rel__ir::after { content: " →"; }
-.pg-rel__item:active { transform: scale(.98); }
-@media (min-width: 48rem) { .pg-rel__chip { display: block; } }
-@media (hover: hover) and (pointer: fine) {
-  .pg-rel__item:hover { transform: translateY(-2px); border-color: var(--pg-marca-700); }
+.pg-rel__ir {
+  margin-top: auto;
+  font-size: .875rem;
+  font-weight: 600;
+  color: var(--pg-marca-300);
 }
-
-/* aviso de fecho, depois das fontes (a margem saiu do atributo `style`) */
-.pg-aviso--fecho { margin-top: 1rem; }
-
-/* ---- 16. revelar ao entrar na tela ------------------------------------
-   Animação é entrega (doutrina, seção 2). Só transform e opacity, com
-   escalonamento de 60ms por irmão em `--pg-atraso`. O conteúdo NUNCA depende
-   de JS para aparecer: só esconde depois de o script marcar `.pg-js`. */
-
+.pg-rel__ir::after {
+  content: " →";
+}
+.pg-rel__item:active {
+  transform: scale(.98);
+}
+@media (min-width: 48rem) {
+  .pg-rel__chip {
+    display: block;
+  }
+}
+@media (hover: hover) and (pointer: fine) {
+  .pg-rel__item:hover {
+    transform: translateY(-2px);
+    border-color: var(--pg-marca-700);
+  }
+}
+.pg-aviso--fecho {
+  margin-top: 1rem;
+}
 .pg-js .pg-rev {
   opacity: 0;
   transform: translateY(16px);
-  transition:
-    opacity .4s cubic-bezier(.22, 1, .36, 1) var(--pg-atraso, 0ms),
-    transform .4s cubic-bezier(.22, 1, .36, 1) var(--pg-atraso, 0ms);
+  transition: opacity .4s cubic-bezier(.22, 1, .36, 1) var(--pg-atraso, 0ms), transform .4s cubic-bezier(.22, 1, .36, 1) var(--pg-atraso, 0ms);
 }
-.pg-js .pg-rev.pg-vis { opacity: 1; transform: none; }
-
+.pg-js .pg-rev.pg-vis {
+  opacity: 1;
+  transform: none;
+}
 @media (prefers-reduced-motion: reduce) {
-  .pg-js .pg-rev { transform: none; transition: opacity .2s linear; }
-  .pg-botao, .pg-fontes a, .pg-faq__q::after,
-  .pg-fato, .pg-rel__item, .pg-indice__tit::after, .pg-produto { transition-duration: .01ms; }
-  .pg-botao:active, .pg-fato:active, .pg-rel__item:active { transform: none; }
+  .pg-js .pg-rev {
+    transform: none;
+    transition: opacity .2s linear;
+  }
+  .pg-botao,
+  .pg-fontes a,
+  .pg-faq__q::after,
+  .pg-fato,
+  .pg-rel__item,
+  .pg-indice__tit::after,
+  .pg-produto {
+    transition-duration: .01ms;
+  }
+  .pg-botao:active,
+  .pg-fato:active,
+  .pg-rel__item:active {
+    transform: none;
+  }
 }
-
-/* ---- 17. foco visível ------------------------------------------------- */
-
 .pg-corpo :focus-visible {
   outline: 2px solid var(--pg-marca-300);
   outline-offset: 2px;
   border-radius: 4px;
 }
-
-/* ---- 18. acerto do chassi DENTRO da página de conteúdo ----------------
-   Estas páginas carregam o cabeçalho, o pop-up e o rodapé do site que já está
-   no ar, e herdam os defeitos dele. O que dá para corrigir sem tocar no site
-   do cliente se corrige aqui, escopado em `.pg-corpo`: o botão de fechar do
-   pop-up mede 38x38px no chassi do safirion.com.br e o de fechar a gaveta
-   mede 26x44px no do safirion.pe, contra o mínimo de 44x44 (medido em
-   29/10/2026). A correção nas HOMES é sugestão escrita ao Victor — home não é
-   a parte nomeada deste pedido. */
-
 .pg-corpo .pp__x,
 .pg-corpo .gaveta__fechar {
   display: inline-flex;
@@ -1348,155 +1510,112 @@ main#conteudo {
   min-width: 2.75rem;
   min-height: 2.75rem;
 }
-
-/* ---- 19. a cena do país ------------------------------------------------
-   Pedido do Victor (29/10/2026): "SLP tem um domínio de um país específico, eu
-   devo botar imagens em relação àquele país para puxar mais a galera". Cada
-   página ganha UMA cena própria, logo abaixo da hero, gerada para ela.
-
-   Doutrina, "texto + imagem": a MESMA imagem do computador vai para o celular,
-   inteira — o que a pessoa vê não muda com a largura, então não há recorte em
-   pé nem arte alternativa. A figura segue a largura de COMPOSIÇÃO (`.pg-wrap`);
-   só a legenda fica presa à largura de LEITURA, senão vira uma linha de ponta a
-   ponta em 1440px. */
-
-/* Desde 31/10/2026 a cena mora DENTRO do artigo, depois da 1ª seção: a frente
-   da página passou a ser do produto. O respiro de cima é o enchimento da seção
-   anterior; o de baixo, o da seção seguinte (que abre com o fio de divisão). */
-.pg-artigo__cena { padding-bottom: clamp(1.5rem, 1.2rem + 1.1vw, 2.25rem); }
-
+.pg-artigo__cena {
+  padding-bottom: clamp(1.5rem, 1.2rem + 1.1vw, 2.25rem);
+}
 .pg-figura {
   margin: 0;
   position: relative;
 }
-
 .pg-figura img {
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 16 / 9;          /* reserva o espaço: zero salto de layout */
+  aspect-ratio: 16 / 9;
   object-fit: cover;
   border-radius: 14px;
   border: 1px solid var(--pg-linha);
-  background: var(--pg-s1);      /* a caixa já tem cor antes do arquivo chegar */
+  background: var(--pg-s1);
 }
-
-/* O mesmo brilho de topo que os cartões da página usam, aqui por cima da cena:
-   `background-image` na PRÓPRIA caixa, nunca forma recortada sobre a foto
-   (doutrina de 28/10/2026 — véu de legibilidade não vira figura). */
 .pg-figura::after {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   border-radius: 14px;
   pointer-events: none;
-  background-image: linear-gradient(180deg, rgba(255, 255, 255, .07) 0%, rgba(255, 255, 255, 0) 34%);
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, .07) 0%,
+      rgba(255, 255, 255, 0) 34%);
 }
-
 .pg-figura figcaption {
   max-width: 66ch;
   margin-top: .75rem;
-  font-size: .875rem;            /* 14px: piso de letra para texto de apoio */
+  font-size: .875rem;
   line-height: 1.55;
   color: var(--pg-muted);
 }
-
 @media (min-width: 48rem) {
-  .pg-figura figcaption { font-size: .9375rem; }
+  .pg-figura figcaption {
+    font-size: .9375rem;
+  }
 }
-
-/* ---- 20. alvos de toque do chassi, só nas páginas de conteúdo -----------
-   Medido em 30/10/2026 (`de audit`, 360 e 390px) na página
-   safirion-activos-disponibles: 33 achados de severidade ALTA, todos vindos do
-   cabeçalho e do rodapé que a página HERDA do chassi da LP — e-mail de contato
-   com 19px de altura tocável, os links das colunas do rodapé com 30,3px, os
-   ícones sociais com 38×38 e o número do FAQ em 11,5px. A doutrina pede 44px de
-   altura E de largura, e piso de letra.
-
-   Tudo aqui mora sob `.pg-corpo`, a classe que só as páginas de conteúdo têm:
-   a LP que está no ar não muda uma linha. O mesmo defeito existe lá, e isso vai
-   ao Victor como sugestão — mexer na LP de cliente é decisão dele. */
-
-/* Só no celular e no tablet, que é onde existe toque — como a 20b faz no outro
-   chassi. Até 31/10/2026 valia em toda largura e, no computador, levava o passo
-   dos 22 links do rodapé de 31 para 55px: ~260px de rodapé a mais por coluna,
-   espaço que a home do domínio não tem. */
 @media (max-width: 63.99rem) {
   .pg-corpo .kvf__grid ul li a,
   .pg-corpo .kvf__mail,
   .pg-corpo .kvsup__mail {
-    /* flex em vez de inline: o link passa a ocupar a largura da coluna, então
-       altura E largura saem dos 44px sem inchar o rodapé — a lista continua com
-       o mesmo número de itens visíveis, só respirando. */
     display: flex;
     align-items: center;
     min-height: 44px;
   }
-
   .pg-corpo .kvf__mail,
   .pg-corpo .kvsup__mail {
-    width: fit-content;            /* e-mail é um alvo só, não a coluna inteira */
+    width: fit-content;
     min-width: 44px;
   }
-
 }
-
-/* O tamanho dos ícones vale em TODA largura. O chassi do .com.mx, do .com.co e
-   do .cl não traz `.kvf__mail svg` (o .mx, o .co e o .ar trazem: 19px) e deixa
-   o ícone social com `width:100%` dentro de um link sem largura: em 1440 o
-   envelope saía com 1.147px e o Instagram e o Telegram com a largura do rodapé
-   — 6.000px de ícone empilhado (medido em 31/10/2026, depois de a regra dos
-   44px ficar só no celular). */
-.pg-corpo .kvf__mail { display: inline-flex; align-items: center; gap: 10px; color: var(--pg-ink); text-decoration: none; font-size: 15px; }
-.pg-corpo .kvf__mail svg { width: 19px; height: 19px; flex: 0 0 auto; color: var(--pg-marca); }
-.pg-corpo .kvf__social a { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; }
-
-/* Selos de loja do rodapé (Windows, Mac, Google Play, App Store) em 2×2 abaixo
-   de 360px. Com o piso de 13px no `small` (parcial `alvo-de-toque`), o ícone ao
-   lado do texto não cabe nos ~115px de cada selo em 320: "Descargar para" e
-   "Disponible en" passavam 17px da borda e o App Store 28px (medido em
-   31/10/2026 nos seis chassis do Framer). O ícone sobe para cima do texto e a
-   grade continua 2×2, como no computador. */
+.pg-corpo .kvf__mail {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--pg-ink);
+  text-decoration: none;
+  font-size: 15px;
+}
+.pg-corpo .kvf__mail svg {
+  width: 19px;
+  height: 19px;
+  flex: 0 0 auto;
+  color: var(--pg-marca);
+}
+.pg-corpo .kvf__social a {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 @media (max-width: 22.49rem) {
-  footer.kvf div.kvf__app-btns { column-gap: 8px; }
-  footer.kvf div.kvf__app-btns .kvf__badge { flex-direction: column; align-items: flex-start; justify-content: center; gap: 5px; padding: 9px 8px; }
+  footer.kvf div.kvf__app-btns {
+    column-gap: 8px;
+  }
+  footer.kvf div.kvf__app-btns .kvf__badge {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 5px;
+    padding: 9px 8px;
+  }
 }
-
 .pg-corpo .kvfaq__n {
-  font-size: .8125rem;           /* 13px: era 11,5, e os 12,5 de 30/10 ainda ficavam
-                                    abaixo do piso de 13 da doutrina */
+  font-size: .8125rem;
 }
-
-/* ---- 20d. o resto do chassi do Framer (31/10/2026) ---------------------
-   O que a seção 20 não tinha pego, medido em 360px na prévia do `.mx`: o botão
-   "CREAR CUENTA" do fim da página com letra de 12px (texto em maiúsculas tem piso
-   de 13), o link do Framer do bloco do aplicativo com 132×29, e três listas
-   curtas ocupando a linha inteira — as duas colunas de 11 links do rodapé e os 4
-   botões de loja de aplicativo. */
 .pg-corpo .kv3p__cta {
-  font-size: .8125rem;           /* 13px: era 12 */
+  font-size: .8125rem;
 }
-
 @media (max-width: 63.99rem) {
-  /* o logotipo do topo (bloco MENU do Framer) media 132×29. A classe `framer-…`
-     é hash do clone e muda se a referência for reclonada: o seletor vai pelo
-     `data-framer-name`, que é nome escrito à mão no projeto de origem. */
-  .pg-corpo [data-framer-name="MENU"] > a,
-  .pg-corpo .kvapp__in a[class*="framer-"] {
+  .pg-corpo [data-framer-name=MENU] > a,
+  .pg-corpo .kvapp__in a[class*=framer-] {
     min-height: 44px;
     display: inline-flex;
     align-items: center;
   }
-
-  /* o aviso "este é um site independente" é NOSSO e obrigatório em toda página:
-     é ele que impede a página de se passar pelo site oficial. Estava em 12px, e
-     os quatro links dele em 59×12. */
   .pg-corpo .kvo__box p,
   .pg-corpo .kvo__box p strong,
   .pg-corpo .kvo__links a {
     font-size: .8125rem;
   }
-
   .pg-corpo .kvo__links a {
     min-height: 44px;
     min-width: 44px;
@@ -1504,32 +1623,18 @@ main#conteudo {
     align-items: center;
     justify-content: center;
   }
-
-  /* rodapé do chassi: o texto "sobre", o e-mail e os 22 links das colunas vinham
-     com 12px e o título do bloco do aplicativo com 12,5. O alvo de toque de cada
-     link já sobe pela seção 20 — aqui é só o piso de letra. */
   .pg-corpo .kvf__sobre,
   .pg-corpo .kvf__mail,
   .pg-corpo .kvf__grid ul li a,
   .pg-corpo .kvf__app h3 {
     font-size: .8125rem;
   }
-
-  /* o link de FONTE curto ("SAT", "BCRA") fechava os 44px de altura pelo padding
-     e continuava com 24px de largura: a doutrina pede 44 nos dois lados. */
   .pg-corpo .pg-fonte a {
     min-width: 44px;
     display: inline-block;
     text-align: center;
   }
 }
-
-/* ---- 20e. o QUARTO chassi: `topo__` (31/10/2026) ----------------------
-   O `safirion.pe` não usa nem o chassi do Framer nem o `hdr__`/`ft__`: o
-   cabeçalho dele é `header.topo` (`topo__barra`, `topo__marca`, `topo__abas`,
-   `topo__entrar`, `topo__menu-btn`) e ele tem a faixa de cookies `#cookies`.
-   Medido em 360px: o logotipo com 173×40 e o "Leer más" do aviso de cookies com
-   57×20. */
 @media (max-width: 63.99rem) {
   .pg-corpo .topo__marca,
   .pg-corpo .topo__entrar,
@@ -1540,96 +1645,47 @@ main#conteudo {
     display: inline-flex;
     align-items: center;
   }
-
   .pg-corpo .cookies__acoes a,
   .pg-corpo .cookies__acoes button {
     min-width: 44px;
     justify-content: center;
   }
 }
-
 @media (max-width: 47.99rem) {
-  /* as colunas do rodapé são links de 11 caracteres em média: em 2 colunas o
-     rodapé encurta mesmo com cada link ganhando os 44px de altura da seção 20 */
   .pg-corpo .kvf__grid--app > div > ul,
   .pg-corpo .kvf__app-btns {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: .25rem .75rem;
   }
-
-  /* os links já têm 44px de altura cada: o vão entre as linhas sai (31/10/2026) */
   .pg-corpo .kvf__grid--app > div > ul {
     row-gap: 0;
   }
-
   .pg-corpo .kvf__grid--app > div > ul > li,
   .pg-corpo .kvf__app-btns > * {
-    min-width: 0;                  /* filho de grid com texto, senão estoura */
+    min-width: 0;
   }
 }
-
-/* No computador o bloco do aplicativo é a 4ª coluna do rodapé (279px em 1280,
-   318 em 1440) e os botões de loja iam 2 por linha com texto sem quebra:
-   "Descargar para" vazava 19px do botão em 1280 e "Próximamente en" 30px —
-   na home do .mx também (medido em 31/10/2026). Um botão por linha cabe, e a
-   coluna continua mais baixa que a lista de 11 links ao lado. */
 @media (min-width: 64rem) {
   .pg-corpo .kvf__app-btns {
     grid-template-columns: minmax(0, 1fr);
   }
 }
-
-/* ---- 20f. respiro do rodapé do chassi Framer nas guias (31/10/2026) -------
-   "Nunca espaçamento exagerado, mesmo que venha da referência" (o Victor). Com
-   os blocos repetidos fora da guia, sobravam dois vãos do chassi: 125px entre o
-   aviso do site oficial e o 1º título do rodapé em 1440 (padding de 84px do
-   rodapé somado ao da seção do aviso) e 88px entre os botões de loja e a linha
-   legal em 390. Teto medido: 120px no computador e 72px no celular. Depois,
-   117px (75 no celular) da faixa do país ao título do aviso: 76px da seção
-   somados aos 40px da caixa. */
 .pg-corpo .kvo {
   padding-top: clamp(1.5rem, .9rem + 2.4vw, 2.75rem);
 }
-
 .pg-corpo .kvf {
   padding-top: clamp(2rem, 1.2rem + 2.2vw, 3.25rem);
 }
-
 .pg-corpo .kvf__legal {
   margin-top: clamp(1.25rem, .8rem + 1.6vw, 2.25rem);
   padding-top: clamp(1rem, .8rem + .9vw, 1.5rem);
 }
-
-/* ---- 20b. o MESMO conserto para o SEGUNDO chassi (31/10/2026) -----------
-   A rede não tem um chassi: tem TRÊS, e as regras acima nomeiam as classes de um
-   só — o clone do Framer (`kvf__`, `kvsup__`, `kvfaq__`, `kvcta`, `kvapp`), que é
-   o das páginas em espanhol e da home do `.com.br`. As páginas em português de
-   `safirion.com.br`, `obynexbroker.com.br` e `axelbroker.net` herdam OUTRO
-   chassi, com as classes `hdr__`, `ft__`, `lng` e `ticker` — e lá o conserto de
-   30/10 nunca pegou nada. Medido em 31/10/2026 nas prévias, em 360 e 390px: o
-   seletor de idioma abria 19px FORA da tela (rolagem lateral, que é regra dura),
-   o `summary` dele tinha 36×36, os ícones sociais 34×34, os botões do topo 41 e
-   43px, o e-mail do rodapé 23px, os 17 links de idioma 37px e os 29 links das
-   colunas do rodapé 14px de altura, numa coluna só.
-
-   Tudo aqui mora sob `.pg-corpo`, que só as páginas de conteúdo têm: a LP e a
-   home que estão no ar não mudam uma linha. Quem defende isto de voltar num 13º
-   domínio é `scripts/portao-celular.mjs`, que mede o RENDERIZADO das prévias em
-   vez de confiar em lista de classe. */
-
-/* A) o estouro: a lista de idiomas nasce ancorada à ESQUERDA do `details`, e com
-   17 idiomas (o mais largo é "Bahasa Indonesia", 162px) a borda direita chegava a
-   423px numa tela de 360. Ancorar à direita resolve sem tocar no chassi nem
-   esconder nada — `overflow-x: hidden` é curativo e proibido. */
 .pg-corpo .lng__lista {
   right: 0;
   left: auto;
   max-width: min(92vw, 20rem);
 }
-
-/* B) alvos de toque: 44px de altura E de largura onde a pessoa toca. Vale no
-   celular e no tablet, que é onde existe toque. */
 @media (max-width: 63.99rem) {
   .pg-corpo .lng > summary,
   .pg-corpo .lng__lista a,
@@ -1640,18 +1696,15 @@ main#conteudo {
     align-items: center;
     justify-content: center;
   }
-
   .pg-corpo .lng > summary {
     min-width: 44px;
   }
-
   .pg-corpo .hdr__logo,
   .pg-corpo .ticker__link {
     min-height: 44px;
     display: inline-flex;
     align-items: center;
   }
-
   .pg-corpo .ft__social a {
     width: 44px;
     height: 44px;
@@ -1659,61 +1712,34 @@ main#conteudo {
     align-items: center;
     justify-content: center;
   }
-
   .pg-corpo .ft__mail {
     min-height: 44px;
     display: inline-flex;
     align-items: center;
-    width: fit-content;            /* o e-mail é um alvo só, não a linha toda */
+    width: fit-content;
   }
 }
-
-/* C) rodapé em DUAS colunas no celular (doutrina, seção 1): são 4 blocos de links
-   de 11 caracteres em média ("Início", "Blog", "Sobre") — item curto nunca ocupa
-   sozinho uma linha de 360px. Em duas colunas o rodapé não alonga mesmo com cada
-   link ganhando os 44px de altura. */
 @media (max-width: 47.99rem) {
   .pg-corpo .ft__cols {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1.25rem 1rem;
   }
-
   .pg-corpo .ft__col {
-    min-width: 0;                  /* filho de grid com texto, senão estoura */
+    min-width: 0;
   }
-
   .pg-corpo .ft__col ul li a {
     display: flex;
     align-items: center;
     min-height: 44px;
   }
 }
-
-/* D) link de FONTE dentro do bloco citável: é nosso, e o menor medido tinha 13px
-   de altura tocável ("WikiBit — AXEL", 94×13). A área cresce por padding com
-   margem negativa do mesmo tamanho — assim o alvo chega aos 44px sem empurrar uma
-   única linha de texto. 1rem de cada lado, não .75rem: com .75 o de 13px fecharia
-   em 37px e continuaria reprovando (13 + 2×16 = 45). */
 @media (max-width: 63.99rem) {
   .pg-corpo .pg-fonte a {
     padding-block: 1rem;
     margin-block: -1rem;
   }
 }
-
-/* ---- 20c. o TERCEIRO chassi: o do `safirionbr.com` (clube) --------------
-   A medição de 31/10 mostrou que a rede não tem dois chassis, tem três. O do
-   clube não usa `kvf__` nem `hdr__`: usa `nav`, `brand`, `burger`, `shell`,
-   `foot` e `foot__links`. Defeitos medidos em 360px na guia do clube:
-   o logotipo do topo e do rodapé com 148×34 (é link para a home), o botão do
-   menu com 40×40, os três links do rodapé com 20px de altura (38×20, 69×20,
-   50×20) e o aviso de risco com 11,5px de letra.
-
-   Fica de fora, por decisão declarada: o "TRADING CLUB" de 10px dentro de
-   `.brand__txt` é o lockup da marca clonada do cliente — crescer a letra
-   desalinharia o logotipo dele. O alvo de toque do `.brand` sobe; o tamanho da
-   letra dentro dele, não. */
 @media (max-width: 63.99rem) {
   .pg-corpo .nav .brand,
   .pg-corpo .foot .brand,
@@ -1722,50 +1748,28 @@ main#conteudo {
     display: inline-flex;
     align-items: center;
   }
-
-  /* "Entrar" fechou a altura e ficou com 38px de largura: a doutrina pede os
-     dois lados, e link de rodapé é controle, não frase (medido em 31/10/2026). */
   .pg-corpo .foot__links a {
     min-width: 44px;
     justify-content: center;
   }
-
   .pg-corpo .burger {
     min-width: 44px;
     min-height: 44px;
   }
-
-  /* o botão do menu encostava no logotipo (x 200 em 390, com a metade da
-     faixa vazia à direita; a home do cliente tem o mesmo, medido em
-     31/10/2026): o grupo de ações vai para a borda direita, onde o polegar
-     procura o menu. O botão sozinho não anda — ele é o único filho à vista de
-     `.nav__acts`, que tem 44px. */
 }
-/* faixa própria: o chassi esconde os links do meio até 1024px INCLUSIVE
-   (`max-width:1024px`); com 63,99rem a 1024 ficava com "Entrar" e "Criar
-   conta" colados no logotipo */
 @media (max-width: 64rem) {
-  .pg-corpo .nav__acts { margin-left: auto; }
+  .pg-corpo .nav__acts {
+    margin-left: auto;
+  }
 }
-
-/* o aviso de risco é texto de conteúdo NOSSO e obrigatório (o briefing manda
-   avisar da perda de capital em toda página que fala de operar): 11,5px fica
-   abaixo do piso de 13 da doutrina. Sobe só nas nossas páginas; a home do
-   cliente continua com o tamanho dele. */
 .pg-corpo .foot .risk {
-  font-size: .8125rem;             /* 13px: era 11,5 */
+  font-size: .8125rem;
   line-height: 1.5;
 }
-
-/* O rodapé do clube nasce com `margin-top: 100px` (na home ele vem depois de
-   uma seção sem respiro embaixo). Na guia a última seção já fecha com o próprio
-   respiro, e os dois somavam 202px entre o aviso e o logotipo no computador
-   (medido em 31/10/2026; teto de 120). O fio de cima do rodapé separa sozinho.
-   A coluna do rodapé segue a do artigo: com o `.wrap` de 1.152px o logotipo
-   começava 59px à direita do texto. */
-.pg-corpo .foot { margin-top: 0; }
+.pg-corpo .foot {
+  margin-top: 0;
+}
 .pg-corpo .foot .wrap {
-  /* as variáveis do `main#conteudo` não chegam ao rodapé: lê as do tokens */
   width: min(100% - 2 * var(--pg-calha-ramo, 1rem), var(--pg-shell-ramo, 80rem));
   max-width: none;
   padding-inline: 0;

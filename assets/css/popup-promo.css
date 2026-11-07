@@ -40,3 +40,6 @@ body.pp-travado{overflow:hidden}
 .pp__cont p strong{color:#7cc0ff;font-weight:700;letter-spacing:.04em;
   background:rgba(35,137,230,.14);border:1px solid rgba(35,137,230,.3);
   border-radius:6px;padding:1px 7px;white-space:nowrap}
+
+/* v3: titulo nao passa por baixo do x no celular (07/11/2026) */
+@media(max-width:799px){.pp__cont h2{padding-right:48px}}

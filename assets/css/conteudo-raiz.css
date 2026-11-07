@@ -81,7 +81,12 @@
    na RAIZ do nosso conteúdo e vale para todo bloco, inclusive o que ainda não
    existe; ela só age onde não há espaço para quebrar, e frase comum sai igual
    (medido no vivo: a altura das páginas sem endereço longo não mudou um pixel). */
-main#conteudo { overflow-wrap: anywhere; }
+main#conteudo { overflow-wrap: break-word; }
+/* Na raiz vai `break-word`, nunca `anywhere` (doutrina, corrigida em 03/11/2026):
+   as duas partem a palavra que não cabe, mas o `anywhere` também encolhe a
+   largura MÍNIMA de todo item de flex e de grade e partia palavra curta no meio
+   com espaço sobrando ao lado. `anywhere` fica só nos blocos que carregam
+   endereço (`.pg-fonte`, fichas, células), mais abaixo. */
 
 /* O grão fica ATRÁS do conteúdo por z-index NEGATIVO, sem tocar nos filhos do
    corpo. A primeira versão desta folha usava `.pg-corpo > * { position:
@@ -107,7 +112,11 @@ main#conteudo { overflow-wrap: anywhere; }
 
 .pg-sec {
   position: relative;
-  padding-block: clamp(2.5rem, 1.6rem + 4.2vw, 5.5rem);
+  /* Teto de vão (31/10/2026): 120px entre blocos no computador e 72 no celular.
+     O valor antigo (até 88px de cada lado) somava 176px entre duas seções a
+     1440 e deixava a home com 8.694px; 56 + 56 = 112 no computador e
+     32 + 32 = 64 no celular ficam no piso (elevar, 04/11/2026). */
+  padding-block: clamp(2rem, 1.5rem + 2.2vw, 3.5rem);
 }
 
 /* Encontro de seções: camada de ALTURA ZERO entre as duas, com a luz
@@ -177,7 +186,11 @@ main#conteudo { overflow-wrap: anywhere; }
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   align-content: center;
-  padding-block: calc(var(--pg-nav-h) + 2.5rem) clamp(2.5rem, 2rem + 2.5vw, 4.5rem);
+  /* O chassi destas duas homes tem a faixa (38px) e o cabeçalho (14 + 62px)
+     FIXOS: 114px reservados + 1rem de respiro. O `--nav-h` não existe nesse
+     chassi e o valor de reserva (64px) deixava o topo do herói 10px sob o
+     cabeçalho, salvo pelo centro vertical (elevar, 04/11/2026). */
+  padding-block: calc(7.125rem + 1rem) clamp(2rem, 1.5rem + 2vw, 3.5rem);
 }
 .pg-hero__chip {
   display: inline-flex;
@@ -229,9 +242,10 @@ main#conteudo { overflow-wrap: anywhere; }
   font-size: 1rem;          /* corpo ≥ 16px: é texto que a pessoa LÊ, não rótulo */
   line-height: 1.6;
   color: var(--pg-muted);
-  background: var(--pg-s1);
-  border: 1px solid var(--pg-linha);
-  border-left: 3px solid var(--pg-marca-700);
+  /* destaque por fundo tingido e borda fina inteira na cor da marca, nunca
+     faixa grossa num lado só (marca de interface gerada, 04/11/2026) */
+  background: color-mix(in srgb, var(--pg-marca-700) 8%, var(--pg-s1));
+  border: 1px solid color-mix(in srgb, var(--pg-marca-700) 34%, var(--pg-linha));
   border-radius: var(--pg-raio, 10px);
   padding: .75rem .9375rem;
   max-width: 62ch;
@@ -307,14 +321,13 @@ main#conteudo { overflow-wrap: anywhere; }
   padding: clamp(1rem, .8rem + .9vw, 1.5rem) clamp(1rem, .8rem + .9vw, 1.75rem);
   padding-left: clamp(1.125rem, .9rem + 1vw, 1.875rem);
   max-width: 68ch;
+  margin: 0;               /* o `blockquote` nasce com 40px de recuo do navegador */
 }
-.pg-citavel::before {
-  content: "";
-  position: absolute;
-  left: 0; top: .875rem; bottom: .875rem;
-  width: 3px;
-  border-radius: 0 3px 3px 0;
-  background: var(--pg-marca-700);
+/* a citação se marca pelo fundo levemente tingido e pela borda fina inteira,
+   sem a barra de 3px na esquerda (04/11/2026) */
+.pg-citavel {
+  background: color-mix(in srgb, var(--pg-marca-700) 7%, var(--pg-s1));
+  border-color: color-mix(in srgb, var(--pg-marca-700) 30%, var(--pg-linha));
 }
 .pg-citavel p {
   font-size: clamp(1.0625rem, 1rem + .3vw, 1.1875rem);
@@ -363,7 +376,12 @@ main#conteudo { overflow-wrap: anywhere; }
 .pg-numeros > li > *,
 .pg-ficha > li > *,
 .pg-cartoes > li > *,
-.pg-naoe > li > * { min-width: 0; overflow-wrap: anywhere; }
+.pg-naoe > li > * { min-width: 0; overflow-wrap: break-word; }
+/* 04/11/2026 (fechar): era `anywhere`, que também encolhe a largura MÍNIMA do
+   item e, na coluna estreita de "O que se sabe", partiu palavra curta com
+   espaço sobrando ("independent|e", "Documento|s", "31/10/202|6"). Com
+   `break-word` só o endereço que não cabe na linha quebra; a coluna já é
+   `minmax(0, 1fr)`, então a largura não depende do min-content. */
 
 /* Cartão de NÚMERO lê centralizado; fato escrito lê da esquerda
    (regra de 11/10/2026). */
@@ -443,7 +461,8 @@ main#conteudo { overflow-wrap: anywhere; }
 .pg-icone--alerta { color: var(--pg-atencao); }
 .pg-icone--info { color: var(--pg-marca-400); }
 
-.pg-naoe > li { border-left: 3px solid var(--pg-nao); }
+/* "o que não é": o ícone em azulejo tingido já marca; a borda fica fina e inteira */
+.pg-naoe > li { border-color: color-mix(in srgb, var(--pg-nao) 28%, var(--pg-linha)); }
 
 /* ---- 9. bloco `passos` -------------------------------------------------
    A composição sai da MEDIDA do texto, não do hábito: o parágrafo de apoio
@@ -453,15 +472,20 @@ main#conteudo { overflow-wrap: anywhere; }
    deixa ~80px de texto, isto é ~9 caracteres por linha. Então em 360px o
    passo é uma faixa com o NÚMERO AO LADO do texto (a linha "recurso com
    parágrafo" da skill responsivo-de-cara), e a faixa de 3 colunas entra a
-   partir de 48rem, onde cada coluna tem ~230px. Não é pilha por omissão: o
-   número e o conteúdo ficam lado a lado, e a decisão tem número atrás. */
+   partir de 48rem, onde cada coluna tem ~230px.
+   Reescrito em 04/11/2026 (fechar as homes hub): a faixa de passos com
+   parágrafo media ~700px a 390 e a home ficava 1,48× o computador. Agora o
+   celular copia a composição do computador: faixa de 3 (2 × 2 quando são
+   quatro) com número e título, e o parágrafo de cada passo só a partir de
+   48rem (copy resumida só no celular, doutrina de 29/09/2026). O aviso do
+   bloco fica inteiro em toda largura. */
 
 .pg-passos {
   display: grid;
   /* `1fr` é `minmax(auto, 1fr)`: o mínimo é min-content e a coluna cresce com o
      conteúdo. Só `minmax(0, 1fr)` tranca na largura disponível (31/10/2026). */
-  grid-template-columns: minmax(0, 1fr);
-  gap: .5rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .375rem;
   counter-reset: pg-passo;
   list-style: none;
   margin: 0;
@@ -476,31 +500,35 @@ main#conteudo { overflow-wrap: anywhere; }
   background: var(--pg-s1);
   border: 1px solid var(--pg-linha);
   border-radius: var(--pg-raio, 10px);
-  padding: clamp(.75rem, .65rem + .4vw, 1.125rem);
+  padding: .625rem .5rem;
   min-width: 0;
   height: 100%;
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr);
   align-content: start;
-  column-gap: .75rem;
   row-gap: .25rem;
 }
 .pg-passos > li::before {
   content: counter(pg-passo, decimal-leading-zero);
-  grid-row: 1 / span 2;
   align-self: start;
-  font-size: 1.375rem;
+  font-size: 1.125rem;
   font-weight: 800;
   line-height: 1.15;
   letter-spacing: .02em;
   color: var(--pg-marca-400);
   font-variant-numeric: tabular-nums;
 }
-.pg-passo__titulo { font-size: 1rem; font-weight: 700; line-height: 1.35; color: var(--pg-ink-forte); }
-.pg-passo__texto { font-size: 1rem; line-height: 1.6; color: var(--pg-muted); }
+.pg-passo__titulo { font-size: .875rem; font-weight: 700; line-height: 1.35; color: var(--pg-ink-forte); }
+.pg-passo__texto { display: none; font-size: 1rem; line-height: 1.6; color: var(--pg-muted); }
+@media (max-width: 47.99rem) {
+  .pg-passos:has(> li:nth-child(4):last-child) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
 @media (min-width: 48rem) {
-  .pg-passos > li { grid-template-columns: minmax(0, 1fr); row-gap: .3125rem; }
-  .pg-passos > li::before { grid-row: auto; font-size: 1.25rem; }
+  .pg-passos { gap: .875rem; }
+  .pg-passos > li { padding: clamp(.75rem, .65rem + .4vw, 1.125rem); row-gap: .3125rem; }
+  .pg-passos > li::before { font-size: 1.25rem; }
+  .pg-passo__titulo { font-size: 1rem; }
+  .pg-passo__texto { display: block; }
 }
 
 /* ---- 10. bloco `tabela`: cartão por linha no celular ------------------
@@ -599,8 +627,7 @@ main#conteudo { overflow-wrap: anywhere; }
   gap: .75rem;
   align-items: flex-start;
   background: color-mix(in srgb, var(--pg-atencao) 9%, var(--pg-s1));
-  border: 1px solid color-mix(in srgb, var(--pg-atencao) 30%, transparent);
-  border-left: 3px solid var(--pg-atencao);
+  border: 1px solid color-mix(in srgb, var(--pg-atencao) 42%, transparent);
   border-radius: var(--pg-raio, 10px);
   padding: clamp(.875rem, .75rem + .5vw, 1.125rem);
 }
@@ -700,6 +727,10 @@ main#conteudo { overflow-wrap: anywhere; }
 .pg-faq__a a { color: var(--pg-marca-300); text-decoration: underline; text-underline-offset: 2px; }
 
 .pg-mais { display: flex; justify-content: center; margin-top: 1.25rem; }
+/* O rótulo é texto + `<span data-faq-n>` + texto: no `inline-flex` do
+   `.pg-botao` cada pedaço vira item, e o `gap` de .5rem saía "(+ 3 )"
+   (04/11/2026). Sem gap: "(+3)". */
+.pg-mais .pg-botao { gap: 0; }
 
 /* ---- 13b. dobra de bloco longo no celular -----------------------------
    Nenhuma seção passa de 2,5 telas no celular (skill `responsivo-de-cara`), e
@@ -1153,3 +1184,447 @@ main#conteudo { overflow-wrap: anywhere; }
   font-size: .8125rem;             /* 13px: era 11,5 */
   line-height: 1.5;
 }
+
+/* ---- 21. hub da marca elevado (04/11/2026) ------------------------------
+   Medido no olho em 04/11 14:40: a 1440 o herói era só texto à esquerda com
+   a metade direita vazia e nenhuma imagem na página; "O que se sabe" fechava
+   4 cartões em 3 + 1; os atalhos eram listas de marcador numa coluna estreita;
+   a página tinha 8.694px a 1440 e 12.282px a 390. A hero FICA (texto e fonte
+   iguais) e ganha o aparelho com a tela REAL da plataforma que a página indica;
+   as grades dividem a quantidade; as listas de atalho viram cartões. */
+
+/* 21a. herói: texto à esquerda, aparelho à direita, nas DUAS composições.
+   No celular o par fica lado a lado no meio do herói (frase + texto ao lado
+   do aparelho), como no computador; título e botões usam a largura toda. */
+.pg-hero__grade {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 34%);
+  grid-template-areas:
+    "chip  chip"
+    "h1    h1"
+    "claim vis"
+    "texto vis"
+    "ctas  ctas"
+    "indep indep";
+  column-gap: clamp(.875rem, .5rem + 1.6vw, 2rem);
+  align-items: start;
+}
+.pg-hero__grade > .pg-hero__chip { grid-area: chip; justify-self: start; }
+.pg-hero__grade > .pg-hero__h1 { grid-area: h1; }
+.pg-hero__grade > .pg-hero__claim { grid-area: claim; }
+.pg-hero__grade > .pg-hero__texto { grid-area: texto; }
+.pg-hero__grade > .pg-ctas { grid-area: ctas; }
+.pg-hero__grade > .pg-indep { grid-area: indep; }
+.pg-hero__grade > .pg-hero__vis { grid-area: vis; }
+
+@media (min-width: 48rem) {
+  .pg-hero__grade { grid-template-columns: minmax(0, 1fr) minmax(0, 38%); }
+}
+@media (min-width: 64rem) {
+  .pg-hero__grade {
+    grid-template-columns: minmax(0, 1.12fr) minmax(0, .88fr);
+    /* Aparelho mais alto que o texto: a sobra vai IGUAL para as duas linhas
+       flexíveis das pontas (nunca espalhada entre título e parágrafo), e o
+       texto fica centrado ao lado do aparelho. */
+    grid-template-areas:
+      ".     vis"
+      "chip  vis"
+      "h1    vis"
+      "claim vis"
+      "texto vis"
+      "ctas  vis"
+      "indep vis"
+      ".     vis";
+    grid-template-rows: 1fr repeat(6, auto) 1fr;
+    column-gap: clamp(2rem, 1rem + 2.5vw, 4rem);
+    align-content: center;
+  }
+  .pg-hero__grade > .pg-hero__vis { align-self: center; }
+}
+
+/* A luz mora na PRÓPRIA caixa do visual (doutrina: brilho é fundo do
+   elemento, nunca caixa cortada) e se apaga antes das bordas. */
+.pg-hero__vis {
+  position: relative;
+  margin: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+  align-content: start;
+  gap: .75rem;
+  background-image: radial-gradient(closest-side, color-mix(in srgb, var(--pg-marca) 26%, transparent), transparent 100%);
+  background-repeat: no-repeat;
+  background-position: 50% 42%;
+  background-size: 100% 84%;
+}
+.pg-hero__palco {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  width: 100%;
+  align-items: end;
+}
+.pg-hero__palco > .pg-fone { grid-area: 1 / 1; }
+
+/* Aparelho de frente entra RETO (doutrina): a moldura é a foto do iPhone 17
+   Pro e a tela é o print real, recortado pela máscara do vidro. */
+.pg-fone {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 878 / 1806;
+  filter: drop-shadow(0 24px 40px rgba(0, 0, 0, .55));
+}
+.pg-fone__tela {
+  position: absolute;
+  left: 4.328%;
+  top: 1.6611%;
+  width: 91.5718%;
+  height: 96.6777%;
+  -webkit-mask: url("/assets/img/hub/iphone-17-pro-tela.svg?v=20261104") 0 0 / 100% 100% no-repeat;
+          mask: url("/assets/img/hub/iphone-17-pro-tela.svg?v=20261104") 0 0 / 100% 100% no-repeat;
+  overflow: hidden;
+  background: #04090f;
+  /* a moldura PNG tem a tela PRETA e opaca: o print vai POR CIMA dela,
+     recortado pela máscara no contorno da tela (mesma ordem do molde 6) */
+  z-index: 2;
+}
+.pg-fone__tela > img,
+.pg-fone__moldura {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+.pg-fone__moldura {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+/* No celular o visual cabe em 1/3 da largura: só o aparelho da frente. */
+.pg-fone--tras { display: none; }
+.pg-hero__vis figcaption {
+  display: none;
+  font-size: .875rem;              /* 14px: acima do piso de 13 */
+  line-height: 1.45;
+  color: var(--pg-muted);
+  text-align: center;
+  max-width: 30ch;
+}
+
+@media (min-width: 64rem) {
+  .pg-hero__vis { background-size: 100% 92%; }
+  .pg-hero__palco { max-width: 28rem; }
+  /* Tela baixa encolhe o aparelho pela ALTURA (doutrina, 27/09): sobram
+     ~15rem para cabeçalho, legenda e respiro. */
+  .pg-fone--frente {
+    justify-self: end;
+    width: min(56%, 16.5rem, calc((100svh - 15rem) * 878 / 1806));
+    z-index: 2;
+  }
+  .pg-fone--tras {
+    display: block;
+    justify-self: start;
+    width: min(46%, 13.5rem, calc((100svh - 18rem) * 878 / 1806));
+    margin-bottom: 2.5rem;
+    margin-left: 4%;
+    opacity: .92;
+  }
+  .pg-hero__vis figcaption { display: block; }
+}
+
+/* Flutuar é entrega (doutrina, seção 2): só `transform`, lento, e só com
+   movimento liberado. Os dois aparelhos fora de fase para dar profundidade. */
+@media (prefers-reduced-motion: no-preference) {
+  .pg-fone--frente { animation: pg-flutua 7s ease-in-out infinite; }
+  .pg-fone--tras { animation: pg-flutua 7s ease-in-out -3.5s infinite; }
+}
+@keyframes pg-flutua {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* 21b. cartões com ícone em ladrilho: o ícone de 18px solto ao lado do
+   título virou um ladrilho tingido da cor do próprio ícone, acima do título. */
+.pg-cartoes .pg-cartao__titulo,
+.pg-naoe .pg-cartao__titulo {
+  flex-direction: column;
+  gap: .625rem;
+}
+.pg-cartoes .pg-icone,
+.pg-naoe .pg-icone {
+  box-sizing: content-box;
+  flex: 0 0 auto;
+  padding: .5rem;
+  margin: 0;
+  border-radius: 9px;
+  background: color-mix(in srgb, currentColor 14%, transparent);
+  border: 1px solid color-mix(in srgb, currentColor 26%, transparent);
+}
+
+/* 21c. grade que DIVIDE a quantidade: 4 cartões são 2 × 2 e, com largura,
+   uma faixa de 4; nunca 3 + 1. Três "não é" ficam em 3 em TODA largura: no
+   celular, faixa de 3 com ícone e título e o parágrafo escondido (copy
+   resumida só no celular; a citação acima diz tudo por inteiro). Corrigido em
+   04/11/2026: eram três faixas de largura toda com parágrafo, ~450px. */
+.pg-cartoes:has(> li:nth-child(4):last-child) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (min-width: 64rem) {
+  /* A faixa de 4 só vale com a largura toda. Na coluna da direita (`.pg-lado`)
+     este seletor (0,3,1) vencia o `.pg-sec__corpo--lado .pg-cartoes` (0,2,0) e
+     punha os 4 em colunas de ~80px com palavra partida (04/11/2026): lá é
+     2 × 2, com as duas linhas da mesma altura. */
+  .pg-cartoes:not(.pg-lado):has(> li:nth-child(4):last-child) { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .pg-sec__corpo--lado > .pg-cartoes.pg-lado { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 1fr; }
+}
+@media (max-width: 47.99rem) {
+  .pg-naoe:has(> li:nth-child(3):last-child) { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .375rem; }
+  .pg-naoe > li { padding: .625rem .5rem; gap: 0; }
+  /* ícone em cima do título: a coluna de 1/3 tem ~100px, e "axelbroker.com"
+     só cabe sem o ícone ao lado (o `<wbr>` do HTML parte antes do ".com") */
+  .pg-naoe .pg-cartao__titulo { flex-direction: column; font-size: .8125rem; gap: .375rem; }
+  .pg-naoe .pg-icone { padding: .3125rem; }
+  .pg-naoe .pg-cartao__texto { display: none; }
+}
+
+/* 21c-2. Celular copia a composição do computador com a copy resumida
+   (doutrina, 29/09/2026; fechar 04/11/2026). A 390 a home media 11.577px
+   contra 7.821 a 1440 (1,48×; meta 1,2×). Nenhum aviso de afiliado, de risco
+   ou de "não é o oficial" sai: some só o parágrafo de apoio. */
+@media (max-width: 47.99rem) {
+  /* a linha de apoio sob o título da seção */
+  .pg-sec__sub { display: none; }
+  /* parágrafo de apoio marcado no HTML (o segundo de um bloco de leitura) */
+  .pg-apoio { display: none; }
+  /* os 4 cartões de "O que se sabe": 2 × 2 com ícone e título */
+  .pg-cartoes.pg-lado .pg-cartao__texto { display: none; }
+  .pg-cartoes.pg-lado > li { padding: .75rem; }
+  /* (os passos viraram faixa de 3 no próprio bloco 9, reescrito no lugar)
+     a citação: mesma frase inteira, com menos moldura */
+  .pg-citavel { padding: .875rem 1rem; }
+  .pg-citavel p { font-size: 1rem; }
+}
+
+/* 21c-3. O aviso longo do fim (#fontes, filho direto do `.pg-wrap`, ~700
+   caracteres) ocupa a largura toda da seção: o texto vai em duas colunas de
+   leitura, em vez de uma coluna de 66ch com 1/3 da caixa vazio à direita
+   (04/11/2026). Cada coluna fica com ~60ch, dentro da largura de leitura. */
+@media (min-width: 64rem) {
+  .pg-wrap > .pg-aviso p {
+    max-width: none;
+    columns: 2;
+    column-gap: clamp(2rem, 1rem + 2vw, 3.5rem);
+  }
+}
+
+/* 21c-4. "Conferir qualquer corretora" (axel): um grupo com 5 páginas e o
+   outro com 2 deixavam o cartão da direita meio vazio a 1440. Quando o
+   segundo grupo tem só duas páginas, o primeiro ganha a coluna mais larga e
+   põe os links em 2 colunas (3 linhas), na altura do vizinho. Nada de
+   conteúdo novo: só a composição (04/11/2026). */
+@media (min-width: 64rem) {
+  .pg-atalhos:has(> .pg-atalho:nth-child(2):last-child .pg-atalho__links > li:nth-child(2):last-child) {
+    grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr);
+  }
+  .pg-atalhos:has(> .pg-atalho:nth-child(2):last-child .pg-atalho__links > li:nth-child(2):last-child) > .pg-atalho:first-child .pg-atalho__links {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: clamp(1.25rem, .5rem + 1.5vw, 2.25rem);
+  }
+}
+
+/* 21d. corpo lado a lado no computador: o texto de leitura à esquerda e o
+   bloco que o acompanha à direita (`.pg-lado`), em vez de tudo numa coluna de
+   66ch com a outra metade da tela vazia. Abaixo de 64rem segue o HTML. */
+@media (min-width: 64rem) {
+  .pg-sec__corpo--lado {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: clamp(2rem, 1rem + 2vw, 3.5rem);
+    align-items: start;
+  }
+  .pg-sec__corpo--lado > * { grid-column: 1; }
+  .pg-sec__corpo--lado > .pg-lado { grid-column: 2; grid-row: 1 / span 6; }
+  .pg-sec__corpo--lado .pg-cartoes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pg-sec__corpo--lado .pg-citavel { max-width: none; }
+
+  /* Texto de dois parágrafos: duas colunas de leitura, cada uma abaixo de
+     66ch, em vez de uma coluna com a direita vazia. */
+  .pg-texto--duas {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: clamp(2rem, 1rem + 2vw, 3.5rem);
+  }
+  .pg-texto--duas > p { margin: 0; }
+
+  /* Aviso de abertura: a frase citável e o aviso de risco lado a lado, os
+     três "não é" numa faixa de 3 embaixo, a fonte fechando. */
+  .pg-corpo--aviso {
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    grid-template-areas:
+      "cit   avi"
+      "naoe  naoe"
+      "fonte fonte";
+  }
+  .pg-corpo--aviso > .pg-citavel { grid-area: cit; }
+  /* Altura do CONTEÚDO, no topo da citação (04/11/2026): esticado até a altura
+     dela o aviso ficava com 2/3 vazios. A citação ganha 1,5× a largura do
+     aviso, perde linha, o aviso ganha linha, e as duas caixas fecham perto. */
+  .pg-corpo--aviso > .pg-aviso { grid-area: avi; align-self: start; }
+  .pg-corpo--aviso > .pg-naoe { grid-area: naoe; }
+  .pg-corpo--aviso > .pg-fonte { grid-area: fonte; }
+  .pg-corpo--aviso > .pg-texto { grid-column: 1 / -1; }
+  .pg-corpo--aviso > .pg-aviso p { max-width: none; }
+
+  /* Bloco do Brasil: o texto à esquerda, o aviso de risco à direita. */
+  .pg-corpo--brasil > .pg-aviso { grid-column: 2; grid-row: 1 / span 2; }
+}
+
+/* 21e. atalhos: cada grupo é um cartão; os dois grupos ficam lado a lado em
+   TODA largura (composição do computador). No celular o cartão mostra só o
+   título de cada página; a frase de apoio volta a partir de 48rem. */
+.pg-atalhos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(.625rem, .4rem + 1vw, 1.25rem);
+  align-items: stretch;
+}
+.pg-atalho {
+  min-width: 0;
+  height: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-content: start;
+  gap: .5rem;
+  background-color: var(--pg-s1);
+  background-image: radial-gradient(120% 60% at 0% 0%, color-mix(in srgb, var(--pg-marca) 10%, transparent), transparent 70%);
+  border: 1px solid var(--pg-linha);
+  border-radius: calc(var(--pg-raio, 10px) + 4px);
+  padding: clamp(.875rem, .6rem + 1.2vw, 1.75rem);
+}
+.pg-atalho__topo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .625rem;
+}
+.pg-atalho__icone {
+  box-sizing: content-box;
+  flex: 0 0 auto;
+  width: 1.25rem;
+  height: 1.25rem;
+  padding: .5rem;
+  border-radius: 9px;
+  color: var(--pg-marca-300);
+  background: color-mix(in srgb, var(--pg-marca) 16%, transparent);
+  border: 1px solid color-mix(in srgb, var(--pg-marca) 30%, transparent);
+}
+.pg-atalho__titulo {
+  font-size: clamp(1.0625rem, 1rem + .4vw, 1.375rem);
+  font-weight: 800;
+  line-height: 1.25;
+  color: var(--pg-ink-forte);
+  margin: 0;
+}
+.pg-atalho__sub { display: none; font-size: 1rem; line-height: 1.55; color: var(--pg-muted); margin: 0; }
+.pg-atalho__links {
+  list-style: none;
+  margin: .25rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+.pg-atalho__links > li { border-top: 1px solid var(--pg-linha); min-width: 0; }
+.pg-atalho__links a {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: .5rem;
+  min-height: 2.75rem;               /* 44px: alvo de toque */
+  padding-block: .5rem;
+  color: var(--pg-ink-forte);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.35;
+  text-decoration: none;
+  transition: color .18s;
+}
+.pg-atalho__links a::after {
+  content: "";
+  width: .5rem;
+  height: .5rem;
+  border-top: 2px solid var(--pg-marca-400);
+  border-right: 2px solid var(--pg-marca-400);
+  transform: rotate(45deg);
+  transition: transform .18s cubic-bezier(.22, 1, .36, 1);
+}
+.pg-atalho__desc {
+  display: none;
+  grid-column: 1;
+  font-size: .9375rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--pg-muted);
+}
+@media (min-width: 48rem) {
+  .pg-atalho__topo { flex-direction: row; align-items: center; }
+  .pg-atalho__sub { display: block; }
+  .pg-atalho__desc { display: block; }
+  .pg-atalho__links a::after { grid-column: 2; grid-row: 1 / span 2; }
+}
+@media (hover: hover) and (pointer: fine) {
+  .pg-atalho__links a:hover { color: var(--pg-marca-300); }
+  .pg-atalho__links a:hover::after { transform: translateX(3px) rotate(45deg); }
+}
+
+/* 21f. listas da ficha do produto (obynex) viram cartões: rótulo em negrito
+   no topo e o texto embaixo, em grade que divide a quantidade. */
+.pg-lista--cartoes {
+  max-width: none;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .625rem;
+}
+.pg-lista--cartoes > li {
+  padding: clamp(.875rem, .75rem + .5vw, 1.25rem);
+  background: var(--pg-s1);
+  border: 1px solid var(--pg-linha);
+  border-radius: var(--pg-raio, 10px);
+  min-width: 0;
+}
+.pg-lista--cartoes > li::before { display: none; }
+.pg-lista--cartoes > li > strong:first-child { display: block; color: var(--pg-ink-forte); margin-bottom: .25rem; }
+/* Sete itens de parágrafo longo: uma coluna no celular (texto acima de 160
+   caracteres não vai a 2 colunas), 2 no tablet com o primeiro largo (2 + 6),
+   e 4 no computador com o primeiro ocupando 2 (fecha 8 casas, sem órfã). */
+.pg-lista--sete { grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 48rem) {
+  .pg-lista--sete { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pg-lista--sete > li:first-child { grid-column: span 2; }
+}
+@media (min-width: 64rem) {
+  .pg-lista--sete { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+/* Ficha de 10 dados: 2 colunas → 5 (divide 10; 4 deixava 4 + 4 + 2);
+   passos de 4: 2 → 4; fontes de 6: 2 → 3 (4 deixava 4 + 2). */
+@media (min-width: 48rem) {
+  .pg-ficha:has(> li:nth-child(10):last-child) { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .pg-fontes:has(> li:nth-child(6):last-child) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (min-width: 64rem) {
+  .pg-passos:has(> li:nth-child(4):last-child) { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (min-width: 48rem) and (max-width: 63.99rem) {
+  .pg-passos:has(> li:nth-child(4):last-child) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pg-atalho__links a, .pg-atalho__links a::after { transition-duration: .01ms; }
+}
+
+/* 22. Encontro com o rodapé do chassi (04/11/2026): a página tem UM fundo
+   (--pg-bg, 9,14,20) e o rodapé `.ft` abre em #060d17 (styles.css, 6,13,23):
+   o portão do encontro acusava salto de 3,3 na fronteira #fontes → footer, a
+   1440 e a 390. A última seção do conteúdo desce em degradê até a cor do topo
+   do rodapé, como nos moldes obgp-inicio e kingfin; o rodapé não muda. */
+body:has(> footer.ft) main#conteudo > .pg-sec:last-child {
+  background: linear-gradient(to bottom, transparent 35%, #060d17 100%);
+}
+/* acabamento-titulos */.pg-cartao__titulo,.pg-passo__titulo{text-wrap:balance}.pg-dado__valor{line-height:1.22}@media (max-width:29.99rem){.pg-sec__h2,.pg-cta__h2{line-height:1.22}}

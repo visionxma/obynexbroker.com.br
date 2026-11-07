@@ -1,6 +1,7 @@
 {
-  "name": "Obynex Broker",
-  "short_name": "Obynex",
+  "name": "obynexbroker.com.br",
+  "short_name": "obynexbroker",
+  "description": "Safirion é uma plataforma moderna e segura para opções binárias, com ferramentas avançadas e suporte especializado para investidores.",
   "lang": "pt-BR",
   "start_url": "/",
   "scope": "/",
