@@ -622,6 +622,13 @@
 .bl-art__ponto {
   opacity: .6;
 }
+.bl-art__onde {
+  margin: .75rem 0 0;
+  max-width: 60ch;
+  font-size: .9375rem;
+  line-height: 1.5;
+  color: var(--pg-muted);
+}
 .bl-art__img {
   margin: 0;
   overflow: hidden;
