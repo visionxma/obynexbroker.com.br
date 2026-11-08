@@ -1,0 +1,31 @@
+# Assets versionados: cache longo
+/assets/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/img/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/icons/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/css/*
+  Cache-Control: public, max-age=604800
+
+/assets/js/*
+  Cache-Control: public, max-age=604800
+
+/wp-content/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/wp-includes/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/cdn-cgi/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Cabecalhos de seguranca em todo o site
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=()

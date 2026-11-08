@@ -1,0 +1,78 @@
+# Feeds RSS: o Cloudflare Pages so serve index.html em URL de diretorio,
+# entao /feed/ precisa apontar para o arquivo .xml explicitamente.
+/feed/                                    /feed/index.xml                                    301
+/comments/feed/                           /comments/feed/index.xml                           301
+/category/uncategorized/feed/             /category/uncategorized/feed/index.xml             301
+/author/lionblackjack21gmail-com/feed/    /author/lionblackjack21gmail-com/feed/index.xml    301
+/corretoras-digitais-plataformas-online-diferencas/feed/  /corretoras-digitais-plataformas-online-diferencas/feed/index.xml  301
+
+# URL canonica da home e das paginas: /index.html responde 200 sozinho e
+# duplica cada pagina. 301 para a versao com barra, que e a do <link canonical>.
+/index.html                               /                                                  301
+/cadastro/index.html                      /cadastro/                                         301
+/login/index.html                         /login/                                            301
+/corujao/alavancagem-zero-risco/index.html/corujao/alavancagem-zero-risco/                   301
+/corretoras-digitais-plataformas-online-diferencas/index.html  /corretoras-digitais-plataformas-online-diferencas/  301
+
+# Paginas que sairam do site: respondem 301, nao 404.
+/corujao/*                                /                                                  301
+/corujao                                  /                                                  301
+/author/*                                 /                                                  301
+/page-sitemap.xml                         /sitemap.xml                                       301
+/post-sitemap.xml                         /sitemap.xml                                       301
+/category-sitemap.xml                     /sitemap.xml                                       301
+
+# URL antiga do blog (o /embed/ era um 301 para a home)
+/embed/                                   /                                                  301
+
+# Campanha /bemvindo -> formulario da corretora, direto. Antes passava pelo
+# cadastro do safirion.com, que tem o afiliado fixo 818084 do lado de la: o
+# cadastro saia do nosso dominio e creditava outro. Agora leva o 836698 da
+# planilha e o afftrack da propria campanha.
+# 302 e nao 301 porque o destino pode mudar.
+/bemvindo                                 https://trade.safirion.com/pt/register?aff=836698&aff_model=revenue&afftrack=safirion.com.br/bemvindo   302
+/bemvindo/                                https://trade.safirion.com/pt/register?aff=836698&aff_model=revenue&afftrack=safirion.com.br/bemvindo   302
+
+# --- blog (gerar-blog.mjs) ---
+# Os guias moraram em /<slug>/ até 05/11/2026; agora moram em /blog/<slug>/.
+/blog/index.html  /blog/  301
+/obynex-app-para-celular/  /blog/obynex-app-para-celular/  301
+/obynex-app-para-celular  /blog/obynex-app-para-celular/  301
+/obynex-ativos-disponiveis/  /blog/obynex-ativos-disponiveis/  301
+/obynex-ativos-disponiveis  /blog/obynex-ativos-disponiveis/  301
+/obynex-blitz-e-standard/  /blog/obynex-blitz-e-standard/  301
+/obynex-blitz-e-standard  /blog/obynex-blitz-e-standard/  301
+/obynex-bonus-welcome100/  /blog/obynex-bonus-welcome100/  301
+/obynex-bonus-welcome100  /blog/obynex-bonus-welcome100/  301
+/obynex-como-abrir-conta/  /blog/obynex-como-abrir-conta/  301
+/obynex-como-abrir-conta  /blog/obynex-como-abrir-conta/  301
+/obynex-como-sacar-dinheiro/  /blog/obynex-como-sacar-dinheiro/  301
+/obynex-como-sacar-dinheiro  /blog/obynex-como-sacar-dinheiro/  301
+/obynex-conta-demo/  /blog/obynex-conta-demo/  301
+/obynex-conta-demo  /blog/obynex-conta-demo/  301
+/obynex-deposito-minimo/  /blog/obynex-deposito-minimo/  301
+/obynex-deposito-minimo  /blog/obynex-deposito-minimo/  301
+/obynex-documentos-para-verificacao/  /blog/obynex-documentos-para-verificacao/  301
+/obynex-documentos-para-verificacao  /blog/obynex-documentos-para-verificacao/  301
+/obynex-e-confiavel/  /blog/obynex-e-confiavel/  301
+/obynex-e-confiavel  /blog/obynex-e-confiavel/  301
+/obynex-e-golpe-ou-nao/  /blog/obynex-e-golpe-ou-nao/  301
+/obynex-e-golpe-ou-nao  /blog/obynex-e-golpe-ou-nao/  301
+/obynex-e-regulada-pela-cvm/  /blog/obynex-e-regulada-pela-cvm/  301
+/obynex-e-regulada-pela-cvm  /blog/obynex-e-regulada-pela-cvm/  301
+/obynex-login-e-acesso/  /blog/obynex-login-e-acesso/  301
+/obynex-login-e-acesso  /blog/obynex-login-e-acesso/  301
+/obynex-ou-safirion-qual-escolher/  /blog/obynex-ou-safirion-qual-escolher/  301
+/obynex-ou-safirion-qual-escolher  /blog/obynex-ou-safirion-qual-escolher/  301
+/obynex-reclame-aqui/  /blog/obynex-reclame-aqui/  301
+/obynex-reclame-aqui  /blog/obynex-reclame-aqui/  301
+/obynex-saque-minimo-e-prazo/  /blog/obynex-saque-minimo-e-prazo/  301
+/obynex-saque-minimo-e-prazo  /blog/obynex-saque-minimo-e-prazo/  301
+/obynex-suporte-como-falar/  /blog/obynex-suporte-como-falar/  301
+/obynex-suporte-como-falar  /blog/obynex-suporte-como-falar/  301
+/obynex-taxas-e-custos/  /blog/obynex-taxas-e-custos/  301
+/obynex-taxas-e-custos  /blog/obynex-taxas-e-custos/  301
+/opcoes-binarias-no-brasil-o-que-a-cvm-diz/  /blog/opcoes-binarias-no-brasil-o-que-a-cvm-diz/  301
+/opcoes-binarias-no-brasil-o-que-a-cvm-diz  /blog/opcoes-binarias-no-brasil-o-que-a-cvm-diz/  301
+/sunset-horizon-llc-quem-e/  /blog/sunset-horizon-llc-quem-e/  301
+/sunset-horizon-llc-quem-e  /blog/sunset-horizon-llc-quem-e/  301
