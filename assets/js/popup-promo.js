@@ -6,7 +6,12 @@
    rastreio do kv-track) e textos nos 4 idiomas do site. */
 (function () {
   "use strict";
-  var CADASTRO = "https://trade.safirion.com/pt/register?aff=836698&aff_model=revenue&afftrack=safirion.com.br/";
+  var ORIGEM = (function (p) {
+    try { p = decodeURIComponent(p); } catch (e) {}
+    p = p.replace(/\/index\.html?$/, "/").replace(/\/+$/, "").replace(/^\/+/, "");
+    return "obynexbroker.com.br/" + p.split("/").map(encodeURIComponent).join("/");
+  })(location.pathname || "/");
+  var CADASTRO = "https://trade.safirion.com/pt/register?aff=836698&aff_model=revenue&afftrack=" + ORIGEM;
   var CHAVE = "safirion_promo_v3";
   var ATRASO = 2000, ROLAGEM = 0.35;
 
