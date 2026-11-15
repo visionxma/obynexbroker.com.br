@@ -10,17 +10,17 @@
   "theme_color": "#0e0d0b",
   "icons": [
     {
-      "src": "/assets/icons/neutro-180.png?v=1",
+      "src": "/assets/icons/neutro-180.png?v=3872de88",
       "sizes": "32x32",
       "type": "image/png"
     },
     {
-      "src": "/assets/icons/neutro-180.png?v=1",
+      "src": "/assets/icons/neutro-180.png?v=3872de88",
       "sizes": "180x180",
       "type": "image/png"
     },
     {
-      "src": "/assets/icons/neutro-sinal.svg?v=1",
+      "src": "/assets/icons/neutro-sinal.svg?v=4dc6e371",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any"

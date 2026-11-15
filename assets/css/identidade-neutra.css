@@ -1,7 +1,7 @@
 /* Identidade neutra do guia independente (15/11/2026).
    Fonte: Schibsted Grotesk (Bakken & Baeck para o grupo de mídia Schibsted, licença OFL), servida da própria origem.
    Paleta: grafite quente, marfim e vinho editorial. Nada visual da Safirion nem da corretora do domínio. */
-@font-face{font-family:"Schibsted Grotesk";src:url(/assets/fonts/schibsted-grotesk.woff2?v=1) format("woff2");font-weight:400 900;font-style:normal;font-display:swap}
+@font-face{font-family:"Schibsted Grotesk";src:url(/assets/fonts/schibsted-grotesk.woff2?v=c5e9a990) format("woff2");font-weight:400 900;font-style:normal;font-display:swap}
 :root{--nm-fundo:#0e0d0b;--nm-papel:#f2ede3;--nm-tinta:#14120f;--nm-vinho:#a33a57;--nm-cinza:#b8b2a7;--nm-linha:rgba(242,237,227,.16)}
 body{font-family:"Schibsted Grotesk",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;font-feature-settings:"kern" 1}
 /* a família não tem itálico: ênfase é cor e peso, nunca inclinação falsa */
@@ -31,7 +31,7 @@ em,i{font-style:normal}
 
 /* imagem que era da plataforma e agora é foto editorial: preenche o mesmo quadro, sem deformar */
 img[src*="/assets/img/neutro/foto-"]{object-fit:cover;object-position:center}
-img[src*="/assets/img/neutro/vazio.svg"]{visibility:hidden}
+img[src*="/assets/img/neutro/vazio.svg?v=102aa7e8"]{visibility:hidden}
 
 /* 359 px ou menos: a barra não cabia inteira já no main (o "CRIAR CONTA" saía 35 px da tela).
    Sai o que tem outro caminho: o sinal do wordmark e o seletor de idioma (a lista de idiomas fica no rodapé). */
