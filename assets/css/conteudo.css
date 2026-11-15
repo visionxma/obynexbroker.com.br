@@ -1,24 +1,24 @@
 .pg-corpo {
-  --pg-bg: var(--bg, #04090f);
-  --pg-s1: var(--s1, #09121b);
-  --pg-s2: var(--s2, #111d2f);
-  --pg-s3: var(--s3, #142533);
+  --pg-bg: var(--bg, #0a0a09);
+  --pg-s1: var(--s1, #131211);
+  --pg-s2: var(--s2, #22211e);
+  --pg-s3: var(--s3, #252422);
   --pg-linha: rgba(255, 255, 255, .08);
-  --pg-ink: var(--ink, #e0f1ff);
+  --pg-ink: var(--ink, #f5f1ea);
   --pg-ink-forte: var(--ink-strong, #ffffff);
-  --pg-muted: var(--muted, #a0b4c8);
-  --pg-marca: var(--brand, #2389e6);
-  --pg-marca-700: var(--brand-700, #0d63b0);
-  --pg-marca-600: var(--brand-600, #1a72c8);
-  --pg-marca-400: var(--brand-400, #4ba3f0);
-  --pg-marca-300: var(--brand-300, #82c5ff);
+  --pg-muted: var(--muted, #bab6ae);
+  --pg-marca: var(--brand, #c14866);
+  --pg-marca-700: var(--brand-700, #912c45);
+  --pg-marca-600: var(--brand-600, #a73b56);
+  --pg-marca-400: var(--brand-400, #d16a84);
+  --pg-marca-300: var(--brand-300, #e79aad);
   --pg-ok: var(--green, #3ed59d);
   --pg-nao: #f0776b;
   --pg-atencao: #f2c14e;
-  --pg-luz: rgba(35, 137, 230, .16);
+  --pg-luz: rgba(193,72,102,.16);
   --pg-fonte:
-    "Mazzard",
-    "Mazzard M",
+    "Schibsted Grotesk",
+    "Schibsted Grotesk",
     system-ui,
     -apple-system,
     "Segoe UI",
@@ -387,8 +387,8 @@ main#conteudo {
     margin: 0;
     padding: .375rem .75rem;
     border-radius: 999px;
-    color: #e8eef7;
-    background: rgba(6, 11, 24, .82);
+    color: #f2f0ed;
+    background: rgba(16,15,14,.82);
     border: 1px solid rgba(255, 255, 255, .1);
     backdrop-filter: blur(6px);
   }

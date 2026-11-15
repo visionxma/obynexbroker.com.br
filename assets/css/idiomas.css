@@ -15,14 +15,14 @@
   -webkit-user-select:none;user-select:none;
 }
 .lng summary::-webkit-details-marker{display:none}
-.lng summary:hover,.lng[open] summary{border-color:rgba(75,163,240,.5);background:rgba(35,137,230,.12)}
+.lng summary:hover,.lng[open] summary{border-color:rgba(209,106,132,.5);background:rgba(193,72,102,.12)}
 .lng img,.ft__lng img{flex:0 0 auto;width:20px;height:15px;border-radius:3px;object-fit:cover}
 .lng__lista{
   position:absolute;inset-inline-end:0;top:calc(100% + 10px);z-index:5;
   display:grid;grid-template-columns:1fr 1fr;gap:2px;
   width:max-content;max-width:calc(100vw - 24px);max-height:min(70vh,520px);overflow:auto;
   margin:0;padding:8px;list-style:none;
-  background:rgba(6,13,23,.97);border:1px solid var(--line);border-radius:var(--r-md);
+  background:rgba(15,15,14,.97);border:1px solid var(--line);border-radius:var(--r-md);
   box-shadow:var(--shadow);
 }
 .lng__lista a{
@@ -30,7 +30,7 @@
   color:var(--muted);font-size:14px;letter-spacing:0;white-space:nowrap;
   transition:color .25s var(--ease),background-color .25s var(--ease);
 }
-.lng__lista a:hover,.lng__lista a[aria-current]{color:#fff;background:rgba(160,176,197,.1)}
+.lng__lista a:hover,.lng__lista a[aria-current]{color:#fff;background:rgba(184,180,173,.1)}
 
 /* ---------- Lista de idiomas no rodapé ---------- */
 .ft__lng{
@@ -43,7 +43,7 @@
   color:var(--muted);font-size:13px;letter-spacing:0;
   transition:color .25s var(--ease),border-color .25s var(--ease);
 }
-.ft__lng a:hover,.ft__lng a[aria-current]{color:#fff;border-color:rgba(75,163,240,.5)}
+.ft__lng a:hover,.ft__lng a[aria-current]{color:#fff;border-color:rgba(209,106,132,.5)}
 
 /* o menu do topo não quebra em duas linhas; some antes, porque há idioma de rótulo longo */
 .hdr__nav a{white-space:nowrap}
@@ -91,9 +91,9 @@ html:lang(ar) .faq__title,html:lang(bn) .faq__title,html:lang(hi) .faq__title,ht
 html:lang(ar) .hero__claim,html:lang(bn) .hero__claim,html:lang(hi) .hero__claim,html:lang(th) .hero__claim,
 html:lang(ar) .lit__txt,html:lang(bn) .lit__txt,html:lang(hi) .lit__txt,html:lang(th) .lit__txt{line-height:1.4}
 html:lang(zh) .lit__txt,html:lang(th) .lit__txt{max-width:20em}
-/* a Mazzard não tem todas as letras do vietnamita: evita misturar duas fontes na mesma palavra */
+/* a "Schibsted Grotesk" não tem todas as letras do vietnamita: evita misturar duas fontes na mesma palavra */
 html:lang(vi) body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
-html:lang(vi) .h-display{font-family:"Mazzard",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+html:lang(vi) .h-display{font-family:"Schibsted Grotesk",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
 
 /* ---------- Árabe: direita para a esquerda ---------- */
 /* fora da tela pela direita: à esquerda, em RTL, vira rolagem horizontal de 10 mil px */
@@ -108,7 +108,7 @@ html:lang(vi) .h-display{font-family:"Mazzard",-apple-system,BlinkMacSystemFont,
 [dir="rtl"] .steps li::after{left:auto;right:18px}
 [dir="rtl"] .pp__selo{left:auto;right:18px}
 [dir="rtl"] .pp__x{right:auto;left:14px}
-[dir="rtl"] .pp__cont .pp__nota{border-left:0;border-right:3px solid #2389e6;border-radius:10px 0 0 10px}
+[dir="rtl"] .pp__cont .pp__nota{border-left:0;border-right:3px solid #c14866;border-radius:10px 0 0 10px}
 /* blocos com foto sangrada e a esteira mantêm a geometria; só o texto vira */
 [dir="rtl"] .split,[dir="rtl"] .marquee__track{direction:ltr}
 [dir="rtl"] .split>*,[dir="rtl"] .marquee__item{direction:rtl}

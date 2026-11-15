@@ -4,32 +4,32 @@
    vírgula é o medido no site em 29/10/2026, para a página não depender de o
    chassi ter carregado a folha antiga.
 
-   --pg-marca-700 (#0d63b0) é o tom de botão: dá 6,12:1 com branco. O --brand
-   puro (#2389e6) daria 3,63:1 e reprovaria na regra de 11/10/2026. */
+   --pg-marca-700 (#912c45) é o tom de botão: dá 6,12:1 com branco. O --brand
+   puro (#c14866) daria 3,63:1 e reprovaria na regra de 11/10/2026. */
 
 .pg-corpo {
-  --pg-bg:         var(--bg, #04090f);
-  --pg-s1:         var(--s1, #09121b);
-  --pg-s2:         var(--s2, #111d2f);
-  --pg-s3:         var(--s3, #142533);
+  --pg-bg:         var(--bg, #0a0a09);
+  --pg-s1:         var(--s1, #131211);
+  --pg-s2:         var(--s2, #22211e);
+  --pg-s3:         var(--s3, #252422);
   --pg-linha:      rgba(255, 255, 255, .08);
 
-  --pg-ink:        var(--ink, #e0f1ff);
+  --pg-ink:        var(--ink, #f5f1ea);
   --pg-ink-forte:  var(--ink-strong, #ffffff);
-  --pg-muted:      var(--muted, #a0b4c8);
+  --pg-muted:      var(--muted, #bab6ae);
 
-  --pg-marca:      var(--brand, #2389e6);
-  --pg-marca-700:  var(--brand-700, #0d63b0);
-  --pg-marca-600:  var(--brand-600, #1a72c8);
-  --pg-marca-400:  var(--brand-400, #4ba3f0);
-  --pg-marca-300:  var(--brand-300, #82c5ff);
+  --pg-marca:      var(--brand, #c14866);
+  --pg-marca-700:  var(--brand-700, #912c45);
+  --pg-marca-600:  var(--brand-600, #a73b56);
+  --pg-marca-400:  var(--brand-400, #d16a84);
+  --pg-marca-300:  var(--brand-300, #e79aad);
 
   --pg-ok:         var(--green, #3ed59d);
   --pg-nao:        #f0776b;
   --pg-atencao:    #f2c14e;
 
-  --pg-luz:        rgba(35, 137, 230, .16);
-  --pg-fonte:      "Mazzard", "Mazzard M", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --pg-luz:        rgba(193,72,102,.16);
+  --pg-fonte:      "Schibsted Grotesk", "Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
   --pg-nav-h:      var(--nav-h, 64px);
   --pg-shell:      72rem;
   --pg-raio:       10px;
@@ -278,7 +278,7 @@ main#conteudo { overflow-wrap: break-word; }
 }
 /* Bloco de cor viva leva texto BRANCO, e a cor escurece até o branco dar
    4,5:1 (regra de 11/10/2026). `--pg-marca-700` é o tom medido para isso:
-   #0d63b0 dá 6,12:1 com branco; o `--pg-marca` puro daria só 3,63:1. */
+   #912c45 dá 6,12:1 com branco; o `--pg-marca` puro daria só 3,63:1. */
 .pg-botao--cheio {
   background: var(--pg-marca-700);
   color: #fff;
@@ -1282,7 +1282,7 @@ main#conteudo { overflow-wrap: break-word; }
   -webkit-mask: url("/assets/img/hub/iphone-17-pro-tela.svg?v=20261104") 0 0 / 100% 100% no-repeat;
           mask: url("/assets/img/hub/iphone-17-pro-tela.svg?v=20261104") 0 0 / 100% 100% no-repeat;
   overflow: hidden;
-  background: #04090f;
+  background: #0a0a09;
   /* a moldura PNG tem a tela PRETA e opaca: o print vai POR CIMA dela,
      recortado pela máscara no contorno da tela (mesma ordem do molde 6) */
   z-index: 2;
@@ -1620,11 +1620,11 @@ main#conteudo { overflow-wrap: break-word; }
 }
 
 /* 22. Encontro com o rodapé do chassi (04/11/2026): a página tem UM fundo
-   (--pg-bg, 9,14,20) e o rodapé `.ft` abre em #060d17 (styles.css, 6,13,23):
+   (--pg-bg, 9,14,20) e o rodapé `.ft` abre em #0f0f0e (styles.css, 6,13,23):
    o portão do encontro acusava salto de 3,3 na fronteira #fontes → footer, a
    1440 e a 390. A última seção do conteúdo desce em degradê até a cor do topo
    do rodapé, como nos moldes obgp-inicio e kingfin; o rodapé não muda. */
 body:has(> footer.ft) main#conteudo > .pg-sec:last-child {
-  background: linear-gradient(to bottom, transparent 35%, #060d17 100%);
+  background: linear-gradient(to bottom, transparent 35%, #0f0f0e 100%);
 }
 /* acabamento-titulos */.pg-cartao__titulo,.pg-passo__titulo{text-wrap:balance}.pg-dado__valor{line-height:1.22}@media (max-width:29.99rem){.pg-sec__h2,.pg-cta__h2{line-height:1.22}}
