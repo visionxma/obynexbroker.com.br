@@ -52,3 +52,7 @@ img[src*="/assets/img/neutro/vazio.svg"]{visibility:hidden}
    e a frase sobre o app vira a legenda honesta, pequena */
 .kf-mao-img[src*="/assets/img/neutro/foto-"]{aspect-ratio:2/3;height:auto;object-fit:cover;border-radius:28px}
 .kf-hand-text.kf-hand-text--legenda{font-size:.875rem;font-weight:500;line-height:1.3;letter-spacing:0;color:#b8b2a7}
+
+/* faixa do topo: com a Schibsted a frase mede 339 px (a Mazzard media 319) e o espaço a 390 é 327;
+   sem o espaçamento extra entre letras ela volta a caber a 390, como no main, sem baixar dos 13 px */
+@media (max-width:47.99rem){.ticker__msg{letter-spacing:-.01em}}
