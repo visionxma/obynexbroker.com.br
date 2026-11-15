@@ -47,3 +47,8 @@ img[src*="/assets/img/neutro/vazio.svg"]{visibility:hidden}
 
 /* molde u1784f: o fundo do formulário nasce com 328 px fixos e passava 4 px da tela de 320 (já no main) */
 .mx-u1784f ._background_10916_16,.mx-u1784f ._background_1lbfe_15,.mx-u1784f ._listsWrapper_1lbfe_67,.mx-u1784f ._paymentsTop_1lbfe_91,.mx-u1784f ._paymentsBottom_1lbfe_100{max-width:100%}
+
+/* molde kf (hero da mão com o app): o quadro em pé recebe a foto ilustrativa recortada em pé, como cartão,
+   e a frase sobre o app vira a legenda honesta, pequena */
+.kf-mao-img[src*="/assets/img/neutro/foto-"]{aspect-ratio:2/3;height:auto;object-fit:cover;border-radius:28px}
+.kf-hand-text.kf-hand-text--legenda{font-size:.875rem;font-weight:500;line-height:1.3;letter-spacing:0;color:#b8b2a7}
