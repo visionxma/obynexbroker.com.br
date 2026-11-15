@@ -56,3 +56,27 @@ img[src*="/assets/img/neutro/vazio.svg?v=102aa7e8"]{visibility:hidden}
 /* faixa do topo: com a Schibsted a frase mede 339 px (a Mazzard media 319) e o espaço a 390 é 327;
    sem o espaçamento extra entre letras ela volta a caber a 390, como no main, sem baixar dos 13 px */
 @media (max-width:47.99rem){.ticker__msg{letter-spacing:-.01em}}
+
+/* ---- segunda rodada (15/11/2026) ----
+   fundo: LP escura tem UM fundo, preto puro (doutrina, seção 2); nenhuma faixa pinta cinza de ponta a ponta,
+   e o rodapé deixa de nascer em #0f0f0e (era uma costura de cor na fronteira com a última seção) */
+:root{--bg:#000;--bg-band:#000;--nm-fundo:#000}
+html,body{background-color:#000}
+.ft{background:none}
+
+/* hero do obynex: UMA foto editorial, sem silhueta de aparelho (doutrina: aparelho só o pedido; cartão que
+   imita o celular sem o app de verdade é reprovado). Mesmo recorte no computador e no celular. */
+.pg-hero__foto{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center;border-radius:clamp(14px,.75rem + 1vw,28px);box-shadow:0 24px 48px -18px rgba(0,0,0,.85)}
+@media (min-width:64rem){.pg-hero__foto{width:min(100%,22rem,calc((100svh - 15rem) * 4 / 5))}}
+@media (prefers-reduced-motion:no-preference){.pg-hero__foto{animation:pg-flutua 7s ease-in-out infinite}}
+/* o fim de cada página descia em degradê até o #0f0f0e do rodapé antigo; com o rodapé no preto puro, o degradê
+   virava faixa cinza na fronteira com o rodapé (portão do encontro de seções) */
+body:has(footer.ft) main#conteudo > .pg-sec:last-child,
+.mx-raiz :is(.fg-fecho,.iq-fecho,.kf-fecho,.m12-fecho,.mx-fecho,.sp-fecho,.vi-fecho){background:none!important}
+/* hero com fundo de ponta a ponta (doutrina, seção 1, e portão portao-lp-victor): uma luz vinho e marfim que atravessa
+   a largura toda, na PRÓPRIA caixa da hero, e se apaga antes da borda de baixo — a fronteira com a seção seguinte
+   continua no preto puro (sem costura no encontro). Sem vínculo com cor da Safirion ou da corretora. */
+.pg-hero,.kf-hero{background-image:radial-gradient(ellipse 120% 80% at 72% 12%,rgba(163,58,87,.24),rgba(163,58,87,.07) 42%,transparent 72%),radial-gradient(ellipse 90% 60% at 8% 38%,rgba(242,237,227,.045),transparent 70%);background-repeat:no-repeat}
+
+/* "Entrar" e "Criar conta" do topo com alvo de 44 px (doutrina 04/11/2026, hero entrega criar conta e entrar; portão hero-capta) */
+.hdr .btn{min-height:44px}

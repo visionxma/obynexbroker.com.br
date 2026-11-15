@@ -252,7 +252,7 @@ strong,b{font-weight:600;color:var(--ink-strong)}
     radial-gradient(920px 540px at 74% 56%,rgba(193,72,102,.12),transparent 70%);
 }
 .hero__veil{position:absolute;inset:0;z-index:-1;pointer-events:none;
-  background:linear-gradient(180deg,rgba(10,10,9,.6) 0%,rgba(10,10,9,0) 24%,rgba(10,10,9,.72) 76%,var(--bg) 100%);
+  background:linear-gradient(180deg,rgba(0,0,0,.6) 0%,rgba(0,0,0,0) 24%,rgba(0,0,0,.72) 76%,var(--bg) 100%);
 }
 .hero__in{
   position:relative;display:grid;grid-template-columns:1.06fr .94fr;
@@ -315,7 +315,7 @@ strong,b{font-weight:600;color:var(--ink-strong)}
 .marquee{
   position:relative;overflow:hidden;padding-block:22px;
   border-block:1px solid var(--line-soft);
-  background:linear-gradient(180deg,rgba(19,18,17,.6),rgba(10,10,9,.6));
+  background:linear-gradient(180deg,rgba(19,18,17,.6),rgba(0,0,0,.6));
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
   mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
 }
@@ -439,13 +439,13 @@ strong,b{font-weight:600;color:var(--ink-strong)}
 .split--bleed .split__media::after{
   content:"";position:absolute;inset:0;pointer-events:none;
   background:
-    linear-gradient(90deg,var(--bg) 0%,rgba(10,10,9,.86) 12%,rgba(10,10,9,0) 52%),
-    linear-gradient(180deg,var(--bg) 0%,rgba(10,10,9,0) 17%,rgba(10,10,9,0) 83%,var(--bg) 100%);
+    linear-gradient(90deg,var(--bg) 0%,rgba(0,0,0,.86) 12%,rgba(0,0,0,0) 52%),
+    linear-gradient(180deg,var(--bg) 0%,rgba(0,0,0,0) 17%,rgba(0,0,0,0) 83%,var(--bg) 100%);
 }
 .split--bleed.split--rev .split__media::after{
   background:
-    linear-gradient(270deg,var(--bg) 0%,rgba(10,10,9,.86) 12%,rgba(10,10,9,0) 52%),
-    linear-gradient(180deg,var(--bg) 0%,rgba(10,10,9,0) 17%,rgba(10,10,9,0) 83%,var(--bg) 100%);
+    linear-gradient(270deg,var(--bg) 0%,rgba(0,0,0,.86) 12%,rgba(0,0,0,0) 52%),
+    linear-gradient(180deg,var(--bg) 0%,rgba(0,0,0,0) 17%,rgba(0,0,0,0) 83%,var(--bg) 100%);
 }
 /* o brilho azul da moldura antiga não faz mais sentido aqui */
 .split--bleed .split__media::before{content:none}
@@ -718,7 +718,7 @@ strong,b{font-weight:600;color:var(--ink-strong)}
   }
   .split--bleed .split__media::after,
   .split--bleed.split--rev .split__media::after{
-    background:linear-gradient(180deg,var(--bg) 0%,rgba(10,10,9,0) 22%,rgba(10,10,9,0) 78%,var(--bg) 100%);
+    background:linear-gradient(180deg,var(--bg) 0%,rgba(0,0,0,0) 22%,rgba(0,0,0,0) 78%,var(--bg) 100%);
   }
   .panel-grid{grid-template-columns:1fr;gap:30px}
 }
