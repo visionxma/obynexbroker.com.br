@@ -146,6 +146,10 @@ body>*{position:relative;z-index:1}
 .quad{grid-template-columns:repeat(2,minmax(0,1fr))}
 .grade{grid-template-columns:repeat(auto-fit,minmax(min(100%,var(--min,150px)),1fr))}
 @media (min-width:37.5rem){ .quad{grid-template-columns:repeat(4,minmax(0,1fr))} }
+/* Quatro cartoes dentro de uma coluna da .dividido ficavam com ~100 px cada e
+   partiam a palavra no meio ("Fore|x", "Co|mm|oditi|es"): ali sao 2 por linha,
+   em toda largura (16/11/2026). */
+.dividido .quad{grid-template-columns:repeat(2,minmax(0,1fr))}
 .uma{grid-template-columns:minmax(0,1fr)}
 
 /* texto + imagem lado a lado a partir do tablet, em sequencia no celular */
@@ -321,15 +325,46 @@ h3.h3{font-size:var(--t-h3);font-weight:700}
   .fato{padding:.5rem .6rem}
   .risco{padding:.55rem .7rem;font-size:.8125rem}
 }
-/* Tela baixa no celular (iPhone SE e afins): encolhe o objeto pela ALTURA */
-@media (max-width:47.99rem) and (max-height:46rem){
+/* Tela baixa no celular (360x740 e afins, ate 800 px): encolhe o objeto pela
+   ALTURA e aperta os vaos; os numeros viram a faixa de 4 do computador (16/11/2026:
+   a hero terminava em 827 px numa tela de 740). */
+@media (max-width:47.99rem) and (max-height:50rem){
   .hero__fig img{max-width:min(100%,104px)}
   .hero h1{font-size:1.75rem}
+  .hero__g,.hero .pilha--larga{gap:.625rem}
 }
 
-/* faixa de numeros da hero — 2 colunas em 360, 4 do tablet para cima */
-.hero__fatos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.5rem}
-@media (min-width:37.5rem){ .hero__fatos{grid-template-columns:repeat(4,minmax(0,1fr))} }
+/* Cartoes de 2 colunas no celular: icone, titulo e texto cabem sem partir palavra
+   ("internaciona|is", "Commodit|ies") */
+@media (max-width:47.99rem){
+  .cartao{padding:.7rem}
+  .cartao:has(>.ico){column-gap:.4rem}
+  .cartao:has(>.ico)>h3{font-size:.9375rem;line-height:1.15}
+  .ico{width:20px;height:20px}
+  .ico svg{width:19px;height:19px}
+  .cartao p{font-size:.8125rem}
+  /* faixa de 3 cartoes (cada um com ~100 px): letra e icone menores */
+  .trio .cartao{padding:.6rem}
+  .trio .cartao:has(>.ico){column-gap:.3rem}
+  .trio .cartao:has(>.ico)>h3{font-size:.8125rem}
+  .trio .ico{width:16px;height:16px}
+  .trio .ico svg{width:15px;height:15px}
+  .trio .cartao p{font-size:.75rem}
+}
+
+/* faixa de numeros da hero — 4 em linha desde o celular (a composicao do
+   computador), com a letra ajustada; 2x2 so abaixo de 360 nao se usa mais */
+.hero__fatos{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.375rem}
+.hero .fato{padding:.45rem .35rem}
+.hero .fato b{font-size:1rem}
+.hero .fato span{font-size:.6875rem;line-height:1.2}
+@media (min-width:37.5rem){
+  .hero__fatos{gap:.5rem}
+  .hero .fato{padding:.625rem .75rem}
+  .hero .fato b{font-size:clamp(1.05rem,.9rem + .8vw,1.5rem)}
+  .hero .fato span{font-size:clamp(.75rem,.72rem + .15vw,.875rem);line-height:1.3}
+}
+@media (max-width:37.49rem){ .hero .fato span{font-size:.65rem} }
 .fato{background:var(--vidro);border:1px solid var(--linha);border-radius:var(--r-sm);padding:.625rem .75rem;min-width:0}
 .fato b{display:block;font-family:var(--fd);font-weight:800;font-size:clamp(1.05rem,.9rem + .8vw,1.5rem);color:var(--ciano);line-height:1.1}
 .fato span{display:block;color:var(--tinta-2);font-size:clamp(.75rem,.72rem + .15vw,.875rem);line-height:1.3;margin-top:.15rem}
@@ -367,6 +402,12 @@ h3.h3{font-size:var(--t-h3);font-weight:700}
 .qa summary::after{content:"";width:11px;height:11px;flex:none;border-right:2px solid var(--ciano);border-bottom:2px solid var(--ciano);
   transform:rotate(45deg) translateY(-2px);transition:transform .22s var(--ease)}
 .qa[open] summary::after{transform:rotate(-135deg) translateY(-2px)}
+/* a resposta abre e fecha deslizando (curva da casa, 320 ms), nunca num salto */
+:root{interpolate-size:allow-keywords}
+.qa::details-content{block-size:0;overflow:clip;
+  transition:block-size .32s cubic-bezier(.22,1,.36,1),content-visibility .32s allow-discrete}
+.qa[open]::details-content{block-size:auto}
+@media (prefers-reduced-motion:reduce){ .qa::details-content{transition:none} }
 .qa__p{padding:0 .9rem .9rem;color:var(--tinta-2);font-size:var(--t-peq);line-height:1.55}
 .qa__p p+p{margin-top:.5rem}
 .faq-mais{display:grid;place-items:center;margin-top:.875rem}

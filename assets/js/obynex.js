@@ -72,7 +72,7 @@
   });
 
   /* ----- 4. FAQ: abrir um fecha o outro + "ver mais" contado ----------- */
-  var faq = q('#faq');
+  var faq = q('#faq-lista');
   if (faq) {
     var todas = qa('details', faq);
     /* reserva para navegador sem suporte a <details name> */
@@ -94,9 +94,28 @@
         bt.hidden = escondidas === 0 && !aberto;
         q('span', bt).textContent = aberto ? 'Ver menos perguntas' : 'Ver mais perguntas (+' + escondidas + ')';
       };
+      /* "ver mais" cresce e "ver menos" recolhe deslizando (altura animada com a
+         curva da casa); ao recolher, a seção volta para o título, que fica abaixo
+         do cabeçalho fixo. "Menos movimento": sem animação, só o estado final. */
+      var voltarAoTitulo = function () {
+        var t = q('#t-faq'), topo = q('#topo');
+        if (!t) return;
+        var alvo = t.getBoundingClientRect().top + window.pageYOffset - ((topo ? topo.offsetHeight : 64) + 24);
+        window.scrollTo({ top: Math.max(0, alvo), behavior: menos ? 'auto' : 'smooth' });
+      };
       bt.addEventListener('click', function () {
-        bt.setAttribute('aria-expanded', bt.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');
+        var abrir = bt.getAttribute('aria-expanded') !== 'true';
+        var antes = faq.offsetHeight, estavam = todas.map(function (d) { return d.hidden; });
+        bt.setAttribute('aria-expanded', abrir ? 'true' : 'false');
         recontar();
+        var depois = faq.offsetHeight;
+        if (menos || !faq.animate || antes === depois) { if (!abrir) voltarAoTitulo(); return; }
+        if (!abrir) todas.forEach(function (d, i) { d.hidden = estavam[i]; });   /* fica à vista até acabar de recolher */
+        faq.style.overflow = 'clip';
+        var an = faq.animate([{ height: antes + 'px' }, { height: depois + 'px' }],
+          { duration: 320, easing: 'cubic-bezier(.22,1,.36,1)' });
+        var fim = function () { faq.style.overflow = ''; if (!abrir) { recontar(); voltarAoTitulo(); } };
+        an.onfinish = fim; an.oncancel = fim;
       });
       addEventListener('resize', recontar);
       recontar();
