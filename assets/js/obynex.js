@@ -24,7 +24,7 @@
   qa('[data-ir]').forEach(function (a) {
     var alvo = a.getAttribute('data-ir');
     a.href = destino(alvo === 'entrar' ? ENTRAR : alvo === 'demo' ? DEMO : CADASTRO);
-    a.rel = 'noopener';
+    a.rel = 'sponsored noopener';   /* link pago: o `sponsored` é exigência do Google e o JS apagava o do HTML (16/11/2026) */
   });
 
   /* ----- 2. Topo: capsula depois de rolar ------------------------------ */
