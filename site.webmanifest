@@ -1,29 +1,15 @@
 {
-  "name": "obynexbroker.com.br",
-  "short_name": "obynexbroker",
-  "description": "Safirion é uma plataforma moderna e segura para opções binárias, com ferramentas avançadas e suporte especializado para investidores.",
-  "lang": "pt-BR",
+  "name": "Obynex Broker",
+  "short_name": "Obynex",
+  "description": "Corretora internacional com mais de 400 ativos: cripto, ações internacionais, forex, commodities e índices.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#000000",
+  "lang": "pt-BR",
+  "background_color": "#03050B",
+  "theme_color": "#03050B",
   "icons": [
-    {
-      "src": "/assets/icons/neutro-180.png?v=3872de88",
-      "sizes": "32x32",
-      "type": "image/png"
-    },
-    {
-      "src": "/assets/icons/neutro-180.png?v=3872de88",
-      "sizes": "180x180",
-      "type": "image/png"
-    },
-    {
-      "src": "/assets/icons/neutro-sinal.svg?v=4dc6e371",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any"
-    }
+    { "src": "/assets/img/obynex-icone-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/assets/img/obynex-icone-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
   ]
 }
