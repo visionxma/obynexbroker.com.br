@@ -242,15 +242,24 @@ h3.h3{font-size:var(--t-h3);font-weight:700}
     radial-gradient(70% 50% at 10% 22%, rgba(11,75,80,.30), transparent 70%);
 }
 .hero__g{display:grid;gap:clamp(1.25rem,.9rem + 1.6vw,2.25rem);align-items:center;grid-template-columns:minmax(0,1fr)}
-@media (min-width:60rem){ .hero__g{grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr)} }
 .hero h1{font-size:var(--t-h1);font-weight:800;letter-spacing:-.025em;line-height:1.02}
 .hero h1 em{font-style:normal;color:var(--ciano)}
 .hero__sub{color:var(--tinta-2);font-size:clamp(1rem,.95rem + .35vw,1.25rem);line-height:1.45;max-width:38ch}
 .hero__fig{position:relative;display:grid;place-items:center;min-width:0}
 .hero__fig img{width:100%;max-width:min(100%,400px);border-radius:var(--r-lg);
   box-shadow:0 30px 80px -30px rgba(0,0,0,.9),0 0 0 1px var(--linha)}
-@media (max-width:59.99rem){ .hero__fig img{max-width:min(100%,260px)} }
-@media (max-height:55rem) and (min-width:60rem){ .hero__fig img{max-width:min(100%,320px)} }
+/* Tablet e computador (16/11/2026): a hero cabe em 1 tela com os 4 numeros
+   a vista. Duas colunas desde 48rem; o titulo acompanha a largura da coluna
+   (em 68px quebrava em 4 linhas); o print e limitado pela ALTURA da tela, nao
+   pela largura (810 px de altura empurravam os numeros para baixo da dobra). */
+@media (min-width:48rem){
+  .hero__g{grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);gap:clamp(.875rem,.4rem + 1.3vw,1.5rem) clamp(1.25rem,.5rem + 2.5vw,2.5rem)}
+  .hero h1{font-size:clamp(2rem,1.2rem + 2.2vw,3.25rem)}
+  .hero__sub{font-size:clamp(1rem,.9rem + .3vw,1.125rem);max-width:46ch}
+  .hero .pilha--larga{gap:clamp(.75rem,.4rem + .9vw,1.25rem)}
+  .hero__fig img{width:auto;height:auto;max-width:100%;max-height:clamp(15rem,calc(100svh - 17rem),37rem)}
+  .hero .risco{padding:.6rem .8rem}
+}
 
 /* Celular: o heroi INTEIRO cabe na 1a tela. A composicao e a mesma do
    computador (titulo, numeros, par de CTAs e aviso de risco, lado a lado);
@@ -417,3 +426,19 @@ h3.h3{font-size:var(--t-h3);font-weight:700}
 .pular{position:absolute;left:-9999px;top:0;z-index:100}
 .pular:focus{left:var(--gut);top:calc(env(safe-area-inset-top,0px) + .5rem);
   background:var(--ciano);color:var(--tinta-ciano);padding:.75rem 1rem;border-radius:var(--r-sm);font-weight:700}
+
+/* ---------- 17. Pagina 404: os 9 guias lado a lado --------------------- */
+.nf{padding-top:calc(var(--topo-h) + env(safe-area-inset-top,0px) + clamp(1.5rem,1rem + 3vw,3.25rem));
+  padding-bottom:clamp(2rem,1rem + 4vw,4rem);display:grid;gap:clamp(.75rem,.5rem + 1vw,1.25rem);align-content:start}
+.nf .miolo{display:grid;gap:clamp(.75rem,.5rem + 1vw,1.25rem);grid-template-columns:minmax(0,1fr)}
+.nf__cod{font:800 clamp(3rem,2rem + 5vw,6rem)/1 var(--fd);color:var(--ciano);letter-spacing:-.03em}
+.nf h1{font-size:clamp(1.75rem,1.3rem + 2vw,2.75rem);font-weight:800;letter-spacing:-.022em;line-height:1.08}
+.nf__grade{list-style:none;margin:0;padding:0;display:grid;gap:.5rem;grid-template-columns:repeat(3,minmax(0,1fr))}
+.nf-card{display:grid;gap:.2rem;align-content:center;min-height:56px;height:100%;padding:.75rem .875rem;
+  background:var(--bloco);border:1px solid var(--linha);border-radius:var(--r-sm);color:var(--tinta);text-decoration:none;
+  transition:transform .18s var(--ease),border-color .18s var(--ease)}
+.nf-card b{font-size:var(--t-corpo);font-weight:700}
+.nf-card span{color:var(--tinta-2);font-size:var(--t-peq);line-height:1.35}
+.nf-card:active{transform:scale(.98)}
+@media (hover:hover) and (pointer:fine){ .nf-card:hover{transform:translateY(-2px);border-color:var(--ciano)} }
+@media (max-width:47.99rem){ .nf-card span{display:none} }
