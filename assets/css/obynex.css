@@ -107,9 +107,34 @@ body::before{
 }
 body>*{position:relative;z-index:1}
 
+/* ---------- 4b. Encontro das secoes: UM fundo so, luz que atravessa --------
+   Nenhuma secao pinta fundo de ponta a ponta. Entre duas secoes mora uma
+   camada de ALTURA ZERO (.enc) com luz que cruza a fronteira e anda com a
+   rolagem (so transform e opacity). Modelo: la-encontro.css (doutrina, 2). */
+.enc{display:block;height:0;position:relative;z-index:-1;pointer-events:none}
+.enc::before{
+  content:"";position:absolute;left:0;right:0;top:-380px;height:760px;
+  background:
+    radial-gradient(46% 42% at var(--ex,24%) 50%, rgba(25,237,238,.075), transparent 72%),
+    radial-gradient(60% 30% at 50% 50%, rgba(0,118,125,.07), transparent 76%);
+}
+.enc:nth-of-type(even){--ex:76%}
+.enc--hero::before{
+  top:-440px;height:880px;
+  background:
+    radial-gradient(100% 46% at 50% 50%, rgba(25,237,238,.15), transparent 68%),
+    radial-gradient(55% 34% at 78% 50%, rgba(0,118,125,.12), transparent 74%);
+}
+@keyframes enc-anda{from{transform:translateY(46px);opacity:.55}50%{opacity:1}to{transform:translateY(-46px);opacity:.55}}
+@media (prefers-reduced-motion:no-preference){
+  @supports (animation-timeline:view()){
+    .enc::before{animation:enc-anda linear both;animation-timeline:view();will-change:transform,opacity}
+  }
+}
+
 /* ---------- 5. Primitivas de composicao -------------------------------- */
 .miolo{width:min(100%,var(--miolo));margin-inline:auto;padding-inline:var(--gut)}
-.sec{padding-block:var(--sp-sec) 0}
+.sec{padding-block:max(26px,calc(var(--sp-sec) / 2))}
 .sec--fim{padding-bottom:var(--sp-sec)}
 .pilha{display:grid;gap:clamp(.75rem,.5rem + 1vw,1.25rem);align-content:start;grid-template-columns:minmax(0,1fr)}
 .pilha--larga{gap:clamp(1rem,.7rem + 1.4vw,1.75rem)}
@@ -177,8 +202,8 @@ h3.h3{font-size:var(--t-h3);font-weight:700}
 .ico{width:24px;height:24px;color:var(--ciano);display:grid;place-items:center;flex:none}
 .ico svg{width:23px;height:23px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
 .cartao:has(>.ico){grid-template-columns:auto minmax(0,1fr);column-gap:.6rem;align-items:center}
-.cartao>.ico{grid-column:1;grid-row:1}
-.cartao>h3{grid-column:2;grid-row:1}
+.cartao:has(>.ico)>.ico{grid-column:1;grid-row:1}
+.cartao:has(>.ico)>h3{grid-column:2;grid-row:1}
 .cartao:has(>.ico)>:not(.ico):not(h3){grid-column:1/-1}
 
 /* numero que prova algo */
@@ -190,8 +215,28 @@ h3.h3{font-size:var(--t-h3);font-weight:700}
   padding-top:env(safe-area-inset-top,0px);
   display:flex;align-items:center;transition:background-color .3s var(--ease),border-color .3s var(--ease);
   border-bottom:1px solid transparent}
-.topo.rolou{background:rgba(7,12,20,.9);-webkit-backdrop-filter:blur(14px) saturate(140%);backdrop-filter:blur(14px) saturate(140%);border-bottom-color:var(--linha)}
-.topo__g{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:.75rem;width:100%}
+/* Depois de rolar a barra vira CAPSULA: a pilula (::before do .topo__g) aparece
+   e logo e acoes entram por transform (nada de animar largura). */
+.topo__g::before{content:"";position:absolute;z-index:-1;inset:-6px calc(var(--gut) - 10px);border-radius:999px;
+  background:rgba(7,12,20,.82);border:1px solid var(--linha-forte);
+  -webkit-backdrop-filter:blur(14px) saturate(140%);backdrop-filter:blur(14px) saturate(140%);
+  box-shadow:0 10px 30px -12px rgba(0,0,0,.8);
+  opacity:0;transform:scale(.97,.88);transition:opacity .3s var(--ease),transform .3s var(--ease)}
+.topo.rolou .topo__g::before{opacity:1;transform:none}
+.topo__logo,.topo__acoes{transition:transform .3s var(--ease)}
+.topo.rolou .topo__logo{transform:translateX(5px)}
+.topo.rolou .topo__acoes{transform:translateX(-5px)}
+@media (min-width:64rem){
+  .topo__g::before{inset:-8px calc(var(--gut) - 8px)}
+  .topo.rolou .topo__logo{transform:translateX(14px)}
+  .topo.rolou .topo__acoes{transform:translateX(-14px)}
+}
+@media (prefers-reduced-motion:reduce){
+  .topo__g::before,.topo__logo,.topo__acoes{transition:opacity .16s linear}
+}
+.topo__g{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:.75rem;width:100%}
+/* laterais iguais: o menu fica no CENTRO da tela (abas-no-centro <= 12 px) */
+@media (min-width:64rem){ .topo__g{grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)} }
 .topo__logo{display:flex;align-items:center;min-height:44px}
 .topo__logo img{height:26px;width:auto}
 @media (min-width:64rem){ .topo__logo img{height:30px} }
@@ -230,16 +275,17 @@ h3.h3{font-size:var(--t-h3);font-weight:700}
 .hero{
   position:relative;min-height:100svh;display:grid;align-content:space-evenly;
   padding-top:calc(var(--topo-h) + env(safe-area-inset-top,0px) + clamp(1rem,.5rem + 1.6vw,1.75rem));
-  padding-bottom:clamp(1rem,.5rem + 1.6vw,1.75rem);
+  padding-bottom:max(30px,clamp(1rem,.5rem + 1.6vw,1.75rem));
   overflow:clip;isolation:isolate;
 }
-/* fundo de ponta a ponta: luz na PROPRIA caixa, nunca bloco recortado */
-.hero::before{
-  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
-  background:
-    radial-gradient(120% 78% at 50% 108%, rgba(25,237,238,.20), transparent 62%),
+/* fundo de ponta a ponta: luz na PROPRIA caixa (background-image do .hero), que
+   apaga antes das bordas; o brilho de baixo mora no encontro (secao 4b), que
+   atravessa a fronteira com a secao seguinte (doutrina, secao 2). */
+.hero{
+  background-image:
     radial-gradient(85% 62% at 84% 8%, rgba(0,118,125,.26), transparent 66%),
     radial-gradient(70% 50% at 10% 22%, rgba(11,75,80,.30), transparent 70%);
+  background-repeat:no-repeat;
 }
 .hero__g{display:grid;gap:clamp(1.25rem,.9rem + 1.6vw,2.25rem);align-items:center;grid-template-columns:minmax(0,1fr)}
 .hero h1{font-size:var(--t-h1);font-weight:800;letter-spacing:-.025em;line-height:1.02}
@@ -269,7 +315,7 @@ h3.h3{font-size:var(--t-h3);font-weight:700}
   .hero__sub{display:none}
   .hero__g{gap:.875rem}
   .hero .pilha--larga{gap:.75rem}
-  .hero__fig img{max-width:min(100%,148px)}
+  .hero__fig img{max-width:min(100%,128px)}
   .hero h1{font-size:clamp(1.875rem,1.35rem + 2.4vw,2.5rem)}
   .hero .selo{height:26px;font-size:.8125rem}
   .fato{padding:.5rem .6rem}
@@ -335,7 +381,7 @@ h3.h3{font-size:var(--t-h3);font-weight:700}
 .ia span{font:600 .8125rem/1.2 var(--ft)}
 
 /* ---------- 13. Rodape ------------------------------------------------- */
-.rodape{margin-top:var(--sp-sec);border-top:1px solid var(--linha);background:var(--casco);
+.rodape{margin-top:var(--sp-sec);
   padding-block:var(--sp-sec);padding-bottom:calc(var(--sp-sec) + env(safe-area-inset-bottom,0px))}
 .rodape__g{display:grid;gap:clamp(1.25rem,.9rem + 1.6vw,2rem);grid-template-columns:minmax(0,1fr)}
 @media (min-width:56rem){ .rodape__g{grid-template-columns:minmax(0,1.3fr) minmax(0,2fr)} }
