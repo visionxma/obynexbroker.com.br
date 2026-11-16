@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Margem e alavancagem na Obynex: margin call e stop-out</title>
+<meta name="description" content="Como a política de margem da Obynex descreve alavancagem, margem inicial e de manutenção, margin call, stop-out, swap e proteção de saldo negativo.">
+<link rel="canonical" href="https://obynexbroker.com.br/obynex-margem-e-alavancagem/">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="theme-color" content="#03050B">
+<meta name="author" content="Obynex Broker">
+<link rel="icon" href="/assets/favicon.ico" sizes="48x48">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/obynex-apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Obynex Broker">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Margem e alavancagem na Obynex: margin call e stop-out">
+<meta property="og:description" content="Como a política de margem da Obynex descreve alavancagem, margem inicial e de manutenção, margin call, stop-out, swap e proteção de saldo negativo.">
+<meta property="og:url" content="https://obynexbroker.com.br/obynex-margem-e-alavancagem/">
+<meta property="og:image" content="https://obynexbroker.com.br/assets/img/obynex-og.jpg">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="1036">
+<meta property="og:image:alt" content="Obynex Broker: mais de 400 ativos, depósito a partir de R$ 50 e operação a partir de R$ 5.">
+<meta property="article:published_time" content="2026-11-16">
+<meta property="article:modified_time" content="2026-11-16">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Margem e alavancagem na Obynex: margin call e stop-out">
+<meta name="twitter:description" content="Como a política de margem da Obynex descreve alavancagem, margem inicial e de manutenção, margin call, stop-out, swap e proteção de saldo negativo.">
+<meta name="twitter:image" content="https://obynexbroker.com.br/assets/img/obynex-og.jpg">
+<link rel="preconnect" href="https://trade.obynexbroker.com">
+<link rel="preload" as="font" type="font/woff2" href="/assets/fontes/wix-madefor-display-latin-800-normal.87d65f4e.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fontes/wix-madefor-text-latin-400-normal.c862fad5.woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/obynex.css?v=20261116d">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://obynexbroker.com.br/#org","name":"Obynex Broker","url":"https://obynexbroker.com.br/","legalName":"SUNSET HORIZON LLC","logo":{"@type":"ImageObject","url":"https://obynexbroker.com.br/assets/img/obynex-logo.webp","width":409,"height":112},"sameAs":["https://www.obynexbroker.com/","https://instagram.com/obynex_broker","https://t.me/obynexglobal"]},{"@type":"WebSite","@id":"https://obynexbroker.com.br/#site","url":"https://obynexbroker.com.br/","name":"Obynex Broker","inLanguage":"pt-BR","publisher":{"@id":"https://obynexbroker.com.br/#org"}},{"@type":"WebPage","@id":"https://obynexbroker.com.br/obynex-margem-e-alavancagem/#pagina","url":"https://obynexbroker.com.br/obynex-margem-e-alavancagem/","name":"Margem e alavancagem na Obynex: margin call e stop-out","description":"Como a política de margem da Obynex descreve alavancagem, margem inicial e de manutenção, margin call, stop-out, swap e proteção de saldo negativo.","inLanguage":"pt-BR","isPartOf":{"@id":"https://obynexbroker.com.br/#site"},"primaryImageOfPage":"https://obynexbroker.com.br/assets/img/obynex-og.jpg","datePublished":"2026-11-16","dateModified":"2026-11-16","breadcrumb":{"@id":"https://obynexbroker.com.br/obynex-margem-e-alavancagem/#trilha"}},{"@type":"BreadcrumbList","@id":"https://obynexbroker.com.br/obynex-margem-e-alavancagem/#trilha","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://obynexbroker.com.br/"},{"@type":"ListItem","position":2,"name":"Margem e alavancagem","item":"https://obynexbroker.com.br/obynex-margem-e-alavancagem/"}]},{"@type":"Article","@id":"https://obynexbroker.com.br/obynex-margem-e-alavancagem/#artigo","headline":"Margem e alavancagem na Obynex: margin call, stop-out e saldo negativo","description":"Como a política de margem da Obynex descreve alavancagem, margem inicial e de manutenção, margin call, stop-out, swap e proteção de saldo negativo.","inLanguage":"pt-BR","image":"https://obynexbroker.com.br/assets/img/obynex-og.jpg","datePublished":"2026-11-16","dateModified":"2026-11-16","author":{"@type":"Organization","name":"Obynex Broker","url":"https://obynexbroker.com.br/"},"publisher":{"@id":"https://obynexbroker.com.br/#org"},"mainEntityOfPage":{"@id":"https://obynexbroker.com.br/obynex-margem-e-alavancagem/#pagina"},"articleSection":"Margem e alavancagem"}]}
+</script>
+</head>
+<body>
+<a class="pular" href="#principal">Pular para o conteúdo</a>
+
+<header class="topo" id="topo">
+  <div class="miolo topo__g">
+    <a class="topo__logo" href="/" aria-label="Obynex Broker, página inicial">
+      <img src="/assets/img/obynex-logo-branco.webp?v=20261116" alt="Obynex Broker" width="409" height="112" fetchpriority="high">
+    </a>
+    <nav class="topo__nav" aria-label="Principal">
+      <a href="/obynex-e-confiavel/">É confiável?</a>
+      <a href="/obynex-como-abrir-conta/">Abrir conta</a>
+      <a href="/obynex-deposito-minimo/">Depósito</a>
+      <a href="/obynex-como-sacar-dinheiro/">Saque</a>
+      <a href="/obynex-taxas-e-custos/">Taxas</a>
+    </nav>
+    <div class="topo__acoes">
+      <a class="topo__entrar" data-ir="entrar" href="https://trade.obynexbroker.com/pt/login">Entrar</a>
+      <a class="btn btn--p" data-ir="cadastro" href="https://trade.obynexbroker.com/pt/register">Criar conta</a>
+      <button class="menu-btn" id="menuBtn" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="gaveta">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="gaveta" id="gaveta" hidden>
+  <div class="gaveta__topo">
+    <img src="/assets/img/obynex-logo-branco.webp?v=20261116" alt="Obynex Broker" width="409" height="112">
+    <button class="menu-btn" id="gavetaFecha" type="button" aria-label="Fechar menu">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <nav aria-label="Menu">
+    <a href="/">Início</a>
+    <a href="/obynex-e-confiavel/">A Obynex é confiável?</a>
+    <a href="/obynex-como-abrir-conta/">Como abrir conta</a>
+    <a href="/obynex-deposito-minimo/">Depósito mínimo</a>
+    <a href="/obynex-como-sacar-dinheiro/">Como sacar</a>
+    <a href="/obynex-conta-demo/">Conta demo e torneios</a>
+    <a href="/obynex-taxas-e-custos/">Taxas</a>
+    <a href="/obynex-blitz-e-standard/">Blitz e Standard</a>
+    <a href="/obynex-app-para-celular/">Aplicativo de celular</a>
+  </nav>
+  <div class="cta">
+    <a class="btn btn--p btn--g" data-ir="cadastro" href="https://trade.obynexbroker.com/pt/register">Criar conta</a>
+    <a class="btn btn--t btn--g" data-ir="entrar" href="https://trade.obynexbroker.com/pt/login">Entrar</a>
+  </div>
+</div>
+
+<main id="principal">
+  <section class="pg-hero" aria-labelledby="t-pg">
+    <div class="miolo">
+      <nav class="trilha" aria-label="Trilha de navegação">
+        <a href="/">Início</a> <span aria-hidden="true">›</span> <span>Margem e alavancagem</span>
+      </nav>
+      <h1 id="t-pg">Margem e alavancagem na Obynex: margin call, stop-out e saldo negativo</h1>
+    </div>
+  </section>
+
+  <div class="miolo">
+    <div class="pg-corpo" style="padding-top:clamp(1rem,.7rem + 1.4vw,1.75rem)">
+      <aside class="indice" id="indice" aria-labelledby="t-indice">
+        <h2 id="t-indice">NESTA PÁGINA</h2>
+        <ol><li><a href="#alavancagem">O que é alavancagem, nas palavras da política</a></li><li><a href="#margens">Margem inicial e margem de manutenção</a></li><li><a href="#margin-call">Margin call: o alerta antes do corte</a></li><li><a href="#stop-out">Stop-out: o fechamento automático</a></li><li><a href="#saldo">Proteção de saldo negativo e swap</a></li><li><a href="#perguntas">Perguntas para fazer antes de operar com alavancagem</a></li></ol>
+      </aside>
+
+      <div class="pilha pilha--larga">
+        <div class="resposta rv">
+          <span class="selo">Resposta direta</span>
+          <p>A Política de Negociação com Margem da Obynex diz que a alavancagem permite abrir posições maiores que o valor depositado e amplia ganhos e perdas na mesma proporção. Ela descreve margem inicial, margem de manutenção, margin call, stop-out e proteção de saldo negativo, mas não publica os percentuais nem o nível de stop-out.</p>
+        </div>
+
+        <article class="artigo">
+          <section class="rv">
+            <h2 id="alavancagem">O que é alavancagem, nas palavras da política</h2>
+<p>O item 1 da Política de Negociação com Margem da Obynex começa pelo conceito: a negociação com margem permite ao cliente abrir posições de valor superior ao que depositou. O mesmo item alerta que, enquanto a alavancagem pode multiplicar os lucros em cenários favoráveis, ela <strong>amplifica as perdas potenciais na mesma proporção</strong> nos movimentos adversos.</p>
+            <p>Uma analogia ajuda. Alavancar é como usar uma alavanca de verdade: um esforço pequeno move algo grande, mas o movimento vale nos dois sentidos. Com uma posição maior do que o dinheiro depositado, uma variação pequena de preço vira uma variação grande do seu saldo. Por isso a mesma ferramenta que explica os relatos de ganho rápido explica também as perdas rápidas, e por isso a Declaração de Divulgação de Risco fala em possível perda de todo o capital.</p>
+            <p>A política não afirma qual é a alavancagem máxima, nem se ela muda conforme o ativo ou o perfil do cliente. <strong>Nenhum multiplicador está publicado</strong> nos documentos, e esta página não vai citar um. Quem vir "alavancagem de tanto" em alguma página sem fonte está vendo número inventado, ou número de outra corretora.</p>
+          </section>
+          <section class="rv">
+            <h2 id="margens">Margem inicial e margem de manutenção</h2>
+<p>O item 2 da política define duas figuras que aparecem em qualquer corretora que opera alavancado:</p>
+            <ul>
+              <li><strong>Margem inicial.</strong> Para abrir uma posição alavancada, é exigido um percentual mínimo de garantia. É o "depósito de entrada" da posição: um pedaço do seu saldo que fica reservado enquanto ela existe.</li>
+              <li><strong>Margem de manutenção.</strong> Para manter a posição aberta, o cliente precisa conservar um nível mínimo de patrimônio. Se o resultado da posição consumir o saldo e a conta cair abaixo desse nível, a posição fica em risco.</li>
+            </ul>
+            <p>A diferença entre as duas é de momento: a inicial é a condição para <em>entrar</em>, a de manutenção é a condição para <em>permanecer</em>. O documento não informa os percentuais de nenhuma das duas, e eles podem variar entre instrumentos. O que se pode afirmar com segurança é que existem, que o cliente precisa respeitá-las e que o valor aplicável aparece na plataforma, no momento da operação, e não nos documentos gerais.</p>
+          </section>
+          <section class="rv">
+            <h2 id="margin-call">Margin call: o alerta antes do corte</h2>
+<p>O item 3 descreve a sequência. Se o mercado se move contra as posições do cliente e o nível de margem cai a patamares críticos, a plataforma <strong>pode emitir um alerta de Margin Call</strong>. O verbo é "pode": o documento não promete que o alerta virá sempre, nem com que antecedência, nem por qual canal.</p>
+            <p>Esse detalhe é importante. Em mercados muito voláteis, o preço pode atravessar o nível crítico em segundos, e a Declaração de Divulgação de Risco lembra que movimentos de preço podem acontecer em questão de segundos, por eventos econômicos inesperados, anúncios de bancos centrais ou mudanças na liquidez global. Quem depende do aviso para agir pode descobrir que o aviso chegou depois do fechamento. A prudência está em não operar tão perto do limite que um solavanco dispense o alerta.</p>
+            <p>Duas atitudes valem aqui. Primeira: acompanhe o nível de margem enquanto tiver posição aberta, sem esperar a notificação. Segunda: mantenha saldo livre na conta. Posição que usa quase todo o saldo como margem é a que menos resiste a uma oscilação.</p>
+          </section>
+          <section class="rv">
+            <h2 id="stop-out">Stop-out: o fechamento automático</h2>
+<p>Se a margem cair abaixo do nível de <strong>Stop-Out definido para o instrumento</strong>, o sistema fecha automaticamente as posições mais deficitárias, a preço de mercado, com o objetivo declarado de proteger a integridade do saldo restante. Quatro pontos merecem leitura atenta:</p>
+            <ul>
+              <li>o nível de stop-out é definido <em>por instrumento</em>, então não há um número único para a conta inteira, e ele não está publicado nos documentos;</li>
+              <li>o sistema fecha primeiro as posições "mais deficitárias", ou seja, as que mais perdem, e não necessariamente as mais recentes;</li>
+              <li>o fechamento acontece a <em>preço de mercado</em>, o que se liga ao slippage descrito na <a href="/obynex-execucao-de-ordem/">política de execução de ordens</a>: o preço do fechamento pode diferir do que você viu na tela;</li>
+              <li>o stop-out protege o saldo que sobrou, não evita a perda que já ocorreu.</li>
+            </ul>
+            <p>Tratar o stop-out como "rede de segurança" é um erro de leitura. Ele é um mecanismo de contenção do prejuízo da corretora e do cliente, que aciona depois que a perda já é grande. Quem opera para evitar chegar a ele tem resultado muito diferente de quem opera contando com ele.</p>
+          </section>
+          <section class="rv">
+            <h2 id="saldo">Proteção de saldo negativo e swap</h2>
+<p>O item 4 traz o ponto mais favorável ao cliente: a Obynex oferece proteção de saldo negativo para clientes pessoa física, e <strong>em nenhuma hipótese o cliente contrai dívida com a corretora superior ao total de fundos que depositou</strong>. Em outras palavras, o pior desfecho é perder o que foi depositado, e não ficar devendo além disso. A formulação é restrita a clientes pessoa física, e o documento não explica como a proteção funciona por dentro.</p>
+            <p>O item 5 trata do custo de manter posição aberta. Posições alavancadas que passam da virada do dia útil, a operação "overnight", estão sujeitas a encargos ou créditos de financiamento, o <strong>swap ou rollover</strong>, conforme as taxas vigentes no mercado interbancário. O percentual não está publicado e muda com o mercado, então vale checar na plataforma o custo antes de carregar uma posição por vários dias. A <a href="/obynex-taxas-e-custos/">página de taxas</a> reúne esse custo com os demais.</p>
+            <p>Quem quer treinar sem arriscar dinheiro pode usar a <a href="/obynex-conta-demo/">conta demo</a>, que tem saldo virtual recarregável e mostra o comportamento da plataforma. Treinar não revela os níveis de margem da conta real, mas ensina a ler o painel antes de usar dinheiro de verdade.</p>
+          </section>
+          <section class="rv">
+            <h2 id="perguntas">Perguntas para fazer antes de operar com alavancagem</h2>
+<p>Como nem a alavancagem máxima nem os níveis de margem estão publicados, a plataforma passa a ser a única fonte, e o cliente precisa saber perguntar a ela. Antes de abrir uma posição alavancada na conta real, responda por escrito:</p>
+            <ul>
+              <li>Qual é a margem exigida para esta posição, em valor, e quanto sobra de saldo livre depois de abri-la?</li>
+              <li>Qual é o nível de stop-out do instrumento que vou negociar? Se a tela não mostrar, perguntei ao suporte?</li>
+              <li>Quanto o preço precisa andar contra mim para eu chegar ao margin call, e esse movimento é comum no dia a dia desse ativo?</li>
+              <li>Vou manter a posição na virada do dia útil? Qual é o custo de swap, e ele me é cobrado ou creditado?</li>
+              <li>Se o stop-out fechar a posição, qual é a perda máxima que eu aceito e ainda mantenho o meu orçamento do mês?</li>
+            </ul>
+            <p>Quem não consegue responder a duas dessas perguntas ainda não está pronto para alavancar. A boa notícia é que a conta demo permite treinar a leitura do painel, e a proteção de saldo negativo limita o pior caso ao valor depositado. A má notícia é que "limitar ao valor depositado" significa que o valor depositado inteiro pode ser perdido, e é por isso que os documentos pedem para só operar com dinheiro cuja perda não comprometa o sustento. Veja também <a href="/obynex-e-regulada-pela-cvm/">o que a Obynex publica sobre a CVM</a>, que é parte do risco.</p>
+          </section>
+          <section>
+            <p class="fonte">Fontes: Política de Negociação com Margem (itens 1 a 5) e Declaração de Divulgação de Risco (itens 1 e 2), publicados no <a href="https://www.obynexbroker.com/legal" rel="nofollow noopener" target="_blank">centro legal da Obynex</a>. Leitura feita em 16 de novembro de 2026. A alavancagem máxima, os percentuais de margem e o nível de stop-out não são publicados nesses documentos.</p>
+          </section>
+        </article>
+
+        <section class="pilha rv" aria-labelledby="t-prox">
+          <h2 class="h3" id="t-prox">Continue por aqui</h2>
+          <div class="proximas"><a class="proxima" href="/obynex-execucao-de-ordem/"><b>Execução de ordem</b><span>Best execution, cotação, slippage e o que é proibido</span></a><a class="proxima" href="/obynex-taxas-e-custos/"><b>Taxas e inatividade</b><span>Spread, swap e os R$ 50 depois de 90 dias parado</span></a><a class="proxima" href="/obynex-blitz-e-standard/"><b>Blitz e Standard</b><span>Os dois modos de operação e a política de risco</span></a></div>
+        </section>
+
+        <section class="cartao cartao--luz rv" style="text-align:center;justify-items:center;padding:clamp(1.25rem,.9rem + 1.6vw,2rem)">
+          <h2 class="h3">Treine a leitura do painel sem risco</h2>
+          <p class="apoio" style="max-width:48ch;margin-inline:auto">A conta demo é gratuita e recarregável, com saldo virtual, e mostra como a plataforma funciona.</p>
+          <div class="cta" style="justify-content:center;margin-top:.5rem">
+            <a class="btn btn--p btn--g" data-ir="cadastro" href="https://trade.obynexbroker.com/pt/register">Criar conta</a>
+            <a class="btn btn--t btn--g" data-ir="demo" href="https://trade.obynexbroker.com/pt/trial">Testar a demo</a>
+          </div>
+          <p class="risco" style="margin-top:.8rem;text-align:left;max-width:60ch">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 9v4.5M12 17h.01M10.3 3.9 2.4 17.6A2 2 0 0 0 4.1 20.6h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>
+            <span><b>Operar envolve risco de perda do capital investido.</b> Produto para maiores de 18 anos. A Obynex Broker não é autorizada pela CVM a oferecer diretamente corretagem a residentes no Brasil.</span>
+          </p>
+        </section>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="rodape">
+  <div class="miolo">
+    <div class="rodape__g">
+      <div class="pilha">
+        <a class="rodape__logo" href="/" aria-label="Obynex Broker, página inicial">
+          <img src="/assets/img/obynex-logo-branco.webp?v=20261116" alt="Obynex Broker" width="409" height="112" loading="lazy">
+        </a>
+        <p class="miudo" style="max-width:38ch">Invista a qualquer hora, de qualquer lugar. Cripto, ações internacionais, forex e mais, com ferramentas avançadas e atendimento 24 horas.</p>
+        <div class="redes">
+          <a href="https://instagram.com/obynex_broker" rel="nofollow noopener" target="_blank" aria-label="Obynex no Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="https://t.me/obynexglobal" rel="nofollow noopener" target="_blank" aria-label="Obynex no Telegram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M21 4 3 11l5 2 2 6 3-4 5 4 3-15Z"/><path d="m8 13 9-6-6 8"/></svg>
+          </a>
+        </div>
+      </div>
+      <nav class="rodape__cols" aria-label="Rodapé">
+        <div>
+          <h2>Plataforma</h2>
+          <ul>
+            <li><a data-ir="cadastro" href="https://trade.obynexbroker.com/pt/register">Criar conta</a></li>
+            <li><a data-ir="entrar" href="https://trade.obynexbroker.com/pt/login">Entrar</a></li>
+            <li><a data-ir="demo" href="https://trade.obynexbroker.com/pt/trial">Conta demo</a></li>
+            <li><a href="https://apps.apple.com/br/app/obynex/id6761621698" rel="nofollow noopener" target="_blank">Aplicativo iOS</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=com.obynexbroker" rel="nofollow noopener" target="_blank">Aplicativo Android</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Guias</h2>
+          <ul>
+            <li><a href="/obynex-e-confiavel/">É confiável?</a></li>
+            <li><a href="/obynex-como-abrir-conta/">Abrir conta</a></li>
+            <li><a href="/obynex-deposito-minimo/">Depósito mínimo</a></li>
+            <li><a href="/obynex-como-sacar-dinheiro/">Como sacar</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Mais guias</h2>
+          <ul>
+            <li><a href="/obynex-conta-demo/">Conta demo e torneios</a></li>
+            <li><a href="/obynex-taxas-e-custos/">Taxas e inatividade</a></li>
+            <li><a href="/obynex-blitz-e-standard/">Blitz e Standard</a></li>
+            <li><a href="/obynex-app-para-celular/">Aplicativo de celular</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Documentos</h2>
+          <ul>
+            <li><a href="https://www.obynexbroker.com/legal" rel="nofollow noopener" target="_blank">Centro legal</a></li>
+            <li><a href="https://www.obynexbroker.com/terms" rel="nofollow noopener" target="_blank">Termos de uso</a></li>
+            <li><a href="https://www.obynexbroker.com/privacy" rel="nofollow noopener" target="_blank">Privacidade</a></li>
+            <li><a href="https://www.obynexbroker.com/risk-disclosure" rel="nofollow noopener" target="_blank">Divulgação de risco</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <div class="rodape__legal">
+      <p><strong>Aviso de risco.</strong> Operar contratos Blitz, forex e instrumentos financeiros derivativos é altamente especulativo e envolve risco significativo de perda. Você pode perder todo o capital investido numa única operação ou numa sequência de operações. Não deposite nem opere com recursos de que você dependa para o seu sustento. Resultados passados não são previsão nem garantia de retorno futuro. A Obynex não presta consultoria individualizada de investimento. Serviço destinado a maiores de 18 anos.</p>
+      <p>A Obynex Broker presta serviços exclusivamente nas jurisdições em que possui as licenças adequadas para operar. <strong>A Obynex Broker não é autorizada pela Comissão de Valores Mobiliários (CVM)</strong> a oferecer diretamente serviços de corretagem ou distribuição a pessoas físicas ou jurídicas residentes ou sediadas na República Federativa do Brasil.</p>
+      <p class="quebra-tudo">SUNSET HORIZON LLC, registro L 22994, Lighthouse Trust Nevis Ltd, Suite 1, A.L. Evelyn Ltd Building, Main Street, Charlestown, Nevis. Transações de pagamento: SUNSET HORIZON CY LTD, registro HE464961, Kyriakou Matsi &amp; Anexartisias 3, Roussos Limassol Tower, 4º andar, 3040 Limassol, Chipre.</p>
+    </div>
+
+    <div class="rodape__fim">
+      <span>© <span data-ano>2026</span> Obynex Broker. Todos os direitos reservados.</span>
+      <nav aria-label="Legal">
+        <a href="https://www.obynexbroker.com/privacy" rel="nofollow noopener" target="_blank">Privacidade</a>
+        <a href="https://www.obynexbroker.com/terms" rel="nofollow noopener" target="_blank">Termos de uso</a>
+        <a href="https://www.obynexbroker.com/legal" rel="nofollow noopener" target="_blank">Centro legal</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/js/obynex.js?v=20261116" defer></script>
+</body>
+</html>

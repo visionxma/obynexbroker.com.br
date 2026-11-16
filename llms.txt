@@ -8,7 +8,7 @@ Juízo em uma linha: a própria Obynex publica que não é autorizada pela CVM a
 
 Operar nos mercados financeiros envolve risco de perda do capital investido e pode não ser adequado a todos. O conteúdo deste site é informativo e não constitui recomendação de investimento. Este site não recebe depósito, não guarda dinheiro de ninguém e não executa ordem no mercado.
 
-## Páginas (9)
+## Páginas (21)
 - [Obynex Broker: cripto, ações e forex a partir de R$ 50](https://obynexbroker.com.br/): O que é a Obynex, mais de 400 ativos, depósito, saque, taxas, conta demo e o que ela publica sobre a CVM.
 - [Como abrir conta na Obynex: o passo a passo](https://obynexbroker.com.br/obynex-como-abrir-conta/): Dados pedidos no cadastro, verificação de identidade, documentos aceitos, conta demo e o que fazer antes do primeiro depósito.
 - [Depósito mínimo na Obynex: R$ 50 e as formas aceitas](https://obynexbroker.com.br/obynex-deposito-minimo/): Depósito mínimo de R$ 50, operação a partir de R$ 5, formas aceitas, prazos de compensação, regra de titularidade e bônus de 100%.
@@ -18,6 +18,18 @@ Operar nos mercados financeiros envolve risco de perda do capital investido e po
 - [Blitz e Standard na Obynex: como funciona cada modo](https://obynexbroker.com.br/obynex-blitz-e-standard/): Os dois modos de operação, os ativos de cada um, como a ordem é executada e a política de risco.
 - [Aplicativo da Obynex: iPhone, Android e navegador](https://obynexbroker.com.br/obynex-app-para-celular/): Aplicativo oficial para iOS e Android, acesso pelo navegador e aplicativo para computador.
 - [A Obynex é confiável? O que dá para verificar](https://obynexbroker.com.br/obynex-e-confiavel/): Quem opera a corretora, o que ela publica sobre a CVM, KYC, segregação de contas e os sinais que você mesmo pode conferir.
+- [Obynex no Reclame Aqui: como conferir antes de depositar](https://obynexbroker.com.br/obynex-reclame-aqui/): O que olhar nas reclamações públicas sobre a Obynex, como conferir o perfil no Reclame Aqui, cruzar com as políticas da corretora e testar com valor pequeno.
+- [A Obynex é golpe ou não? O que é fato e o que é boato](https://obynexbroker.com.br/obynex-e-golpe-ou-nao/): Separa o que está escrito nos documentos da Obynex do que circula como boato, sem afirmar golpe nem confiabilidade, e mostra como verificar por conta própria.
+- [A Obynex é regulada pela CVM? O que ela mesma publica](https://obynexbroker.com.br/obynex-e-regulada-pela-cvm/): A própria Obynex publica nos Termos de Uso que não é autorizada pela CVM a atender residentes no Brasil. Veja o texto, o que muda no risco e o que conferir.
+- [Documentos para verificação na Obynex: o que enviar](https://obynexbroker.com.br/obynex-documentos-para-verificacao/): Documento oficial com foto, comprovante de endereço de até 90 dias e a regra de mesmo nome: o que o KYC da Obynex pede, quando pede e o que trava a conta.
+- [Login na Obynex: como entrar e proteger o acesso à conta](https://obynexbroker.com.br/obynex-login-e-acesso/): Onde fica o login oficial da Obynex, o que os documentos dizem sobre senha, cookies e suporte pelo chat, e o que fazer se não conseguir entrar na conta.
+- [Margem e alavancagem na Obynex: margin call e stop-out](https://obynexbroker.com.br/obynex-margem-e-alavancagem/): Como a política de margem da Obynex descreve alavancagem, margem inicial e de manutenção, margin call, stop-out, swap e proteção de saldo negativo.
+- [Execução de ordem na Obynex: cotação, slippage e regras](https://obynexbroker.com.br/obynex-execucao-de-ordem/): Como a Obynex diz executar ordens: best execution, formação da cotação por provedores de liquidez, latência, slippage e as práticas proibidas na plataforma.
+- [Estorno e reembolso na Obynex: o que a política permite](https://obynexbroker.com.br/obynex-estorno-e-reembolso/): A Política de Reembolso da Obynex vale só para saldo não operado, devolvido ao mesmo meio de origem em até 5 dias úteis. Veja o pedido e as negativas.
+- [Taxa de inatividade da Obynex: até R$ 50 por mês](https://obynexbroker.com.br/obynex-taxa-de-inatividade/): A Obynex pode cobrar até R$ 50 por mês de contas sem nenhuma operação por 90 dias seguidos, e nunca deixa o saldo negativo. Veja como evitar e o que fazer.
+- [Formas de pagamento da Obynex: PIX, PicPay, boleto e cripto](https://obynexbroker.com.br/obynex-formas-de-pagamento/): PIX, PicPay, boleto rápido e criptomoedas na Obynex: o que cada forma muda em prazo, custo e regra do mesmo nome, com os prazos de saque publicados.
+- [Torneios da Obynex: regras, prêmios e como são pagos](https://obynexbroker.com.br/obynex-torneios/): Como funcionam os torneios da Obynex: onde ficam as regras de cada campeonato, taxa de entrada quando houver, conduta proibida e como o prêmio é creditado.
+- [Opções binárias no Brasil: Call/Put e a posição da CVM](https://obynexbroker.com.br/opcoes-binarias-no-brasil-o-que-a-cvm-diz/): O modo Call/Put da Obynex e o que ela publica sobre a CVM: a corretora não é autorizada a atender o Brasil. Veja o que a página oficial diz e o que não diz.
 
 ## Oficial
 - [Site oficial da Obynex Broker](https://obynexbroker.com/): o site da própria corretora.
