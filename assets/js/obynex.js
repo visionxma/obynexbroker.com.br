@@ -1,6 +1,4 @@
-/* Obynex Broker — comportamento da pagina. Sem dependencia.
-   Conteudo nunca depende de JS para aparecer: a classe js-ok so entra
-   depois que o script roda, e so entao o .rv fica escondido. */
+
 (function () {
   'use strict';
   var raiz = document.documentElement;
@@ -8,14 +6,11 @@
   var q = function (s, c) { return (c || document).querySelector(s); };
   var qa = function (s, c) { return [].slice.call((c || document).querySelectorAll(s)); };
 
-  /* ----- 1. Ponto UNICO do link de cadastro ---------------------------
-     O link de parceiro ainda vai chegar. Quando chegar, muda-se SO a
-     linha PARCEIRO abaixo (ex.: '?ref=mjx') e todo botao de criar conta
-     da pagina passa a levar o parametro, inclusive o do rodape.        */
+  
   var CADASTRO = 'https://trade.obynexbroker.com/pt/register';
   var ENTRAR   = 'https://trade.obynexbroker.com/pt/login';
   var DEMO     = 'https://trade.obynexbroker.com/pt/trial';
-  var PARCEIRO = '';   /* <= o unico lugar a mexer quando o link chegar */
+  var PARCEIRO = '';   
 
   function destino(base) {
     if (!PARCEIRO) return base;
@@ -24,10 +19,10 @@
   qa('[data-ir]').forEach(function (a) {
     var alvo = a.getAttribute('data-ir');
     a.href = destino(alvo === 'entrar' ? ENTRAR : alvo === 'demo' ? DEMO : CADASTRO);
-    a.rel = 'sponsored noopener';   /* link pago: o `sponsored` é exigência do Google e o JS apagava o do HTML (16/11/2026) */
+    a.rel = 'sponsored noopener';   
   });
 
-  /* ----- 2. Topo: capsula depois de rolar ------------------------------ */
+  
   var topo = q('.topo'), pedindo = false;
   function aoRolar() {
     if (pedindo) return;
@@ -40,7 +35,7 @@
   }
   addEventListener('scroll', aoRolar, { passive: true });
 
-  /* ----- 3. Gaveta do celular ------------------------------------------ */
+  
   var gaveta = q('#gaveta'), btMenu = q('#menuBtn'), btFecha = q('#gavetaFecha');
   function abrir() {
     if (!gaveta) return;
@@ -64,18 +59,18 @@
   addEventListener('keydown', function (e) {
     if (!gaveta || gaveta.hidden) return;
     if (e.key === 'Escape') { fechar(); btMenu.focus(); }
-    if (e.key === 'Tab') {             /* o foco nao escapa da gaveta aberta */
+    if (e.key === 'Tab') {             
       var f = qa('a,button', gaveta), p = f[0], u = f[f.length - 1];
       if (e.shiftKey && document.activeElement === p) { e.preventDefault(); u.focus(); }
       else if (!e.shiftKey && document.activeElement === u) { e.preventDefault(); p.focus(); }
     }
   });
 
-  /* ----- 4. FAQ: abrir um fecha o outro + "ver mais" contado ----------- */
+  
   var faq = q('#faq-lista');
   if (faq) {
     var todas = qa('details', faq);
-    /* reserva para navegador sem suporte a <details name> */
+    
     todas.forEach(function (d) {
       d.addEventListener('toggle', function () {
         if (!d.open) return;
@@ -85,7 +80,7 @@
     var bt = q('#faqMais');
     if (bt) {
       var recontar = function () {
-        /* 5 a vista numa coluna, 6 quando sao duas — o numero e CONTA */
+        
         var cols = getComputedStyle(faq).gridTemplateColumns.split(' ').length;
         var vista = cols > 1 ? 6 : 5;
         var aberto = bt.getAttribute('aria-expanded') === 'true';
@@ -94,9 +89,7 @@
         bt.hidden = escondidas === 0 && !aberto;
         q('span', bt).textContent = aberto ? 'Ver menos perguntas' : 'Ver mais perguntas (+' + escondidas + ')';
       };
-      /* "ver mais" cresce e "ver menos" recolhe deslizando (altura animada com a
-         curva da casa); ao recolher, a seção volta para o título, que fica abaixo
-         do cabeçalho fixo. "Menos movimento": sem animação, só o estado final. */
+      
       var voltarAoTitulo = function () {
         var t = q('#t-faq'), topo = q('#topo');
         if (!t) return;
@@ -110,7 +103,7 @@
         recontar();
         var depois = faq.offsetHeight;
         if (menos || !faq.animate || antes === depois) { if (!abrir) voltarAoTitulo(); return; }
-        if (!abrir) todas.forEach(function (d, i) { d.hidden = estavam[i]; });   /* fica à vista até acabar de recolher */
+        if (!abrir) todas.forEach(function (d, i) { d.hidden = estavam[i]; });   
         faq.style.overflow = 'clip';
         var an = faq.animate([{ height: antes + 'px' }, { height: depois + 'px' }],
           { duration: 320, easing: 'cubic-bezier(.22,1,.36,1)' });
@@ -122,7 +115,7 @@
     }
   }
 
-  /* ----- 5. Revelar ao entrar na tela, com escalonamento --------------- */
+  
   function revelar() {
     var alvos = qa('.rv:not(.vis), .rv-f:not(.vis)');
     qa('.rv-f').forEach(function (g) {
@@ -142,7 +135,7 @@
     alvos.forEach(function (e) { ob.observe(e); });
   }
 
-  /* ----- 6. Contador animado nos numeros que provam algo --------------- */
+  
   function contadores() {
     var nums = qa('[data-conta]');
     if (!nums.length) return;
@@ -168,7 +161,7 @@
     nums.forEach(function (n) { ob.observe(n); });
   }
 
-  /* ----- 7. Indice lateral: quem troca o topico e a ROLAGEM ------------ */
+  
   var indice = q('#indice');
   function indiceAtual() {
     if (!indice) return;
@@ -181,7 +174,7 @@
     });
   }
 
-  /* ----- 8. Ano do rodape e conta, nao texto --------------------------- */
+  
   qa('[data-ano]').forEach(function (e) { e.textContent = new Date().getFullYear(); });
 
   raiz.classList.add('js-ok');
