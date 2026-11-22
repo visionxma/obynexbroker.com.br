@@ -1,8 +1,3 @@
-# Endereços do site antigo -> página nova mais próxima pelo assunto.
-# ATENCAO: o dominio e servido por GitHub Pages, onde este arquivo NAO e lido.
-# O que vale la sao as pastas com index.html de redirecionamento (geradas junto).
-# Este arquivo vale se o site for para Cloudflare Pages ou Netlify.
-
 /ar/                                                           /                                        301
 /ar                                                            /                                        301
 /ar/index.html                                                 /                                        301
@@ -169,13 +164,11 @@
 /zh                                                            /                                        301
 /zh/index.html                                                 /                                        301
 
-# feeds e mapas de site antigos
 /blog/feed.xml / 301
 /page-sitemap.xml /sitemap.xml 301
 /post-sitemap.xml /sitemap.xml 301
 /category-sitemap.xml /sitemap.xml 301
 
-# o resto do que existia vai para a pagina inicial (sempre por ultimo)
 /blog/* / 301
 /corujao/* / 301
 /author/* / 301
